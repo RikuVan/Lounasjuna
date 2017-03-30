@@ -1,30 +1,27 @@
 import React, {Component, PropTypes} from 'react'
-import Restaurant from './Restaurant-card'
 import './Restaurants.css'
 
 class Restaurants extends Component {
 
   render () {
-    const {restaurants, user} = this.props
+    const {name, address, link, rating, type} = this.props
     return (
-      <section className="Restaurants">
-        {restaurants.map((rest, key) =>
-          <Restaurant
-            key={key}
-            user={user}
-            handleSelect={() => this.handleSelect(key)}
-            handleDeselect={() => this.handleDeselect(key)}
-            {...rest}
-          />)
-        }
-      </section>
+      <article className="Restaurant">
+        <h3 className="Restaurant--name"><a href={link}>{name}</a></h3>
+        <p>{type}</p>
+        <p>{address}</p>
+        <p>Tähtit: {rating ? Math.round(rating) : 0}</p>
+      </article>
     );
   }
 }
 
 Restaurants.propTypes = {
-  user: PropTypes.object,
-  restaurants: PropTypes.object
+  name: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  rating: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default Restaurants

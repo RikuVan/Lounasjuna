@@ -5,7 +5,6 @@ export const COMPLETE_REQUEST = 'COMPLETE_REQUEST'
 
 const attemptRequest = key => ({type: ATTEMPT_REQUEST, payload: {key}});
 const completeRequest = (key, data, error) => {
-  console.log(key, data);
   return {
     type: COMPLETE_REQUEST,
     payload: {key, ...data, error}
@@ -13,7 +12,7 @@ const completeRequest = (key, data, error) => {
 }
 
 
-export const apiFn = type => ({url, key, payload, responseHandler}) => dispatch => {
+export const apiFn = type => ({url, key, payload, handler: responseHandler}) => dispatch => {
   //out UI wants to know that we are loading data
   dispatch(attemptRequest(key));
 
@@ -27,7 +26,7 @@ export const apiFn = type => ({url, key, payload, responseHandler}) => dispatch 
           .then(resp => {
             return responseHandler ?
               responseHandler(resp) :
-              {data: resp.data};
+              {...resp};
           })
           .then(data => {
             dispatch(completeRequest(key, data, null))

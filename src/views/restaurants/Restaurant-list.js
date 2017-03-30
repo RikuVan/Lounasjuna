@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux'
-//import RestaurantCard from './Restaurant-card';
+import RestaurantCard from './Restaurant-card';
 import {fetchRestaurants} from '../../actions/restaurants'
 import './Restaurants.css';
 
@@ -18,7 +18,14 @@ class Restaurants extends Component {
     const {restaurants} = this.props
     return (
       <section className="Restaurants">
-        <pre>{JSON.stringify(restaurants, null, 2)}</pre>
+        {restaurants.loading ?
+          <div>...loading</div> :
+          (restaurants.data || []).map((rest, i) =>
+            <RestaurantCard
+              key={i}
+              {...rest}
+            />
+        )}
       </section>
     )
   }

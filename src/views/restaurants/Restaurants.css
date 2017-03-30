@@ -1,10 +1,10 @@
-.restaurants {
+.Restaurants {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.restaurant {
+.Restaurant {
     margin: 1em;
     min-width: 200px;
     text-align: center;
@@ -12,10 +12,6 @@
     padding: 1em;
 }
 
-.restaurant--name {
+.Restaurant--name {
     margin-top: 0;
-}
-
-.restaurant--votes {
-    text-align: left;
 }

@@ -8,7 +8,7 @@ export default (state = initialState.requests, action) => {
   switch(action.type) {
     case ATTEMPT_REQUEST:
       return {
-        ...state,
+        ...state.requests,
         [action.payload.key]: {
           loading: true,
           data: null,
