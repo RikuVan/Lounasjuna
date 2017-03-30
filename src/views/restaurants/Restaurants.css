@@ -1,0 +1,21 @@
+.restaurants {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.restaurant {
+    margin: 1em;
+    min-width: 200px;
+    text-align: center;
+    border: 1px solid #eee;
+    padding: 1em;
+}
+
+.restaurant--name {
+    margin-top: 0;
+}
+
+.restaurant--votes {
+    text-align: left;
+}

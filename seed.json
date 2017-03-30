@@ -1,0 +1,106 @@
+{
+  "restaurants": {
+    "1": {
+      "name": "Amarillo Ilves",
+      "address": "Hatanp\u00e4\u00e4n valtatie 1, 33100 Tampere",
+      "rating": "3",
+      "lat": "61.4966011047363",
+      "lng": "23.7674007415771",
+      "link": "https:\/\/www.raflaamo.fi\/fi\/tampere\/amarillo-ilves-tampere\/menu",
+      "type": "Nöytäpöytä",
+      "reviews": {}
+    },
+    "2": {
+      "name": "4 Vuodenaika",
+      "address": "Hameenkatu 19, Kauppahalli, 33200 Tampere",
+      "rating": "4.6667",
+      "lat": "61.497501373291",
+      "lng": "23.7586994171143",
+      "link": "http:\/\/4vuodenaikaa.fi\/",
+      "type": "Ranskalainen",
+      "reviews": {}
+    },
+    "3": {
+      "name": "Katmandu",
+      "address": "Satakunnankatu 29, 33210 Tampere",
+      "rating": "4.6667",
+      "lat": "61.5001061",
+      "lng": "23.7521219",
+      "link": "http:\/\/ravintolakatmandu.fi\/menu\/lounas-lunch.html",
+      "type": "Nepalalainen",
+      "reviews": {}
+    },
+    "4": {
+      "name": "Gastropub Soho",
+      "address": "Otavalankatu 10, 33100 Tampere",
+      "rating": null,
+      "lat": "61.49645330000001",
+      "lng": "23.771115099999975",
+      "link": "https:\/\/www.facebook.com\/Gastropub-Soho-345658057323\/",
+      "type": "Hampurilaiset",
+      "reviews": {}
+    },
+    "5": {
+      "name": "Klubi",
+      "address": "Tullikamarinaukio 2, 33101 Tampere",
+      "rating": "0",
+      "lat": "61.4981803894043",
+      "lng": "23.7770614624023",
+      "link": "http:\/\/tullikamari.net\/klubi\/ravintola",
+      "type": "",
+      "reviews": {}
+    },
+    "6": {
+      "name": "Maruseki",
+      "address": "H\u00e4meenkatu 31, 33200 Tampere",
+      "rating": "5",
+      "lat": "61.4971008300781",
+      "lng": "23.7530994415283",
+      "link": "http:\/\/www.maruseki.net\/#\/Lounas",
+      "type": "Sushi",
+      "reviews": {}
+    },
+    "7": {
+      "name": "Ravintola Dabbal",
+      "address": "Yliopistonkatu 44, 33100 Tampere",
+      "rating": null,
+      "lat": "61.4977732",
+      "lng": "23.779560299999957",
+      "link": "https:\/\/www.laplandhotels.com\/FI\/kaupunkihotellit\/tampere\/lapland-hotel-tampere\/kitchen-bar-dabbal.html",
+      "type": "Suomalainen",
+      "reviews": {}
+    },
+    "8": {
+      "name": "Myll\u00e4rit",
+      "address": "\u00c5kerlundinkatu 4, 33100 Tampere",
+      "rating": "3.7143",
+      "lat": "61.4959983825684",
+      "lng": "23.7780990600586",
+      "link": "http:\/\/www.myllarit.fi\/Lounas.aspx",
+      "type": "Suomalainen",
+      "reviews": {}
+    },
+    "9": {
+      "name": "Thai & Laos N\u00e4silinnankatu",
+      "address": "N\u00e4silinnankatu 23, 33210 TAMPERE",
+      "rating": "4.2",
+      "lat": "61.4981994628906",
+      "lng": "23.7546005249023",
+      "kitchen_type_id": "4",
+      "link": "http:\/\/www.thai-laos.fi\/",
+      "type": "Thaimalainen",
+      "reviews": {}
+    },
+    "10": {
+      "name": "Bengol Curry",
+      "address": "Tullikatu 6, 33100 Tampere",
+      "rating": "3.2",
+      "lat": "61.4978247",
+      "lng": "23.7771279999999",
+      "link": "http:\/\/www.bengolcurry.fi\/lunch-menu.php",
+      "type": "Indialainen",
+      "reviews": {}
+    }
+  },
+  "users": {}
+}
