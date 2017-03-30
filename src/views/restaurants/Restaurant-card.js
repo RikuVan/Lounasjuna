@@ -3,15 +3,6 @@ import Restaurant from './Restaurant-card'
 import './Restaurants.css'
 
 class Restaurants extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  handleSelect = key => {
-  }
-
-  handleDeselect = key => {
-  }
 
   render () {
     const {restaurants, user} = this.props

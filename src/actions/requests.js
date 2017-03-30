@@ -3,15 +3,17 @@ import axios from 'axios'
 export const ATTEMPT_REQUEST = 'ATTEMPT_REQUEST'
 export const COMPLETE_REQUEST = 'COMPLETE_REQUEST'
 
+const attemptRequest = key => ({type: ATTEMPT_REQUEST, payload: {key}});
+const completeRequest = (key, data, error) => {
+  console.log(key, data);
+  return {
+    type: COMPLETE_REQUEST,
+    payload: {key, ...data, error}
+  }
+}
 
-const attemptRequest = key => ({type: ATTEMPT_REQUEST, payload: key});
-const completeRequest = (key, data, error, status) => ({
-  type: key,
-  payload: {data, error, status}
-})
 
-
-export const apiFn = type => (url, key, payload) => dispatch => {
+export const apiFn = type => ({url, key, payload, responseHandler}) => dispatch => {
   //out UI wants to know that we are loading data
   dispatch(attemptRequest(key));
 
@@ -23,7 +25,12 @@ export const apiFn = type => (url, key, payload) => dispatch => {
 
   return reqFn()
           .then(resp => {
-            dispatch(completeRequest(key, resp.data, null, resp.status))
+            return responseHandler ?
+              responseHandler(resp) :
+              {data: resp.data};
+          })
+          .then(data => {
+            dispatch(completeRequest(key, data, null))
 
           })
           .catch(error => {

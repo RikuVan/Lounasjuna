@@ -1,10 +1,17 @@
-import secrets from './secrets';
-import firebase from 'firebase';
+import secrets from './secrets'
+import firebase from 'firebase'
 
-firebase.initializeApp(secrets.firebaseConfig);
+firebase.initializeApp(secrets.firebaseConfig)
 
-export default firebase;
+export default firebase
 
-export const database = firebase.database();
-export const auth = firebase.auth();
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+export const database = firebase.database()
+export const auth = firebase.auth()
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+
+const baseURL = secrets.firebaseConfig.databaseURL
+const createFbUrl = path => `${baseURL}/${path}.json`
+
+export const fbUrls = {
+  restaurants: () => createFbUrl('restaurants')
+}

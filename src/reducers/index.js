@@ -1,5 +1,9 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux'
+import requests from './requests'
 
-const reducer = combineReducers({});
+
+const reducer = combineReducers({
+  requests
+});
 
 export default reducer;

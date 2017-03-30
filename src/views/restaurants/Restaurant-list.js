@@ -1,25 +1,24 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux'
-import RestaurantCard from './Restaurant-card';
+//import RestaurantCard from './Restaurant-card';
 import {fetchRestaurants} from '../../actions/restaurants'
 import './Restaurants.css';
 
 class Restaurants extends Component {
 
-  //typically data fetching done in this method
-  componentWillMount() {
-    //could also directly call apI
+  // data usually fetched here, called once
+  componentDidMount() {
     this.props.fetchRestaurants();
+    //instead of binding the action to the component props
+    //you could just import dispatch and use
+    //it directly dispatch(fetchRestaurants());
   }
 
   render () {
-    console.log(this.props);
     const {restaurants} = this.props
     return (
       <section className="Restaurants">
-        {
-          JSON.stringify(restaurants, null, 0)
-        }
+        <pre>{JSON.stringify(restaurants, null, 2)}</pre>
       </section>
     )
   }
@@ -33,18 +32,13 @@ Restaurants.propTypes = {
 //or use () => ({}) for more concise function
 const mapStateToProps = state => {
   return {
-    restaurants: state.requests.restaurants,
+    restaurants: state.requests.restaurants || {},
   }
 }
 
-//react-redux provides a bindActionCreators func to do make this more concise,
-//particularly with many actions
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchRestaurants() {
-      return () => dispatch(fetchRestaurants())
-    }
-  }
-}
+//react-redux provides a bindActionCreators func to do make this more concise
+//when you have many action creators to bind to
+const mapDispatchToProps = dispatch => (
+  {fetchRestaurants: () => dispatch(fetchRestaurants())});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurants)
