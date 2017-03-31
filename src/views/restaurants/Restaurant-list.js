@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux'
 import RestaurantCard from './Restaurant-card';
+import Loading from '../../components/Loading';
 import {fetchRestaurants} from '../../actions/restaurants'
 import './Restaurants.css';
 
@@ -16,10 +17,11 @@ class Restaurants extends Component {
 
   render () {
     const {restaurants} = this.props
+    console.log(restaurants);
     return (
       <section className="Restaurants">
         {restaurants.loading ?
-          <div>...loading</div> :
+          <Loading /> :
           (restaurants.data || []).map((rest, i) =>
             <RestaurantCard
               key={i}

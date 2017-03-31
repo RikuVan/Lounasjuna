@@ -13,6 +13,18 @@
   padding: 20px;
   color: white;
 }
+.App-subheader {
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: hsla(63, 2%, 82%, 1);
+  height: 50px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.App-subheader > * {
+  padding: 8px;
+}
 
 .App-intro {
   font-size: large;

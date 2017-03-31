@@ -1,6 +1,6 @@
 {
   "restaurants": {
-    "1": {
+    "0": {
       "name": "Amarillo Ilves",
       "address": "Hatanp\u00e4\u00e4n valtatie 1, 33100 Tampere",
       "rating": "3",
@@ -10,7 +10,7 @@
       "type": "Nöytäpöytä",
       "reviews": {}
     },
-    "2": {
+    "1": {
       "name": "4 Vuodenaika",
       "address": "Hameenkatu 19, Kauppahalli, 33200 Tampere",
       "rating": "4.6667",
@@ -20,7 +20,7 @@
       "type": "Ranskalainen",
       "reviews": {}
     },
-    "3": {
+    "2": {
       "name": "Katmandu",
       "address": "Satakunnankatu 29, 33210 Tampere",
       "rating": "4.6667",
@@ -30,17 +30,17 @@
       "type": "Nepalalainen",
       "reviews": {}
     },
-    "4": {
+    "3": {
       "name": "Gastropub Soho",
       "address": "Otavalankatu 10, 33100 Tampere",
-      "rating": null,
+      "rating": "2",
       "lat": "61.49645330000001",
       "lng": "23.771115099999975",
       "link": "https:\/\/www.facebook.com\/Gastropub-Soho-345658057323\/",
       "type": "Hampurilaiset",
       "reviews": {}
     },
-    "5": {
+    "4": {
       "name": "Klubi",
       "address": "Tullikamarinaukio 2, 33101 Tampere",
       "rating": "0",
@@ -50,7 +50,7 @@
       "type": "",
       "reviews": {}
     },
-    "6": {
+    "5": {
       "name": "Maruseki",
       "address": "H\u00e4meenkatu 31, 33200 Tampere",
       "rating": "5",
@@ -60,7 +60,7 @@
       "type": "Sushi",
       "reviews": {}
     },
-    "7": {
+    "6": {
       "name": "Ravintola Dabbal",
       "address": "Yliopistonkatu 44, 33100 Tampere",
       "rating": null,
@@ -70,7 +70,7 @@
       "type": "Suomalainen",
       "reviews": {}
     },
-    "8": {
+    "7": {
       "name": "Myll\u00e4rit",
       "address": "\u00c5kerlundinkatu 4, 33100 Tampere",
       "rating": "3.7143",
@@ -80,7 +80,7 @@
       "type": "Suomalainen",
       "reviews": {}
     },
-    "9": {
+    "8": {
       "name": "Thai & Laos N\u00e4silinnankatu",
       "address": "N\u00e4silinnankatu 23, 33210 TAMPERE",
       "rating": "4.2",
@@ -91,7 +91,7 @@
       "type": "Thaimalainen",
       "reviews": {}
     },
-    "10": {
+    "9": {
       "name": "Bengol Curry",
       "address": "Tullikatu 6, 33100 Tampere",
       "rating": "3.2",
@@ -102,5 +102,16 @@
       "reviews": {}
     }
   },
-  "users": {}
+  "users": {
+    "0": {
+      "displayName": "Mikko Matilainen",
+      "photoUrl": "",
+      "vote": "8"
+    },
+    "1": {
+      "displayName": "Timur Karki",
+      "photoUrl": "",
+      "vote": "7"
+    }
+  }
 }

@@ -13,5 +13,6 @@ const baseURL = secrets.firebaseConfig.databaseURL
 const createFbUrl = path => `${baseURL}/${path}.json`
 
 export const fbUrls = {
-  restaurants: () => createFbUrl('restaurants')
+  restaurants: () => createFbUrl('restaurants'),
+  users: () => createFbUrl('users')
 }

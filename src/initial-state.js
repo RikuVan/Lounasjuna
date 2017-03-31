@@ -1,5 +1,7 @@
 const initialState = {
-  //auth: {},
+  auth: {
+    status: 'ANONYMOUS'
+  },
   requests: {}
 }
 

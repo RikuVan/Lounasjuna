@@ -7,8 +7,9 @@ import {
 export default (state = initialState.requests, action) => {
   switch(action.type) {
     case ATTEMPT_REQUEST:
+      console.log(state, action);
       return {
-        ...state.requests,
+        ...state,
         [action.payload.key]: {
           loading: true,
           data: null,
@@ -20,6 +21,7 @@ export default (state = initialState.requests, action) => {
       // reducers should not mutate data. The spread operator copies all the properties
       // of an object or array into a new object, equivalent to Object.assign/R.merge
       return {
+        ...state,
         [action.payload.key]: {
           loading: false,
           ...action.payload
