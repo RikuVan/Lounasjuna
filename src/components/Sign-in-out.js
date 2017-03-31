@@ -1,14 +1,24 @@
-import React, { PropTypes } from 'react';
-import './Sign-in-out.css';
+import React, { PropTypes } from 'react'
+import './Sign-in-out.css'
+import Loading from './Loading'
 
-const SignInOrOut = ({type = 'SignIn', onClickHandler}) => {
+const getButtonContent = (type, loading) => {
+  if (loading) {
+    return <Loading small={true} />
+  } else if (type === 'SignIn') {
+    return 'Sign In'
+  }
+  return 'Sign out'
+}
+
+const SignInOrOut = ({type = 'SignIn', loading, onClickHandler}) => {
   return (
-    <div className="signInOut">
+    <div className="SignInOut">
       <button
         className={`block ${type === 'SignOut' ? 'destructive' : ''}`}
         onClick={onClickHandler}
       >
-        {type === 'SignIn' ? 'Sign In' : 'Sign out'}
+        {getButtonContent(type, loading)}
       </button>
     </div>
   );
@@ -16,7 +26,8 @@ const SignInOrOut = ({type = 'SignIn', onClickHandler}) => {
 
 SignInOrOut.propTypes = {
   type: PropTypes.string,
-  onClickHandler: PropTypes.func
+  onClickHandler: PropTypes.func.isRequired,
+  loading: PropTypes.bool
 }
 
 export default SignInOrOut

@@ -11,6 +11,7 @@ import './App.css'
 import RestaurantList from './views/restaurants/Restaurant-list'
 import SignInOrOut from './components/Sign-in-out'
 import Loading from './components/Loading'
+import CurrentUser from './components/Current-user'
 
 class App extends Component {
 
@@ -25,6 +26,7 @@ class App extends Component {
   render() {
     const {auth} = this.props
     const showSignIn = this.props.auth.status === 'ANONYMOUS'
+    const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE'
     return (
       <div className="App">
         <div className="App-header">
@@ -35,8 +37,10 @@ class App extends Component {
           <SignInOrOut
             type={showSignIn ? 'SignIn' : 'SignOut'}
             onClickHandler={showSignIn ? this.handleSignIn : this.handleSignOut}
+            loading={awaitingLogin}
           />
-          { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
+          <CurrentUser {...auth} />
+          {auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading />}
         </div>
         <RestaurantList />
       </div>

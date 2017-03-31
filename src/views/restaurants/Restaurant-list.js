@@ -20,7 +20,9 @@ class Restaurants extends Component {
     return (
       <section className="Restaurants">
         {restaurants.loading ?
-          <Loading /> :
+          <div className="Restaurants--loader">
+            <Loading />
+          </div> :
           (restaurants.data || []).map((rest, i) =>
             <RestaurantCard
               key={i}

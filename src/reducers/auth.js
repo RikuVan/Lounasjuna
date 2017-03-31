@@ -22,10 +22,7 @@ export default function authReducer(state = initialState.auth, action) {
     case SIGN_IN:
       return {
         status: 'SIGNED_IN',
-        email: action.email,
-        displayName: action.displayName,
-        photoURL: action.photoURL,
-        uid: action.uid
+        ...action.payload
       };
     default:
       return state

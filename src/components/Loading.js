@@ -1,12 +1,16 @@
-import React from 'react';
-import './Loading.css';
+import React, {PropTypes} from 'react'
+import './Loading.css'
 
-const Loading = () => {
+const Loading = ({small}) => {
   return (
-    <div className="Loading">
+    <div className={small ? 'Loading--small' : 'Loading'}>
       Loading…
     </div>
-  );
-};
+  )
+}
+
+Loading.propTypes = {
+  small: PropTypes.bool
+}
 
 export default Loading;
