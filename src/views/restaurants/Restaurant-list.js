@@ -17,7 +17,6 @@ class Restaurants extends Component {
 
   render () {
     const {restaurants} = this.props
-    console.log(restaurants);
     return (
       <section className="Restaurants">
         {restaurants.loading ?

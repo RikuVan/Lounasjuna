@@ -7,7 +7,6 @@ import {
 export default (state = initialState.requests, action) => {
   switch(action.type) {
     case ATTEMPT_REQUEST:
-      console.log(state, action);
       return {
         ...state,
         [action.payload.key]: {
