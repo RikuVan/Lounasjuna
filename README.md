@@ -28,6 +28,7 @@ You can find the most recent version of this guide with how to perform common ta
        messagingSenderId: "your_id"
      }
   ```
+- Seed the database using the `Import JSON` button in the upper right hand corner of the database. `seed.json` is at the root of the project.
 - Initially remove restrictions on reading and writing to the datebase until you have
 authentication hooked up. Database > Rules
   ```json
