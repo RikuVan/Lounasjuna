@@ -19,7 +19,6 @@ export default (state = initialState.requests, action) => {
     case COMPLETE_REQUEST:
       // reducers should not mutate data. The spread operator {...state} copies all the properties
       // of an object or array into a new object, equivalent to Object.assign/R.merge
-      console.log(state, action.payload)
       return {
         ...state,
         [action.payload.key]: {

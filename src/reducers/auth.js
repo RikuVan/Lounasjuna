@@ -1,4 +1,4 @@
-import initialState from '../initial-state.js';
+import initialState from '../initial-state.js'
 import {
   ATTEMPTING_LOGIN,
   SIGN_OUT,
