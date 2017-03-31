@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import './Restaurants.css'
+import StarRating from '../../components/Star-rating'
 
 class Restaurants extends Component {
 
@@ -8,9 +9,9 @@ class Restaurants extends Component {
     return (
       <article className="Restaurant">
         <h3 className="Restaurant--name"><a href={link}>{name}</a></h3>
+        <StarRating rating={rating ? Math.round(rating) : 0} />
         <p>{type}</p>
         <p>{address}</p>
-        <p>Tähtit: {rating ? Math.round(rating) : 0}</p>
       </article>
     );
   }

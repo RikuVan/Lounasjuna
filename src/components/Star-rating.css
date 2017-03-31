@@ -1,0 +1,15 @@
+.Star-rating--list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0;
+}
+
+.Star-rating--star > i.fa-star {
+  color: #ccc;
+}
+
+.Star-rating--star > i.fa-star.active {
+  color: #ff912c;
+}

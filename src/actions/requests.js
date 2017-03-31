@@ -13,7 +13,7 @@ const completeRequest = (key, data, error) => {
 
 
 export const apiFn = type => ({url, key, payload, handler: responseHandler}) => dispatch => {
-  //out UI wants to know that we are loading data
+  //UI wants to know that we are loading data
   dispatch(attemptRequest(key));
 
   let reqFn = () => axios[type](url);
