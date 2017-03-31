@@ -9,23 +9,29 @@ const signIn = user => ({type: SIGN_IN, payload: user})
 const signOut = () => ({type: SIGN_OUT})
 const startLogin = () => ({type: ATTEMPTING_LOGIN})
 
+const getRelevantUserDataFromResponse = user => ({
+  email: user.email,
+  displayName: user.displayName,
+  photoURL: user.photoURL,
+  uid: user.uid
+})
+
+const handleUserIfNew = (user, currentUsers, dispatch) => {
+  const usersWithCurrentId = currentUsers.filter(user => user.uid === user.uid)
+  if (usersWithCurrentId.length < 1) {
+    const {uid, ...rest} = user;
+    dispatch(saveUserToDB(uid, rest))
+  }
+}
+
 export const attemptSignInWithGoogle = () => (dispatch, getState) => {
   dispatch(startLogin())
-  const users = getState().requests.users.data || []
+  const currentUsers = getState().requests.users.data || []
   auth.signInWithPopup(googleAuthProvider).then(({user}) => {
-    const userData = {
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      uid: user.uid
-    }
+    const userData = getRelevantUserDataFromResponse(user)
     //if the user has never signed in before we need to add them to
     //to list of app users in the DB. Is this the right place for this?
-    const usersWithCurrentId = users.filter(user => user.uid === userData.uid)
-    if (usersWithCurrentId.length < 1) {
-      const {uid, ...rest} = userData;
-      dispatch(saveUserToDB(uid, rest))
-    }
+    handleUserIfNew(userData, currentUsers, dispatch)
     return userData
   }).then(data => {
     dispatch(signIn(data))
@@ -35,5 +41,16 @@ export const attemptSignInWithGoogle = () => (dispatch, getState) => {
 export const cancelGoogleAuth = () => dispatch => {
   auth.signOut().then(() =>{
     dispatch(signOut())
+  })
+}
+
+export const listenToAuthChanges = () => dispatch => {
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      const userData = getRelevantUserDataFromResponse(user)
+      dispatch(signIn(userData))
+    } else {
+      dispatch(signOut())
+    }
   })
 }

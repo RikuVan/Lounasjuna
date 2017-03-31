@@ -7,6 +7,7 @@ import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import reducer from './reducers'
 import initialState from './initial-state'
+import {listenToAuthChanges} from './actions/auth'
 
 const middleware = [thunk]
 const enhancers = []
@@ -20,6 +21,8 @@ const store = createStore(
     ...enhancers
   )
 );
+
+store.dispatch(listenToAuthChanges())
 
 ReactDOM.render(
   <Provider store={store}>
