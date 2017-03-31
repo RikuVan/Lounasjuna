@@ -1,6 +1,7 @@
-# React/Redux Workshop app: Lounasjuna
+# React/Redux Workshop App: Lounasjuna
 
-This project was bootstrapped with Create React App
+This project was bootstrapped with Create React App.
+
 You can find the most recent version of this guide with how to perform common tasks here: [Create React App Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Setup before the workshop
@@ -15,35 +16,37 @@ You can find the most recent version of this guide with how to perform common ta
 
 ### Firebase
 
-- Sign up for a [Firebase account](https://console.firebase.google.com/) and create a new project called Lounasjuna
-- Choose Authentication > Sign-in method and enable Google authentication. Choose the popup for the login method.
-- In authentication choose WEB SETUP in the upper right hand corner. This will open a modal with your unique configuration.
-- copy the config and add it to a file in the root of your app called secrets.js:
-  ```javascript
+- Sign up for a [Firebase account](https://console.firebase.google.com/) and create a new project called Lounasjuna.
+- Choose Authentication → Sign-in method and enable Google authentication. Choose the popup for the login method.
+- In authentication choose `WEB SETUP` in the upper right hand corner. This will open a modal with your unique configuration.
+- Copy the config and add it to a file in the `src` folder of your app called `secrets.js`:
+```javascript
+  export default {
     firebaseConfig: {
-       apiKey: "your_unqiue_key",
-       authDomain: "your_auth domain",
-       databaseURL: "https://lounasjuna-your_stuff.firebaseio.com",
-       storageBucket: "lounasjuna-your_stuff.appspot.com",
-       messagingSenderId: "your_id"
-     }
-  ```
+      apiKey: "your_unqiue_key",
+      authDomain: "your_auth domain",
+      databaseURL: "https://lounasjuna-your_stuff.firebaseio.com",
+      projectId: "your_project_id",
+      storageBucket: "lounasjuna-your_stuff.appspot.com",
+      messagingSenderId: "your_id"
+    }
+  }
+```
 - Seed the database using the `Import JSON` button in the upper right hand corner of the database. `seed.json` is at the root of the project.
 - Initially remove restrictions on reading and writing to the datebase until you have
-authentication hooked up. Database > Rules
-  ```json
-    {
-      "rules": {
-        ".read": "true",
-        ".write": "true"
-      }
+authentication hooked up. Database → Rules
+```json
+  {
+    "rules": {
+      ".read": "true",
+      ".write": "true"
     }
-  ```
-  DO NOT FORGET TO RETURN THE RESTRICTIONS LATER!
+  }
+```
+DO NOT FORGET TO RETURN THE RESTRICTIONS LATER!
 
 ### App
 
--Each page/feature has its own directory under /Views together with its css and tests
--Generic, reusable components are placed in the components directory
--Feel free to reorganize
-
+- Each page/feature has its own directory under `/Views` together with its css and tests
+- Generic, reusable components are placed in the `components` directory
+- Feel free to reorganize
