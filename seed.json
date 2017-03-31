@@ -1,5 +1,6 @@
 {
   "restaurants" : [ {
+    "id": "f332cf15-d818-46ec-be75-c1052eab4a5a",
     "address" : "Hatanpään valtatie 1, 33100 Tampere",
     "lat" : "61.4966011047363",
     "link" : "https://www.raflaamo.fi/fi/tampere/amarillo-ilves-tampere/menu",
@@ -8,6 +9,7 @@
     "rating" : "3",
     "type" : "Nöytäpöytä"
   }, {
+    "id": "aa599c87-31fb-487a-9e3b-b0fef0463bf3",
     "address" : "Hameenkatu 19, Kauppahalli, 33200 Tampere",
     "lat" : "61.497501373291",
     "link" : "http://4vuodenaikaa.fi/",
@@ -16,6 +18,7 @@
     "rating" : "4.6667",
     "type" : "Ranskalainen"
   }, {
+    "id": "1629cf32-5630-40a0-8c32-d4cc93b20510",
     "address" : "Satakunnankatu 29, 33210 Tampere",
     "lat" : "61.5001061",
     "link" : "http://ravintolakatmandu.fi/menu/lounas-lunch.html",
@@ -24,6 +27,7 @@
     "rating" : "4.6667",
     "type" : "Nepalalainen"
   }, {
+    "id": "61974020-d586-4088-b3dd-60dd82198585",
     "address" : "Otavalankatu 10, 33100 Tampere",
     "lat" : "61.49645330000001",
     "link" : "https://www.facebook.com/Gastropub-Soho-345658057323/",
@@ -32,6 +36,7 @@
     "rating" : "2",
     "type" : "Hampurilaiset"
   }, {
+    "id": "4d196a5d-73c2-4def-902f-f92490408415",
     "address" : "Tullikamarinaukio 2, 33101 Tampere",
     "lat" : "61.4981803894043",
     "link" : "http://tullikamari.net/klubi/ravintola",
@@ -40,14 +45,17 @@
     "rating" : "0",
     "type" : ""
   }, {
+    "id": "3d7ac1d5-269e-4976-8a05-6c2c9e144a9b",
     "address" : "Hämeenkatu 31, 33200 Tampere",
     "lat" : "61.4971008300781",
     "link" : "http://www.maruseki.net/#/Lounas",
     "lng" : "23.7530994415283",
     "name" : "Maruseki",
     "rating" : "5",
-    "type" : "Sushi"
+    "type" : "Sushi",
+    "votes": ["o7y8DCJIcxN3Gz4pjVfvlxSRU3g1"]
   }, {
+    "id": "15af433e-a88e-45c3-ae94-fc7174fb2785",
     "address" : "Yliopistonkatu 44, 33100 Tampere",
     "lat" : "61.4977732",
     "link" : "https://www.laplandhotels.com/FI/kaupunkihotellit/tampere/lapland-hotel-tampere/kitchen-bar-dabbal.html",
@@ -55,14 +63,17 @@
     "name" : "Ravintola Dabbal",
     "type" : "Suomalainen"
   }, {
+    "id": "939f0ada-eac2-4c6a-96a2-1573a4b328e4",
     "address" : "Åkerlundinkatu 4, 33100 Tampere",
     "lat" : "61.4959983825684",
     "link" : "http://www.myllarit.fi/Lounas.aspx",
     "lng" : "23.7780990600586",
     "name" : "Myllärit",
     "rating" : "3.7143",
-    "type" : "Suomalainen"
+    "type" : "Suomalainen",
+    "votes": ["o6w8DCJKcxM3Kz4pjVfvlxDRU3g1", "o6w8DCJIcxN3Gz4pjVfvlxSRU3g1"]
   }, {
+    "id": "e3660a89-0ece-45b4-9cb8-e32a4c0f376b",
     "address" : "Näsilinnankatu 23, 33210 TAMPERE",
     "kitchen_type_id" : "4",
     "lat" : "61.4981994628906",
@@ -72,6 +83,7 @@
     "rating" : "4.2",
     "type" : "Thaimalainen"
   }, {
+    "id": "12ec6699-ebf3-46ae-95c4-b87d67fd8a46",
     "address" : "Tullikatu 6, 33100 Tampere",
     "lat" : "61.4978247",
     "link" : "http://www.bengolcurry.fi/lunch-menu.php",
@@ -81,15 +93,13 @@
     "type" : "Indialainen"
   } ],
   "users" : {
-    "0" : {
+    "o7y8DCJIcxN3Gz4pjVfvlxSRU3g1" : {
       "displayName" : "Mikko Matilainen",
-      "photoUrl" : "",
-      "vote" : "8"
+      "photoUrl" : ""
     },
-    "1" : {
+    "o6w8DCJKcxM3Kz4pjVfvlxDRU3g1" : {
       "displayName" : "Timur Kärki",
-      "photoUrl" : "",
-      "vote" : "7"
+      "photoUrl" : ""
     },
     "o6w8DCJIcxN3Gz4pjVfvlxSRU3g1" : {
       "displayName" : "Richard Van Camp",

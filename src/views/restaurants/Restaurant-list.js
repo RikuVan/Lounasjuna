@@ -16,16 +16,18 @@ class Restaurants extends Component {
   }
 
   render () {
-    const {restaurants} = this.props
+    const {restaurants, auth, users} = this.props
     return (
       <section className="Restaurants">
-        {restaurants.loading ?
+        {restaurants.loading || users.loading ?
           <div className="Restaurants--loader">
             <Loading />
           </div> :
           (restaurants.data || []).map((rest, i) =>
             <RestaurantCard
               key={i}
+              userId={auth.uid}
+              users={users.data}
               {...rest}
             />
         )}
@@ -36,13 +38,15 @@ class Restaurants extends Component {
 
 Restaurants.propTypes = {
   restaurants: PropTypes.object,
-  fetchRestaurants: PropTypes.func.isRequired
+  fetchRestaurants: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 //or use () => ({}) for more concise function
 const mapStateToProps = state => {
   return {
     restaurants: state.requests.restaurants || {},
+    users: state.requests.users || {}
   }
 }
 

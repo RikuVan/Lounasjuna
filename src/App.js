@@ -42,7 +42,7 @@ class App extends Component {
           <CurrentUser {...auth} />
           {auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading />}
         </div>
-        <RestaurantList />
+        <RestaurantList auth={auth} />
       </div>
     );
   }

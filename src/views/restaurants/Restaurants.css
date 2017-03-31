@@ -8,6 +8,7 @@
 .Restaurant {
   margin: 1em;
   min-width: 200px;
+  max-width: 300px;
   text-align: center;
   border: 1px solid #eee;
   padding: 1em;
@@ -19,4 +20,33 @@
 
 Restaurants--loader {
   align-center: center;
+}
+/* css insanity...http://codepen.io/haibnu/pen/FxGsI */
+.Restaurant--votes {
+  position: relative;
+  background-color: #ededed;
+  padding: 5px;
+  border: 1px solid #aaaaaa;
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+Restaurant--votes:before, .Restaurant--votes:after
+{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+  -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+  box-shadow:0 0 20px rgba(0,0,0,0.8);
+  top:50%;
+  bottom:0;
+  left:10px;
+  right:10px;
+  -moz-border-radius:100px / 10px;
+  border-radius:100px / 10px;
+}
+
+.Restaurant--votes-title {
+  font-weight: 700;
+  color: #1cb2d3;
 }
