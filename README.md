@@ -27,6 +27,21 @@ You can find the most recent version of this guide with how to perform common ta
        messagingSenderId: "your_id"
      }
   ```
-  
+- Seed the database using the `Import JSON` button in the upper right hand corner of the database. `seed.json` is at the root of the project.
+- Initially remove restrictions on reading and writing to the datebase until you have
+authentication hooked up. Database > Rules
+  ```json
+    {
+      "rules": {
+        ".read": "true",
+        ".write": "true"
+      }
+    }
+  ```
+  DO NOT FORGET TO RETURN THE RESTRICTIONS LATER!
+
 ### App
+
+- Each page/feature has its own directory under /Views together with its css and tests 
+- Generic, reusable components are placed in the components directory -Feel free to reorganize
 
