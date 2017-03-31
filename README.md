@@ -7,10 +7,11 @@ You can find the most recent version of this guide with how to perform common ta
 
 ### Installations
 
-- A recent version of Node.js
+- A recent version of [Node.js](https://nodejs.org/en/)
 - `npm install -g create-react-app`
 - `npm install -g firebase-tools`
-- Optional: Yarn
+- Optional: [Yarn](https://yarnpkg.com/en/)
+- Optional: [Nvm](https://github.com/creationix/nvm)
 
 ### Firebase
 
@@ -27,6 +28,21 @@ You can find the most recent version of this guide with how to perform common ta
        messagingSenderId: "your_id"
      }
   ```
-  
+- Initially remove restrictions on reading and writing to the datebase until you have
+authentication hooked up. Database > Rules
+  ```json
+    {
+      "rules": {
+        ".read": "true",
+        ".write": "true"
+      }
+    }
+  ```
+  DO NOT FORGET TO RETURN THE RESTRICTIONS LATER!
+
 ### App
+
+-Each page/feature has its own directory under /Views together with its css and tests
+-Generic, reusable components are placed in the components directory
+-Feel free to reorganize
 

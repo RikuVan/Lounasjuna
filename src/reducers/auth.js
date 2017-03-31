@@ -23,6 +23,6 @@ export default function authReducer(state = initialState.auth, action) {
         uid: action.uid
       };
     default:
-      return state;
+      return state
   }
 }
