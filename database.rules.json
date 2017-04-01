@@ -1,0 +1,13 @@
+{
+  "rules": {
+    ".read": "true",
+    "restaurants": {
+      ".write": "auth !== null"
+    },
+    "users": {
+      "$userId": {
+        ".write": "$userId === auth.uid"
+      }
+    }
+  }
+}
