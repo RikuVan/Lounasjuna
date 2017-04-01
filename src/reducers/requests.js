@@ -9,7 +9,7 @@ export default (state = initialState.requests, action) => {
     case ATTEMPT_REQUEST:
       return {
         ...state,
-        [action.payload.key]: {
+        [action.payload.resource]: {
           loading: true,
           data: null,
           status: null,
@@ -21,7 +21,7 @@ export default (state = initialState.requests, action) => {
       // of an object or array into a new object, equivalent to Object.assign/R.merge
       return {
         ...state,
-        [action.payload.key]: {
+        [action.payload.resource]: {
           loading: false,
           ...action.payload
         }

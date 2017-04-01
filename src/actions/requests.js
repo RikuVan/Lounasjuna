@@ -1,42 +1,54 @@
-import axios from 'axios'
-
+import {dbResource} from '../dataApi'
 export const ATTEMPT_REQUEST = 'ATTEMPT_REQUEST'
 export const COMPLETE_REQUEST = 'COMPLETE_REQUEST'
 
-const attemptRequest = key => ({type: ATTEMPT_REQUEST, payload: {key}});
-const completeRequest = (key, data, error) => {
+const attemptRequest = resource => ({type: ATTEMPT_REQUEST, payload: {resource}});
+const completeRequest = (resource, data, error) => {
   return {
     type: COMPLETE_REQUEST,
-    payload: {key, ...data, error}
+    payload: {resource, ...data, error}
   }
 }
 
-export const apiFn = type => ({url, key, payload, handler: responseHandler}) => dispatch => {
-  //UI wants to know that we are loading data
-  dispatch(attemptRequest(key));
+const errorCallback = (dispatch, resource) => error => {
+  dispatch(completeRequest(resource, null, error))
+}
 
-  let reqFn = () => axios[type](url);
-
-  if (type === 'post' || type === 'put') {
-    reqFn = () => axios[type](url, payload)
+const createRequest = (type, resource, params = {}, payload) => {
+  if (type === 'set') {
+    return dbResource[resource](params).set(payload)
+  } else if (type === 'push') {
+    //untested
+    return dbResource[resource](params).push().key
+  } else if (type === 'update') {
+    return dbResource[resource](params).update(payload)
+  } else if (type === 'remove') {
+    return dbResource[resource](params).remove()
   }
+  return dbResource[resource](params)
+}
 
-  return reqFn()
-          .then(resp => {
-            return responseHandler ?
-              responseHandler(resp) :
-              {...resp};
-          })
-          .then(data => {
-            dispatch(completeRequest(key, data, null))
-          })
-          .catch(error => {
-            dispatch(completeRequest(key, null, error, error.status))
-          })
+export const apiFn = type => ({resource, params, payload, handler: responseHandler}) => dispatch => {
+  //UI wants to know that we are loading data
+  dispatch(attemptRequest(resource))
+
+  const request = createRequest(type, resource, params, payload)
+  //this is the firebase real time api once is alternative to an open web socket
+  //so closer to rest api behaviour
+  if (type === 'remove' || type === 'push' || type === 'update') {
+    return responseHandler ? responseHandler(null) : null;
+  }
+  return request.once('value', snapshot => {
+    const data = responseHandler ?
+      responseHandler(snapshot.val()) :
+      {data: snapshot.val()}
+    return dispatch(completeRequest(resource, data, null))
+  }, errorCallback(dispatch, resource))
 }
 
 export const apiGet = apiFn('get')
-export const apiPut = apiFn('put')
-export const apiPost = apiFn('post')
-export const apiDelete = apiFn('delete')
+export const apiSet = apiFn('set')
+export const apiPush = apiFn('push')
+export const apiUpdate = apiFn('update')
+export const apiRemove = apiFn('remove')
 

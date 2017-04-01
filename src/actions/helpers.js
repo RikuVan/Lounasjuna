@@ -1,8 +1,8 @@
-export const objectToArray = resp => {
-  if (!resp.data || Array.isArray(resp.data)) return resp.data
+export const objectToArray = data => {
+  if (!data || Array.isArray(data)) return data
     const array = []
-    for (var key in resp.data) {
-      const obj = resp.data[key]
+    for (var key in data) {
+      const obj = data[key]
       obj.uid = key
       array.push(obj)
    }

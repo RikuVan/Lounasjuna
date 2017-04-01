@@ -29,7 +29,7 @@ export const attemptSignInWithGoogle = () => (dispatch, getState) => {
   auth.signInWithPopup(googleAuthProvider).then(({user}) => {
     const userData = getRelevantUserDataFromResponse(user)
     //if the user has never signed in before we need to add them to
-    //to list of app users in the DB. Is this the right place for this?
+    //to list of users in the DB. Is this the right place for this?
     handleUserIfNew(userData, currentUsers, dispatch)
     return userData
   }).then(data => {

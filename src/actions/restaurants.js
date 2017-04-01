@@ -1,5 +1,4 @@
 import {apiGet} from './requests'
-import {fbUrls} from '../dataApi'
 import {objectToArray, objectKeysToArray} from './helpers'
 
 export const FETCH_RESTAURANTS = 'FETCH_RESTAURANTS'
@@ -8,8 +7,8 @@ const sortByRating = (a, b) => (b.rating || 0) - (a.rating || 0);
 
 //in firebase it is much easier to work with data in objects
 //but in react arrays are convenient
-const processRestaurantData = resp => {
-  return objectToArray(resp)
+const processRestaurantData = data => {
+  return objectToArray(data)
     .map(obj => {
       const votes = objectKeysToArray(obj.votes)
       return Object.assign(obj, {votes});
@@ -19,14 +18,10 @@ const processRestaurantData = resp => {
 }
 
 export const fetchRestaurants = () => {
-  const handler = resp => {
-    //get rid of null values & sort by rating
-    const data = processRestaurantData(resp);
-    return {...resp, data}
-  }
+  //change into array & get rid of null values & sort by rating
+  const handler = data => ({data: processRestaurantData(data)});
   return apiGet({
-    url: fbUrls.restaurants(),
-    key: 'restaurants',
+    resource: 'restaurants',
     handler
   })
 }
