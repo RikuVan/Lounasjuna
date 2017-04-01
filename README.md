@@ -39,7 +39,22 @@ authentication hooked up. Database > Rules
     }
   ```
   DO NOT FORGET TO RETURN THE RESTRICTIONS LATER!
-
+  This is still naive but better
+  ```json
+    {
+      "rules": {
+        ".read": "true",
+        "restaurants": {
+            ".write": "auth !== null"
+        },
+        "users": {
+          "$userId": {
+            ".write": "$userId === auth.uid"
+          }
+        }
+      }
+    }
+  ```
 ### App
 
 - Each page/feature has its own directory under /Views together with its css and tests 
