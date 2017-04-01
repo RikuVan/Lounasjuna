@@ -45,11 +45,11 @@ authentication hooked up. Database > Rules
       "rules": {
         ".read": "true",
         "restaurants": {
-            ".write": "auth !== null"
+          ".write": "auth !== null && auth.provider == 'google'"
         },
         "users": {
           "$userId": {
-            ".write": "$userId === auth.uid"
+            ".write": "$userId === auth.uid && auth.provider == 'google'"
           }
         }
       }
