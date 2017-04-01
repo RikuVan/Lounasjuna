@@ -26,7 +26,7 @@ class Restaurants extends Component {
         <StarRating rating={rating ? Math.round(rating) : 0} />
         <p>{type}</p>
         <p>{address}</p>
-        <RestaurantVotes votes={mapToUsers(votes, users)} />
+        {userId && <RestaurantVotes votes={mapToUsers(votes, users)} />}
       </article>
     );
   }

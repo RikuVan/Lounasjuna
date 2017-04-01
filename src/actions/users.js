@@ -3,7 +3,7 @@ import {fbUrls} from '../dataApi'
 
 export const FETCH_USERS = 'FETCH_RESTAURANTS'
 
-//firebase will return the users as an object since the keys are uids
+//firebase will return the users as an object
 export const fetchUsers = () => {
   return apiGet({
     url: fbUrls.users(),

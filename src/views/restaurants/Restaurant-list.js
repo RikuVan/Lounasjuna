@@ -39,7 +39,8 @@ class Restaurants extends Component {
 Restaurants.propTypes = {
   restaurants: PropTypes.object,
   fetchRestaurants: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired
 };
 
 //or use () => ({}) for more concise function

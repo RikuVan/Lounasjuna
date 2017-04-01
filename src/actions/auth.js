@@ -17,16 +17,15 @@ const getRelevantUserDataFromResponse = user => ({
 })
 
 const handleUserIfNew = (user, currentUsers, dispatch) => {
-  const usersWithCurrentId = currentUsers.filter(user => user.uid === user.uid)
-  if (usersWithCurrentId.length < 1) {
-    const {uid, ...rest} = user;
+  const {uid, ...rest} = user;
+  if (!currentUsers[uid]) {
     dispatch(saveUserToDB(uid, rest))
   }
 }
 
 export const attemptSignInWithGoogle = () => (dispatch, getState) => {
   dispatch(startLogin())
-  const currentUsers = getState().requests.users.data || []
+  const currentUsers = getState().requests.users.data || {}
   auth.signInWithPopup(googleAuthProvider).then(({user}) => {
     const userData = getRelevantUserDataFromResponse(user)
     //if the user has never signed in before we need to add them to
