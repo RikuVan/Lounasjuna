@@ -23,7 +23,7 @@ You can find the most recent version of this guide with how to perform common ta
 ```javascript
   export default {
     firebaseConfig: {
-      apiKey: "your_unqiue_key",
+      apiKey: "your_unique_key",
       authDomain: "your_auth domain",
       databaseURL: "https://lounasjuna-your_stuff.firebaseio.com",
       projectId: "your_project_id",
@@ -43,8 +43,23 @@ authentication hooked up. Database → Rules
     }
   }
 ```
-DO NOT FORGET TO RETURN THE RESTRICTIONS LATER!
-
+  DO NOT FORGET TO RETURN THE RESTRICTIONS LATER!
+  This is still naive but better
+  ```json
+    {
+      "rules": {
+        ".read": "true",
+        "restaurants": {
+            ".write": "auth !== null"
+        },
+        "users": {
+          "$userId": {
+            ".write": "$userId === auth.uid"
+          }
+        }
+      }
+    }
+  ```
 ### App
 
 - Each page/feature has its own directory under `/Views` together with its css and tests
