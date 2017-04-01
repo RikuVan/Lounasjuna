@@ -1,9 +1,19 @@
+import {saveUserToDB} from './users'
+import {auth, googleAuthProvider} from '../dataApi'
+
+/**
+ * AUTH ACTIONS
+ * @type {string}
+ */
+
 export const ATTEMPTING_LOGIN = 'ATTEMPTING_LOGIN'
 export const SIGN_IN = 'SIGIN_IN'
 export const SIGN_OUT = 'SIGN_OUT'
 
-import {saveUserToDB} from './users'
-import {auth, googleAuthProvider} from '../dataApi'
+/**
+ * AUTH ACTION CREATORS
+ * @param user
+ */
 
 const signIn = user => ({type: SIGN_IN, payload: user})
 const signOut = () => ({type: SIGN_OUT})
@@ -23,6 +33,10 @@ const handleUserIfNew = (user, currentUsers, dispatch) => {
   }
 }
 
+/**
+ * main action for signing in with a popup
+ */
+
 export const attemptSignInWithGoogle = () => (dispatch, getState) => {
   dispatch(startLogin())
   const currentUsers = getState().requests.users.data || {}
@@ -37,12 +51,15 @@ export const attemptSignInWithGoogle = () => (dispatch, getState) => {
   }).catch(err => console.error(err))
 }
 
+// logout
 export const cancelGoogleAuth = () => dispatch => {
   auth.signOut().then(() =>{
     dispatch(signOut())
   })
 }
 
+// this is creates an open weg socket which will push a new
+// value when the user is logged in or logged out
 export const listenToAuthChanges = () => dispatch => {
   auth.onAuthStateChanged(user => {
     if (user) {

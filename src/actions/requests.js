@@ -1,6 +1,15 @@
-import {dbResource} from '../dataApi'
+import {DB} from '../dataApi'
+
+/**
+  REQUEST ACTION CONSTANTS
+ */
+
 export const ATTEMPT_REQUEST = 'ATTEMPT_REQUEST'
 export const COMPLETE_REQUEST = 'COMPLETE_REQUEST'
+
+/**
+  REQUEST ACTION CREATORS - functions that create actions
+ */
 
 const attemptRequest = resource => ({type: ATTEMPT_REQUEST, payload: {resource}});
 const completeRequest = (resource, data, error) => {
@@ -10,34 +19,51 @@ const completeRequest = (resource, data, error) => {
   }
 }
 
+/**
+  Shouldn't need to mess with this, which creates the database query
+ */
+
+const createRequest = (type, resource, params = {}, payload) => {
+  switch(type) {
+    case 'set': return DB[resource](params).set(payload)
+    case 'push': return DB[resource](params).push().key
+    //untested
+    case 'update': return DB[resource](params).update(payload)
+    case 'remove': return DB[resource](params).remove()
+    default: return DB[resource](params)
+  }
+}
+
+//the .on/.once method for the real time api takes a second error func
 const errorCallback = (dispatch, resource) => error => {
   dispatch(completeRequest(resource, null, error))
 }
 
-const createRequest = (type, resource, params = {}, payload) => {
-  if (type === 'set') {
-    return dbResource[resource](params).set(payload)
-  } else if (type === 'push') {
-    //untested
-    return dbResource[resource](params).push().key
-  } else if (type === 'update') {
-    return dbResource[resource](params).update(payload)
-  } else if (type === 'remove') {
-    return dbResource[resource](params).remove()
-  }
-  return dbResource[resource](params)
-}
+/**
+ * main handler for requests
+ * see params description below where the curried functions are exported
+ */
 
 export const apiFn = type => ({resource, params, payload, handler: responseHandler}) => dispatch => {
   //UI wants to know that we are loading data
   dispatch(attemptRequest(resource))
 
   const request = createRequest(type, resource, params, payload)
-  //this is the firebase real time api once is alternative to an open web socket
-  //so closer to rest api behaviour
-  if (type === 'remove' || type === 'push' || type === 'update') {
+
+  //remove doesn't not seem to push back a result
+  //should use set(null) for a response
+  //push is not yet tested - what does it return?
+  if (type === 'remove' || type === 'push') {
     return responseHandler ? responseHandler(null) : null;
   }
+  //update api returns a promise
+  //update can also take an object with multiple atomic updates
+  if (type === 'update') {
+    return request.then(resp => {
+      return responseHandler ? responseHandler() : true;
+    }).catch(err => console.log(err))
+  }
+  //real time api
   return request.once('value', snapshot => {
     const data = responseHandler ?
       responseHandler(snapshot.val()) :
@@ -45,10 +71,21 @@ export const apiFn = type => ({resource, params, payload, handler: responseHandl
     return dispatch(completeRequest(resource, data, null))
   }, errorCallback(dispatch, resource))
 }
+/**
+ * The operations below take an object:
+ *   [resource]: string e.g. 'restaurants'
+ *   [params]: object e.g. {userId}
+ *   [payload]: object e.g. {name: 'rick'}
+ *   [handler]: func - use this to process the data or perform another action
+ */
 
 export const apiGet = apiFn('get')
 export const apiSet = apiFn('set')
 export const apiPush = apiFn('push')
 export const apiUpdate = apiFn('update')
 export const apiRemove = apiFn('remove')
+
+//firebase also has a REST api which will work in this app for reading data without auth
+//import an ajax helper lib like axios and use the data base url with .json to fetch data
+
 

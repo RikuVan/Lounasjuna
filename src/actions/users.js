@@ -1,6 +1,15 @@
 import {apiGet, apiSet} from './requests'
+import {resources} from '../dataApi';
+
+/**
+  USER ACTIONS
+ */
 
 export const FETCH_USERS = 'FETCH_RESTAURANTS'
+
+/**
+ * USER ACTION CREATORS
+ */
 
 //firebase will return the users as an object
 export const fetchUsers = () => {
@@ -10,7 +19,7 @@ export const fetchUsers = () => {
 export const saveUserToDB = (userId, payload) => dispatch => {
   const handler = () => dispatch(fetchUsers())
   dispatch(apiSet({
-    resource: 'users',
+    resource: resources.USERS,
     params: {userId},
     payload,
     handler

@@ -10,7 +10,6 @@ import logo from './logo.svg'
 import './App.css'
 import RestaurantList from './views/restaurants/Restaurant-list'
 import SignInOrOut from './components/Sign-in-out'
-import Loading from './components/Loading'
 import CurrentUser from './components/Current-user'
 
 class App extends Component {
@@ -40,7 +39,6 @@ class App extends Component {
             loading={awaitingLogin}
           />
           <CurrentUser {...auth} />
-          {auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading />}
         </div>
         <RestaurantList auth={auth} />
       </div>
