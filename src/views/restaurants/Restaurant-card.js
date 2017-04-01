@@ -22,9 +22,10 @@ const RestaurantCard = ({
    currentVote
  }) => {
   const isOnBoard = restaurantId === currentVote;
+  //must be logged in to vote
   //we can't vote for two different restaurants, so if we have voted already hide buttons
   //until we revoke that vote
-  const hideButtons = currentVote && !isOnBoard;
+  const hideButtons = !userId || (currentVote && !isOnBoard);
   return (
     <article className="Restaurant">
       <h3 className="Restaurant--name"><a href={link}>{name}</a></h3>
@@ -60,7 +61,8 @@ RestaurantCard.propTypes = {
   votes: PropTypes.array,
   userId: PropTypes.string,
   uid: PropTypes.string,
-  users: PropTypes.object.isRequired
+  users: PropTypes.object.isRequired,
+  currentVote: PropTypes.string
 };
 
 export default RestaurantCard
