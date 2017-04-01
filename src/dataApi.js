@@ -15,5 +15,7 @@ const createFbUrl = path => `${baseURL}/${path}.json`
 export const fbUrls = {
   restaurants: () => createFbUrl('restaurants'),
   users: () => createFbUrl('users'),
-  user: id => createFbUrl(`users/${id}`)
+  user: id => createFbUrl(`users/${id}`),
+  vote: (restId, userId) =>
+    createFbUrl(`restaurants/${restId}/votes${userId ? `/${userId}` : ''}`)
 }
