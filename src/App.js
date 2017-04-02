@@ -6,7 +6,6 @@ import {
   cancelGoogleAuth
 } from './actions/auth'
 import {fetchUsers} from './actions/users'
-import logo from './logo.svg'
 import './App.css'
 import RestaurantList from './views/restaurants/Restaurant-list'
 import SignInOrOut from './components/Sign-in-out'
@@ -29,16 +28,18 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Lounasjuna</h2>
+          <h1 className="Logo">
+            <div className="Logo-train">🚂</div>
+            <div className="Logo-text">Lounasjuna</div>
+          </h1>
         </div>
         <div className="App-subheader">
+          <CurrentUser {...auth} />
           <SignInOrOut
             type={showSignIn ? 'SignIn' : 'SignOut'}
             onClickHandler={showSignIn ? this.handleSignIn : this.handleSignOut}
             loading={awaitingLogin}
           />
-          <CurrentUser {...auth} />
         </div>
         <RestaurantList auth={auth} />
       </div>

@@ -1,36 +1,46 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  margin: 0 auto;
+  max-width: 960px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  padding: 3rem 0;
+  text-align: center;
 }
+
 .App-subheader {
+  background-color: rgba(119, 85, 102, 0.9);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   display: flex;
-  flex-direction: row-reverse;
-  background-color: hsla(63, 2%, 82%, 1);
-  height: 70px;
-  padding-right: 20px;
-  padding-left: 20px;
+  justify-content: flex-end;
+  padding: 15px;
 }
 
-.App-subheader > * {
-  padding: 10px;
+h1 {
+  font-family: 'Oleo Script';
+  margin: 0;
 }
 
-.App-intro {
-  font-size: large;
+.Logo {
+  display: inline-block;
+  line-height: 1;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.Logo-train {
+  color: transparent;
+  font-size: 8rem;
+  text-shadow: 0 0 0 rgba(255, 255, 255, 0.5);
+  transform: scale(-1, 1);
+}
+
+.Logo-text {
+  color: #fff;
+  font-size: 4rem;
+  left: 50%;
+  position: absolute;
+  text-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+  top: 0;
+  transform: translate(-50%, 50%);
 }
