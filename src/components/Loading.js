@@ -8,7 +8,7 @@ const Loading = ({small}) => {
 }
 
 Loading.propTypes = {
-  small: PropTypes.bool
+  small: PropTypes.bool,
 }
 
-export default Loading;
+export default Loading

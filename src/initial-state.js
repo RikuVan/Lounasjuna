@@ -1,8 +1,8 @@
 const initialState = {
   auth: {
-    status: 'ANONYMOUS'
+    status: 'ANONYMOUS',
   },
-  requests: {}
+  requests: {},
 }
 
 export default initialState

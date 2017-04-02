@@ -12,7 +12,7 @@ import {reducer as form} from 'redux-form'
 const reducer = combineReducers({
   auth,
   requests,
-  form
-});
+  form,
+})
 
-export default reducer;
+export default reducer

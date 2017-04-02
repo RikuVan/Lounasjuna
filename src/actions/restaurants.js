@@ -1,6 +1,6 @@
 import {apiGet, apiPush} from './requests'
 import {objectToArray, objectKeysToArray} from './helpers'
-import {resources} from '../dataApi';
+import {resources} from '../dataApi'
 
 /**
   RESTAURANTS ACTIONS
@@ -26,7 +26,7 @@ const processRestaurantData = data => {
   return objectToArray(data)
     .map(obj => {
       const votes = objectKeysToArray(obj.votes)
-      return Object.assign(obj, {votes});
+      return Object.assign(obj, {votes})
     })
     .filter(x => x)
     .sort(sortByRating)
@@ -39,18 +39,21 @@ const processRestaurantData = data => {
 
 export const fetchRestaurants = () => {
   //change into array & get rid of null values & sort by rating
-  const handler = data => ({data: processRestaurantData(data)});
+  const handler = data => ({data: processRestaurantData(data)})
   return apiGet({
     resource: resources.RESTAURANTS,
-    handler
+    handler,
   })
 }
 
-export const addRestaurant = payload => dispatch => {
-  const handler = () => dispatch(fetchRestaurants())
-  return dispatch(apiPush({
-    resource: resources.RESTAURANTS,
-    payload,
-    handler
-  }))
-}
+export const addRestaurant = payload =>
+  dispatch => {
+    const handler = () => dispatch(fetchRestaurants())
+    return dispatch(
+      apiPush({
+        resource: resources.RESTAURANTS,
+        payload,
+        handler,
+      }),
+    )
+  }

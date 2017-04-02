@@ -15,6 +15,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "prettier-standard": "^2.0.2",
     "react-scripts": "0.9.5"
   },
   "scripts": {
@@ -22,6 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "yarn install && npm run build && firebase deploy"
+    "deploy": "yarn install && npm run build && firebase deploy",
+    "format": "prettier-standard 'src/**/*.js'"
   }
 }

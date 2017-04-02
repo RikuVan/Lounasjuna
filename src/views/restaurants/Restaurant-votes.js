@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react'
-import './Restaurants.css';
+import './Restaurants.css'
 
 const Votes = ({votes}) => {
   if (votes.length < 1) {
-    return null;
+    return null
   }
   return (
     <div className="Restaurant--votes">
@@ -16,7 +16,7 @@ const Votes = ({votes}) => {
 }
 
 Votes.propTypes = {
-  votes: PropTypes.array
+  votes: PropTypes.array,
 }
 
-export default Votes;
+export default Votes

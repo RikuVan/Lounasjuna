@@ -17,11 +17,13 @@ export const DB = {
   restaurants: () => database.ref('restaurants'),
   users: ({userId = ''}) => database.ref(`users${userId ? `/${userId}` : ''}`),
   votes: ({restaurantId, userId}) =>
-    database.ref(`restaurants/${restaurantId}/votes${userId ? `/${userId}` : ''}`)
+    database.ref(
+      `restaurants/${restaurantId}/votes${userId ? `/${userId}` : ''}`,
+    ),
 }
 
 export const resources = {
   RESTAURANTS: 'restaurants',
   USERS: 'users',
-  VOTES: 'votes'
+  VOTES: 'votes',
 }

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, {PropTypes} from 'react'
 import Loading from './Loading'
 import Button from './Button'
 
@@ -30,13 +30,13 @@ const SignInOrOut = ({type = 'SignIn', loading, onClickHandler}) => {
         {getButtonContent(type, loading)}
       </Button>
     </div>
-  );
-};
+  )
+}
 
 SignInOrOut.propTypes = {
   type: PropTypes.string,
   onClickHandler: PropTypes.func.isRequired,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 }
 
 export default SignInOrOut

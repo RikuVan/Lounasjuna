@@ -1,7 +1,13 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from 'react'
 import './Star-rating.css'
 
-const ratingTitles = ['Välttävä', 'Tyydyttävä', 'Hyvä', 'Kiitettävä', 'Erinomainen!'];
+const ratingTitles = [
+  'Välttävä',
+  'Tyydyttävä',
+  'Hyvä',
+  'Kiitettävä',
+  'Erinomainen!',
+]
 
 /***
  * convert a number to a an array of values to map over li for each star
@@ -14,19 +20,19 @@ const getStars = rating => {
 }
 
 const StarRating = ({rating}) => (
-  <div className='Star-rating'>
-    <ul className='Star-rating--list'>
-      {getStars(rating).map((val, i) =>
-        <li key={i} className='Star-rating--star' title={ratingTitles[i]}>
-          <i className={`fa fa-star fa-fw${!val ? '' : ' active'}`}></i>
+  <div className="Star-rating">
+    <ul className="Star-rating--list">
+      {getStars(rating).map((val, i) => (
+        <li key={i} className="Star-rating--star" title={ratingTitles[i]}>
+          <i className={`fa fa-star fa-fw${!val ? '' : ' active'}`} />
         </li>
-      )}
+      ))}
     </ul>
   </div>
 )
 
 StarRating.propTypes = {
-  rating: PropTypes.number.isRequired
+  rating: PropTypes.number.isRequired,
 }
 
 export default StarRating

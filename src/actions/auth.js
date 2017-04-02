@@ -23,11 +23,11 @@ const getRelevantUserDataFromResponse = user => ({
   email: user.email,
   displayName: user.displayName,
   photoURL: user.photoURL,
-  uid: user.uid
+  uid: user.uid,
 })
 
 const handleUserIfNew = (user, currentUsers, dispatch) => {
-  const {uid, ...rest} = user;
+  const {uid, ...rest} = user
   if (!currentUsers[uid]) {
     dispatch(addUser(uid, rest))
   }
@@ -37,36 +37,43 @@ const handleUserIfNew = (user, currentUsers, dispatch) => {
  * main action for signing in with a popup
  */
 
-export const attemptSignInWithGoogle = () => (dispatch, getState) => {
-  dispatch(startLogin())
-  const currentUsers = getState().requests.users.data || {}
-  auth.signInWithPopup(googleAuthProvider).then(({user}) => {
-    const userData = getRelevantUserDataFromResponse(user)
-    //if the user has never signed in before we need to add them to
-    //to list of users in the DB. Is this the right place for this?
-    handleUserIfNew(userData, currentUsers, dispatch)
-    return userData
-  }).then(data => {
-    dispatch(signIn(data))
-  }).catch(err => console.error(err))
-}
+export const attemptSignInWithGoogle = () =>
+  (dispatch, getState) => {
+    dispatch(startLogin())
+    const currentUsers = getState().requests.users.data || {}
+    auth
+      .signInWithPopup(googleAuthProvider)
+      .then(({user}) => {
+        const userData = getRelevantUserDataFromResponse(user)
+        //if the user has never signed in before we need to add them to
+        //to list of users in the DB. Is this the right place for this?
+        handleUserIfNew(userData, currentUsers, dispatch)
+        return userData
+      })
+      .then(data => {
+        dispatch(signIn(data))
+      })
+      .catch(err => console.error(err))
+  }
 
 // logout
-export const cancelGoogleAuth = () => dispatch => {
-  auth.signOut().then(() =>{
-    dispatch(signOut())
-  })
-}
+export const cancelGoogleAuth = () =>
+  dispatch => {
+    auth.signOut().then(() => {
+      dispatch(signOut())
+    })
+  }
 
 // this is creates an open weg socket which will push a new
 // value when the user is logged in or logged out
-export const listenToAuthChanges = () => dispatch => {
-  auth.onAuthStateChanged(user => {
-    if (user) {
-      const userData = getRelevantUserDataFromResponse(user)
-      dispatch(signIn(userData))
-    } else {
-      dispatch(signOut())
-    }
-  })
-}
+export const listenToAuthChanges = () =>
+  dispatch => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        const userData = getRelevantUserDataFromResponse(user)
+        dispatch(signIn(userData))
+      } else {
+        dispatch(signOut())
+      }
+    })
+  }

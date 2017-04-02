@@ -1,5 +1,5 @@
 import {apiGet, apiSet} from './requests'
-import {resources} from '../dataApi';
+import {resources} from '../dataApi'
 
 /**
   USER ACTIONS
@@ -16,12 +16,15 @@ export const fetchUsers = () => {
   return apiGet({resource: 'users'})
 }
 
-export const addUser = (userId, payload) => dispatch => {
-  const handler = () => dispatch(fetchUsers())
-  dispatch(apiSet({
-    resource: resources.USERS,
-    params: {userId},
-    payload,
-    handler
-  }))
-}
+export const addUser = (userId, payload) =>
+  dispatch => {
+    const handler = () => dispatch(fetchUsers())
+    dispatch(
+      apiSet({
+        resource: resources.USERS,
+        params: {userId},
+        payload,
+        handler,
+      }),
+    )
+  }

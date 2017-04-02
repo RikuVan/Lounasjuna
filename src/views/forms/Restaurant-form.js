@@ -1,55 +1,55 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import {Field, reduxForm} from 'redux-form'
-import {addRestaurant} from '../../actions/restaurants'
-import Button from '../../components/Button'
-import './Restaurant-form.css'
-import classNames from 'classnames'
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {Field, reduxForm} from 'redux-form';
+import {addRestaurant} from '../../actions/restaurants';
+import Button from '../../components/Button';
+import './Restaurant-form.css';
+import classNames from 'classnames';
 
-const renderField = ({
-   placeholder,
-   required,
-   input,
-   label,
-   type,
-   meta: { touched, error },
-   short,
-   name,
-   ...rest
-}) => {
-  const labelStyles = classNames(
-    'Restaurant-form__label',
-    {'Restaurant-form__label--required': required}
-  )
-  const fieldStyles = classNames(
-    'Restaurant-form__field',
-    {'Restaurant-form__field--short': short}
-  )
+const renderField = (
+  {
+    placeholder,
+    required,
+    input,
+    label,
+    type,
+    meta: {touched, error},
+    short,
+    name,
+    ...rest
+  },
+) => {
+  const labelStyles = classNames('Restaurant-form__label', {
+    'Restaurant-form__label--required': required,
+  });
+  const fieldStyles = classNames('Restaurant-form__field', {
+    'Restaurant-form__field--short': short,
+  });
   return (
     <div className="Restaurant-form__row">
-      <label
-        className={labelStyles}
-        htmlFor={name}>
+      <label className={labelStyles} htmlFor={name}>
         {label || name}
       </label>
       <div className={fieldStyles}>
         <input
-          className={classNames('Restaurant-form__input', {'Restaurant-form__input_error': (touched && error)})}
+          className={classNames('Restaurant-form__input', {
+            'Restaurant-form__input_error': touched && error,
+          })}
           {...input}
           name={name}
           placeholder={placeholder}
           type={type}
           {...rest}
         />
-        {(touched && error) &&
+        {touched &&
+          error &&
           <div className="Restaurant-form__error">
             {error}
-          </div>
-        }
+          </div>}
       </div>
     </div>
-  )
-}
+  );
+};
 
 renderField.propTypes = {
   placeholder: PropTypes.string,
@@ -59,41 +59,37 @@ renderField.propTypes = {
   label: PropTypes.string,
   type: PropTypes.type,
   meta: PropTypes.object,
-  short: PropTypes.bool
-}
+  short: PropTypes.bool,
+};
 
-const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/
+const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
 
 const validate = values => {
-  const errors = {}
+  const errors = {};
   if (!values.name) {
-    errors.name = 'Pakollinen'
+    errors.name = 'Pakollinen';
   }
   if (!values.address) {
-    errors.address = 'Pakollinen'
+    errors.address = 'Pakollinen';
   }
   if (values.link && !urlRegex.test(values.link)) {
-    errors.link = 'Virhellinen url'
+    errors.link = 'Virhellinen url';
   }
-  return errors
-}
+  return errors;
+};
 
 class RestaurantForm extends Component {
-
   submit = values => {
     this.props.addRestaurant(values);
-    this.redirectHome()
-  }
+    this.redirectHome();
+  };
 
-  redirectHome = () => this.props.history.push("/")
+  redirectHome = () => this.props.history.push('/');
 
   render() {
     const {handleSubmit, invalid} = this.props;
     return (
-      <form
-        className="Restaurant-form"
-        onSubmit={handleSubmit(this.submit)}
-      >
+      <form className="Restaurant-form" onSubmit={handleSubmit(this.submit)}>
         <Field
           component={renderField}
           label="Paikan nimi"
@@ -139,12 +135,12 @@ class RestaurantForm extends Component {
             disabled={invalid}
             htmlType="submit"
             className="Restaurant-form__submit"
-           >
+          >
             Tallenna
           </Button>
         </div>
       </form>
-    )
+    );
   }
 }
 
@@ -152,18 +148,16 @@ RestaurantForm.propTypes = {
   addRestaurant: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  invalid: PropTypes.bool.isRequired
-}
-
+  invalid: PropTypes.bool.isRequired,
+};
 
 //as a shortcut we can just give connect an object with a function instead
 //of mapDispatchToProps and it will automagically bind it for us
-const ConnectedRestaurantForm =
-  connect(null, {addRestaurant})(RestaurantForm)
+const ConnectedRestaurantForm = connect(null, {addRestaurant})(RestaurantForm);
 
 const DecoratedRestaurantForm = reduxForm({
   form: 'restaurant', // a unique name for this form
-  validate
+  validate,
 })(ConnectedRestaurantForm);
 
 export default DecoratedRestaurantForm;

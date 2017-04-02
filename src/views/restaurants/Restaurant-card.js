@@ -7,23 +7,28 @@ import RestaurantVotes from './Restaurant-votes'
 const mapToUsers = (votes = [], users = {}) =>
   votes.map(id => users[id].displayName)
 
-const RestaurantCard = ({
-   name,
-   address,
-   link,
-   rating,
-   type,
-   userId,
-   uid: restaurantId,
-   votes = [],
-   users,
-   handleSelect,
-   currentVote
- }) => {
+const RestaurantCard = (
+  {
+    name,
+    address,
+    link,
+    rating,
+    type,
+    userId,
+    uid: restaurantId,
+    votes = [],
+    users,
+    handleSelect,
+    currentVote,
+  },
+) => {
   return (
     <article className="Restaurant">
       <h2 className="Restaurant-name">
-        {link && <a href={link} className="Restaurant-www"><span className="fa fa-home" /></a>}
+        {link &&
+          <a href={link} className="Restaurant-www">
+            <span className="fa fa-home" />
+          </a>}
         {name}
       </h2>
       <div className="Restaurant-content">
@@ -36,13 +41,13 @@ const RestaurantCard = ({
         <div className="Restaurant-footer">
           <Button
             disabled={currentVote === restaurantId}
-            onClick={() => handleSelect(userId, restaurantId)}>
-              Lähden junaan mukaan
+            onClick={() => handleSelect(userId, restaurantId)}
+          >
+            Lähden junaan mukaan
           </Button>
-        </div>
-      }
+        </div>}
     </article>
-  );
+  )
 }
 
 RestaurantCard.propTypes = {
@@ -56,7 +61,7 @@ RestaurantCard.propTypes = {
   userId: PropTypes.string,
   uid: PropTypes.string,
   users: PropTypes.object.isRequired,
-  currentVote: PropTypes.string
-};
+  currentVote: PropTypes.string,
+}
 
 export default RestaurantCard

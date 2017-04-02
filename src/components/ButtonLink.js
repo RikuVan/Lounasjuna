@@ -4,9 +4,7 @@ import Button from './Button'
 
 const ButtonLink = ({type, path, children, className}) => (
   <Link to={path} className={className}>
-    <Button
-      type={type}
-    >
+    <Button type={type}>
       {children}
     </Button>
 
@@ -17,7 +15,7 @@ ButtonLink.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
   path: PropTypes.string.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 }
 
 export default ButtonLink

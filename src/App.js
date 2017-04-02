@@ -1,15 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom'
-import {bindActionCreators} from 'redux'
-import {
-  attemptSignInWithGoogle,
-  cancelGoogleAuth
-} from './actions/auth'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {bindActionCreators} from 'redux';
+import {attemptSignInWithGoogle, cancelGoogleAuth} from './actions/auth'
 import {fetchUsers} from './actions/users'
 import './App.css'
 import RestaurantList from './views/restaurants/Restaurant-list'
@@ -29,7 +22,7 @@ class App extends Component {
   handleSignOut = () => this.props.cancelGoogleAuth()
 
   render() {
-    const {auth} = this.props
+    const {auth} = this.props;
     const showSignIn = this.props.auth.status === 'ANONYMOUS'
     const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE'
     return (
@@ -46,37 +39,40 @@ class App extends Component {
           {/******** START NAV *******/}
           <div className="App-subheader">
             <div className="App-subheader-links">
-              <Route path="/" exact render={() =>
-                /**
+              <Route
+                path="/"
+                exact
+                render={() =>
+                  /**
                  * react router provides a render method instead of just passing
                  * as component, inside of which you can add logic and/or
                  * pass props
                  */
-                auth.status === 'SIGNED_IN' ?
-                  <ButtonLink
-                    type="white"
-                    className="Nav--button"
-                    path="/lounaspaikka/uusi"
-                  >
-                    <i className="fa fa-plus-circle" /> Lisää lounaspaikka
-                  </ButtonLink> : null
-              }
+                  auth.status === 'SIGNED_IN'
+                    ? <ButtonLink
+                        type="white"
+                        className="Nav--button"
+                        path="/lounaspaikka/uusi"
+                      >
+                        <i className="fa fa-plus-circle" /> Lisää lounaspaikka
+                      </ButtonLink>
+                    : null}
               />
-              <Route path="/lounaspaikka/" render={() =>
-                <ButtonLink
-                  type="white"
-                  className="Nav--button"
-                  path="/"
-                >
-                  <i className="fa fa-home" /> Pääsivu
-                </ButtonLink>
-              }
+              <Route
+                path="/lounaspaikka/"
+                render={() => (
+                  <ButtonLink type="white" className="Nav--button" path="/">
+                    <i className="fa fa-home" /> Pääsivu
+                  </ButtonLink>
+                )}
               />
             </div>
             <CurrentUser {...auth} />
             <SignInOrOut
               type={showSignIn ? 'SignIn' : 'SignOut'}
-              onClickHandler={showSignIn ? this.handleSignIn : this.handleSignOut}
+              onClickHandler={
+                showSignIn ? this.handleSignIn : this.handleSignOut
+              }
               loading={awaitingLogin}
             />
           </div>
@@ -87,9 +83,7 @@ class App extends Component {
               <Route
                 path="/"
                 exact
-                render={() =>
-                  <RestaurantList auth={auth} />
-                }
+                render={() => <RestaurantList auth={auth} />}
               />
               <Route
                 path="/lounaspaikka/uusi"
@@ -101,9 +95,9 @@ class App extends Component {
                    */
 
                   if (auth.status === 'SIGNED_IN') {
-                    return <RestaurantForm history={history}/>
+                    return <RestaurantForm history={history} />;
                   } else {
-                    return <RestaurantList auth={auth}/>
+                    return <RestaurantList auth={auth} />;
                   }
                 }}
               />
@@ -113,7 +107,7 @@ class App extends Component {
           {/******* END CONTENT *******/}
         </div>
       </Router>
-    )
+    );
   }
 }
 
@@ -121,13 +115,19 @@ App.propTypes = {
   auth: PropTypes.object.isRequired,
   attemptSignInWithGoogle: PropTypes.func.isRequired,
   cancelGoogleAuth: PropTypes.func.isRequired,
-  fetchUsers: PropTypes.func.isRequired
-}
+  fetchUsers: PropTypes.func.isRequired,
+};
 
-const mapStateToProps = state => ({auth: state.auth})
+const mapStateToProps = state => ({auth: state.auth});
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  attemptSignInWithGoogle, cancelGoogleAuth, fetchUsers
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      attemptSignInWithGoogle,
+      cancelGoogleAuth,
+      fetchUsers,
+    },
+    dispatch,
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
