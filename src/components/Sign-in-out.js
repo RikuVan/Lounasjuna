@@ -17,6 +17,7 @@ const SignInOrOut = ({type = 'SignIn', loading, onClickHandler}) => {
       <Button
         className={`block ${type === 'SignOut' ? 'destructive' : ''}`}
         onClick={onClickHandler}
+        type="white"
       >
         {getButtonContent(type, loading)}
       </Button>

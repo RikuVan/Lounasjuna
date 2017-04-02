@@ -1,57 +1,36 @@
 .Restaurant-form {
-  width: 80%;
-  max-width: 1200px;
-  margin: 3em auto;
+  padding: 60px;
   text-align: left;
 }
 
-.Restaurant-form--input {
-  max-width: 800px;
-  margin: 0 auto;
-  padding-top: 1em;
+.Restaurant-form__row {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.Restaurant-form--input {
-  max-width: 800px;
-  margin: 0 auto;
+.Restaurant-form__label {
+  flex: 0 1 160px;
 }
 
-.Restaurant-form--input > label {
-  padding: 8px;
-  font-weight: bold;
-  color: white;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  flex: 1 0 120px;
-  max-width: 220px;
-}
-
-.Restaurant-form--input > label.required::after {
-  content: "*";
+.Restaurant-form__label--required::after {
+  content: ' *';
   color: hsl(0, 76%, 47%);
 }
 
-.Restaurant-form--input > label + * {
+.Restaurant-form__field {
+  border: 1px solid #ddd;
   flex: 1 0 220px;
+  font-size: inherit;
+  outline: none;
+  padding: 10px 15px;
 }
 
-button.Restaurant-form--submit {
-  margin-left: auto;
-  text-transform: uppercase;
-}
-
-.input--number > *{
+.Restaurant-form__field--short {
   max-width: 100px;
 }
 
-input:not([type="submit"]) {
-  font-size: 14px;
-  border: 1px solid #ccc;
-  margin-bottom: 0.1em;
-  padding: 1em 0.5em;
-  width: 100%;
-  border-radius: 5px;
+.Restaurant-form__submit {
+  margin-left: auto;
 }

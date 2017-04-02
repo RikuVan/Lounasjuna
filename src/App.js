@@ -17,9 +17,9 @@ import RestaurantForm from './views/forms/Restaurant-form'
 import SignInOrOut from './components/Sign-in-out'
 import CurrentUser from './components/Current-user'
 import ButtonLink from './components/ButtonLink'
+import {Link} from 'react-router-dom'
 
 class App extends Component {
-
   componentDidMount() {
     this.props.fetchUsers()
   }
@@ -35,44 +35,51 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <h1 className="Logo">
-            <div className="Logo-train">🚂</div>
-            <div className="Logo-text">Lounasjuna</div>
-          </h1>
+          <div className="App-header">
+            <Link to={'/'}>
+              <h1 className="Logo">
+                <div className="Logo-train">🚂</div>
+                <div className="Logo-text">Lounasjuna</div>
+              </h1>
+            </Link>
+          </div>
           <div className="App-subheader">
+            {auth.status === 'SIGNED_IN' &&
+              <div className="App-subheader-links">
+                <ButtonLink path="/uusi" type="white">
+                  Lisää lounaspaikka
+                </ButtonLink>
+              </div>
+            }
+            <CurrentUser {...auth} />
             <SignInOrOut
               type={showSignIn ? 'SignIn' : 'SignOut'}
               onClickHandler={showSignIn ? this.handleSignIn : this.handleSignOut}
               loading={awaitingLogin}
             />
-            <CurrentUser {...auth} />
-            {auth.status === 'SIGNED_IN' &&
-              <div className="App-subheader--link">
-                <ButtonLink path="/uusi">
-                  {'Lisää lounaspaikka'}
-                </ButtonLink>
-              </div>}
           </div>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={() =>
-                <RestaurantList auth={auth} />
-              }
-            />
-            <Route
-              path="/uusi"
-              render={() => {
-                if (auth.status === 'SIGNED_IN') {
-                  return <RestaurantForm />
-                } else {
-                  return <RestaurantList auth={auth} />
+          <div className="App-content">
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={() =>
+                  <RestaurantList auth={auth} />
                 }
-              }}
-            />
-            <Route path="/" render={() => <h3>404</h3>} />
-          </Switch>
+              />
+              <Route
+                path="/uusi"
+                render={() => {
+                  if (auth.status === 'SIGNED_IN') {
+                    return <RestaurantForm />
+                  } else {
+                    return <RestaurantList auth={auth} />
+                  }
+                }}
+              />
+              <Route path="/" render={() => <h3>404</h3>} />
+            </Switch>
+          </div>
         </div>
       </Router>
     );

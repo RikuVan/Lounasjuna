@@ -2,12 +2,10 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {Field, reduxForm} from 'redux-form'
 import {addRestaurant} from '../../actions/restaurants'
-
+import Button from '../../components/Button'
 import './Restaurant-form.css'
 
-
 class RestaurantForm extends Component {
-
   submit = values => this.props.addRestaurant(values)
 
   render() {
@@ -17,32 +15,85 @@ class RestaurantForm extends Component {
         className="Restaurant-form"
         onSubmit={handleSubmit(this.submit)}
       >
-        <div className="Restaurant-form--input">
-          <label className="required" htmlFor="name">Nimi</label>
-          <Field name="name" component="input" type="text"/>
+        <div className="Restaurant-form__row">
+          <label
+            className="Restaurant-form__label Restaurant-form__label--required"
+            htmlFor="name"
+          >
+            Nimi
+          </label>
+          <Field
+            className="Restaurant-form__field"
+            component="input"
+            name="name"
+            type="text"
+          />
         </div>
-        <div className="Restaurant-form--input">
-          <label htmlFor="type">Tyyppi</label>
-          <Field name="type" component="input" type="text" />
+        <div className="Restaurant-form__row">
+          <label
+            className="Restaurant-form__label"
+            htmlFor="type"
+          >
+            Tyyppi
+          </label>
+          <Field
+            className="Restaurant-form__field"
+            component="input"
+            name="type"
+            type="text"
+          />
         </div>
-        <div className="Restaurant-form--input">
-          <label className="required" htmlFor="address">Katuosoite</label>
-          <Field name="address" component="input" type="text"/>
+        <div className="Restaurant-form__row">
+          <label
+            className="Restaurant-form__label Restaurant-form__label--required"
+            htmlFor="address"
+          >
+            Katuosoite
+          </label>
+          <Field
+            className="Restaurant-form__field"
+            component="input"
+            name="address"
+            type="text"
+          />
         </div>
-        <div className="Restaurant-form--input">
-          <label htmlFor="link">Web-sivu</label>
-          <Field name="link" component="input" type="url"/>
+        <div className="Restaurant-form__row">
+          <label
+            className="Restaurant-form__label"
+            htmlFor="link"
+          >
+            Web-sivu
+          </label>
+          <Field
+            className="Restaurant-form__field"
+            component="input"
+            name="link"
+            type="url"
+          />
         </div>
-        <div className="Restaurant-form--input">
-          <label htmlFor="rating">Arvo</label>
-          <div className="input--number">
-            <Field name="rating" component="input" min="1" max="5" type="number"/>
-          </div>
+        <div className="Restaurant-form__row">
+          <label
+            className="Restaurant-form__label"
+            htmlFor="rating"
+          >
+            Arvosana
+          </label>
+          <Field
+            className="Restaurant-form__field Restaurant-form__field--short"
+            component="input"
+            max="5"
+            min="1"
+            name="rating"
+            type="number"
+          />
         </div>
-        <div className="Restaurant-form--input">
-          <button className="Button Restaurant-form--submit" type="submit">
-            Submit
-          </button>
+        <div className="Restaurant-form__row">
+          <Button
+            className="Restaurant-form__submit"
+            htmlType="submit"
+          >
+            Tallenna
+          </Button>
         </div>
       </form>
     )
