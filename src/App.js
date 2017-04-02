@@ -45,37 +45,39 @@ class App extends Component {
           </div>
           {/******** START NAV *******/}
           <div className="App-subheader">
-            {auth.status === 'SIGNED_IN' &&
-              <div className="App-subheader-links">
-                <ButtonLink path="/uusi" type="white">
-                  <i className="fa fa-plus-circle" /> Lisää lounaspaikka
+            <div className="App-subheader-links">
+              <Route path="/" exact render={() =>
+                /**
+                 * react router provides a render method instead of just passing
+                 * as component, inside of which you can add logic and/or
+                 * pass props
+                 */
+                auth.status === 'SIGNED_IN' ?
+                  <ButtonLink
+                    type="white"
+                    className="Nav--button"
+                    path="/lounaspaikka/uusi"
+                  >
+                    <i className="fa fa-plus-circle" /> Lisää lounaspaikka
+                  </ButtonLink> : null
+              }
+              />
+              <Route path="/lounaspaikka/" render={() =>
+                <ButtonLink
+                  type="white"
+                  className="Nav--button"
+                  path="/"
+                >
+                  <i className="fa fa-home" /> Pääsivu
                 </ButtonLink>
-              </div>
-            }
+              }
+              />
+            </div>
             <CurrentUser {...auth} />
             <SignInOrOut
               type={showSignIn ? 'SignIn' : 'SignOut'}
               onClickHandler={showSignIn ? this.handleSignIn : this.handleSignOut}
               loading={awaitingLogin}
-            />
-            <CurrentUser {...auth} />
-            <Route path="/" exact render={() =>
-              /**
-               * react router provides a render method instead of just passing
-               * as component, inside of which you can add logic and/or
-               * pass props
-               */
-              auth.status === 'SIGNED_IN' ?
-                <ButtonLink className="Nav--button" path="/lounaspaikka/uusi">
-                  {'Lisää lounaspaikka'}
-                </ButtonLink> : null
-                }
-            />
-            <Route path="/lounaspaikka/" render={() =>
-                <ButtonLink className="Nav--button" path="/">
-                  {'Pääsivu'}
-                </ButtonLink>
-              }
             />
           </div>
           {/******** END NAV *******/}

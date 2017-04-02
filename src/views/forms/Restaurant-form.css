@@ -20,11 +20,15 @@
 }
 
 .Restaurant-form__field {
-  border: 1px solid #ddd;
   flex: 1 0 220px;
-  font-size: inherit;
+}
+
+.Restaurant-form__input {
   outline: none;
+  border: 1px solid #ddd;
+  font-size: inherit;
   padding: 10px 15px;
+  width: 100%
 }
 
 .Restaurant-form__field--short {
@@ -36,5 +40,10 @@
 }
 
 .Restaurant-form__error {
+  padding-top: 5px;
   color: red;
+}
+
+.Restaurant-form__input_error {
+  border: 1px solid red;
 }

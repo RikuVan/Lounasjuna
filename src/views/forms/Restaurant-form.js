@@ -16,36 +16,40 @@ const renderField = ({
    short,
    ...rest
 }) => {
-  const fieldStyles = classNames(
+  const labelStyles = classNames(
     'Restaurant-form__label',
-    {'Restaurant-form__label--required': required,
-      'Restaurant-form__field--short': short})
+    {'Restaurant-form__label--required': required}
+  )
+  const fieldStyles = classNames(
+    'Restaurant-form__field',
+    {'Restaurant-form__field--short': short}
+  )
   return (
     <div className="Restaurant-form__row">
       <label
-        className={fieldStyles}
+        className={labelStyles}
         htmlFor={name}>
         {label}
       </label>
-      <div>
+      <div className={fieldStyles}>
         <input
-          className="Restaurant-form__field"
+          className={classNames('Restaurant-form__input', {'Restaurant-form__input_error': (touched && error)})}
           {...input}
           placeholder={placeholder}
           type={type}
           {...rest}
         />
         {(touched && error) &&
-          <span className=".Restaurant-form__error">
+          <div className="Restaurant-form__error">
             {error}
-          </span>
+          </div>
         }
       </div>
     </div>
   )
 }
 
-const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/
 
 const validate = values => {
   const errors = {}
@@ -79,14 +83,15 @@ class RestaurantForm extends Component {
       >
         <Field
           component={renderField}
-          label="nimi"
+          label="Paikan nimi"
           name="name"
           type="text"
           placeholder="Pepe's pizza"
         />
+
         <Field
           component={renderField}
-          label="Tyyppi"
+          label="Ruoanlaji"
           name="type"
           type="text"
           placeholder="Pizza"
@@ -114,16 +119,16 @@ class RestaurantForm extends Component {
           min="1"
           max="5"
           short
-          placeholder="https://pepes.com"
+          placeholder="0"
         />
         <div className="Restaurant-form__row">
-          <button
+          <Button
             disabled={invalid}
+            htmlType="submit"
             className="Restaurant-form__submit"
-            type="submit"
            >
             Tallenna
-          </button>
+          </Button>
         </div>
       </form>
     )

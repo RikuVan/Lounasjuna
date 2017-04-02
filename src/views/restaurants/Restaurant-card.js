@@ -18,14 +18,8 @@ const RestaurantCard = ({
    votes = [],
    users,
    handleSelect,
-   handleCancel,
    currentVote
  }) => {
-  const isOnBoard = restaurantId === currentVote;
-  //must be logged in to vote
-  //we can't vote for two different restaurants, so if we have voted already hide buttons
-  //until we revoke that vote
-  const hideButtons = !userId || (currentVote && !isOnBoard);
   return (
     <article className="Restaurant">
       <h2 className="Restaurant-name">
@@ -38,17 +32,12 @@ const RestaurantCard = ({
         <p>{address}</p>
         {userId && <RestaurantVotes votes={mapToUsers(votes, users)} />}
       </div>
-      {!hideButtons && !isOnBoard &&
+      {userId &&
         <div className="Restaurant-footer">
-          <Button onClick={() => handleSelect(userId, restaurantId)}>
-            Lähden junaan mukaan
-          </Button>
-        </div>
-      }
-      {!hideButtons && isOnBoard &&
-        <div className="Restaurant-footer">
-          <Button onClick={() => handleCancel(userId, restaurantId)}>
-            En halua lähteä mukaan
+          <Button
+            disabled={currentVote === restaurantId}
+            onClick={() => handleSelect(userId, restaurantId)}>
+              Lähden junaan mukaan
           </Button>
         </div>
       }
@@ -58,7 +47,6 @@ const RestaurantCard = ({
 
 RestaurantCard.propTypes = {
   handleSelect: PropTypes.func.isRequired,
-  handleCancel: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   link: PropTypes.string,

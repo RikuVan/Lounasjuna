@@ -6,12 +6,14 @@ const Button = ({
   className,
   htmlType,
   onClick,
-  type
+  type,
+  ...rest
 }) => (
   <button
     className={`Button ${type ? 'Button-' + type : ''} ${className && className}`}
     onClick={onClick}
     type={htmlType}
+    {...rest}
   >
     {children}
   </button>

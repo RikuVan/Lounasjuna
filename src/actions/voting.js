@@ -15,10 +15,10 @@ export const vote = (userId, restaurantId) => dispatch => {
   }))
 }
 
-export const revokeVote = (userId, restaurantId) => dispatch => {
+export const revokeVote = (userId, restaurantId, onSuccess) => dispatch => {
   dispatch(apiRemove({
     resource: resources.VOTES,
     params: {restaurantId, userId},
-    handler: () => dispatch(fetchRestaurants())
+    handler: onSuccess
   }))
 }

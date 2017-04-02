@@ -16,9 +16,21 @@ class Restaurants extends Component {
     //it directly dispatch(fetchRestaurants());
   }
 
-  handleSelect = (userId, restaurantId) => this.props.vote(userId, restaurantId)
-
-  handleCancel = (userId, restaurantId) => this.props.revokeVote(userId, restaurantId)
+  handleSelect = (userId, restaurantId) => {
+    const onSuccess = this.props.vote(userId, restaurantId)
+    //if a the user has already voted, we first remove the vote and
+    //then add the new vote by giving it has a callback to the revokeVote action
+    //this is one pattern for handling sequential async actions, such as
+    //sending a success notification after saving
+    if (this.props.currentVote) {
+      return this.props.revokeVote(
+        userId,
+        this.props.currentVote,
+        onSuccess
+      )
+    }
+    onSuccess()
+  }
 
   render () {
     const {restaurants, auth, users, currentVote} = this.props
@@ -36,7 +48,6 @@ class Restaurants extends Component {
               userId={auth.uid}
               users={users.data}
               handleSelect={this.handleSelect}
-              handleCancel={this.handleCancel}
               currentVote={currentVote}
               {...rest}
             />
