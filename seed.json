@@ -25,7 +25,10 @@
       "lng": "23.7521219",
       "name": "Katmandu",
       "rating": "4.6667",
-      "type": "Nepalalainen"
+      "type": "Nepalalainen",
+      "votes": {
+        "obX90qRGN7cU8sRhFHkYRjGsUUh1": true
+      }
     },
     "61974020-d586-4088-b3dd-60dd82198585": {
       "address": "Otavalankatu 10, 33100 Tampere",
@@ -111,6 +114,11 @@
       "displayName": "Richard Van Camp",
       "email": "richard.vancamp@gmail.com",
       "photoURL": "https://lh6.googleusercontent.com/-FZjkKmY6ldU/AAAAAAAAAAI/AAAAAAAAA2I/5o5p9u_WQ30/photo.jpg"
+    },
+    "obX90qRGN7cU8sRhFHkYRjGsUUh1" : {
+      "displayName" : "Julia Van Camp",
+      "email" : "vancampjulia@gmail.com",
+      "photoURL" : "https://lh4.googleusercontent.com/--jDdjxOF-RU/AAAAAAAAAAI/AAAAAAAAAJ0/u1J9157l2JE/photo.jpg"
     }
   }
 }

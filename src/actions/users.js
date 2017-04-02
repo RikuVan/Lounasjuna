@@ -17,6 +17,7 @@ export const fetchUsers = () => {
 }
 
 export const saveUserToDB = (userId, payload) => dispatch => {
+  console.log("called", userId, payload)
   const handler = () => dispatch(fetchUsers())
   dispatch(apiSet({
     resource: resources.USERS,

@@ -26,10 +26,11 @@ const completeRequest = (resource, data, error) => {
 const createRequest = (type, resource, params = {}, payload) => {
   switch(type) {
     case 'set': return DB[resource](params).set(payload)
-    case 'push': return DB[resource](params).push().key
     //untested
+    case 'push': return DB[resource](params).push()
     case 'update': return DB[resource](params).update(payload)
     case 'remove': return DB[resource](params).remove()
+    // get is default
     default: return DB[resource](params)
   }
 }
@@ -50,20 +51,23 @@ export const apiFn = type => ({resource, params, payload, handler: responseHandl
 
   const request = createRequest(type, resource, params, payload)
 
-  //remove doesn't not seem to push back a result
-  //should use set(null) for a response
+  //remove seems to not have a callback
+  //could use set/update(null) for a response/safer delete
   //push is not yet tested - what does it return?
-  if (type === 'remove' || type === 'push') {
-    return responseHandler ? responseHandler(null) : null;
+  if (type === 'remove') {
+    if (responseHandler) responseHandler()
+    return dispatch(completeRequest(resource, null, null))
   }
-  //update api returns a promise
+  //update and set api returns a promise
   //update can also take an object with multiple atomic updates
-  if (type === 'update') {
-    return request.then(resp => {
-      return responseHandler ? responseHandler() : true;
+  if (type === 'update' || type === 'set') {
+    return request.then(() => {
+      if (responseHandler) responseHandler()
+      dispatch(completeRequest(resource, null, null))
     }).catch(err => console.log(err))
   }
-  //real time api
+  if (type === 'push') console.info('NOT YET IMPLEMENTED')
+  //real time api but once listens for event then turns off
   return request.once('value', snapshot => {
     const data = responseHandler ?
       responseHandler(snapshot.val()) :
