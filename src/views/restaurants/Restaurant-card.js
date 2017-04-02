@@ -28,20 +28,29 @@ const RestaurantCard = ({
   const hideButtons = !userId || (currentVote && !isOnBoard);
   return (
     <article className="Restaurant">
-      <h3 className="Restaurant--name"><a href={link}>{name}</a></h3>
-      <StarRating rating={rating ? Math.round(rating) : 0} />
-      <p>{type}</p>
-      <p>{address}</p>
-      {userId && <RestaurantVotes votes={mapToUsers(votes, users)} />}
+      <h2 className="Restaurant-name">
+        <a href={link} className="Restaurant-www"><span className="fa fa-home" /></a>
+        {name}
+      </h2>
+      <div className="Restaurant-content">
+        <StarRating rating={rating ? Math.round(rating) : 0} />
+        <p>{type}</p>
+        <p>{address}</p>
+        {userId && <RestaurantVotes votes={mapToUsers(votes, users)} />}
+      </div>
       {!hideButtons && !isOnBoard &&
-        <Button onClick={() => handleSelect(userId, restaurantId)}>
-          Lähden junaan mukaan
-        </Button>
+        <div className="Restaurant-footer">
+          <Button onClick={() => handleSelect(userId, restaurantId)}>
+            Lähden junaan mukaan
+          </Button>
+        </div>
       }
       {!hideButtons && isOnBoard &&
-        <Button onClick={() => handleCancel(userId, restaurantId)}>
-          En halua lähteä mukaan
-        </Button>
+        <div className="Restaurant-footer">
+          <Button onClick={() => handleCancel(userId, restaurantId)}>
+            En halua lähteä mukaan
+          </Button>
+        </div>
       }
     </article>
   );

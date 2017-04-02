@@ -25,7 +25,7 @@ class Restaurants extends Component {
     return (
       <section className="Restaurants">
         {restaurants.loading || users.loading ?
-          <div className="Restaurants--loader">
+          <div className="Restaurants-loader">
             <Loading />
           </div> :
           (restaurants.data || []).map((rest, i) =>
