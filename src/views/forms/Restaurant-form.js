@@ -14,6 +14,7 @@ const renderField = ({
    type,
    meta: { touched, error },
    short,
+   name,
    ...rest
 }) => {
   const labelStyles = classNames(
@@ -29,12 +30,13 @@ const renderField = ({
       <label
         className={labelStyles}
         htmlFor={name}>
-        {label}
+        {label || name}
       </label>
       <div className={fieldStyles}>
         <input
           className={classNames('Restaurant-form__input', {'Restaurant-form__input_error': (touched && error)})}
           {...input}
+          name={name}
           placeholder={placeholder}
           type={type}
           {...rest}
@@ -47,6 +49,17 @@ const renderField = ({
       </div>
     </div>
   )
+}
+
+renderField.propTypes = {
+  placeholder: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  required: PropTypes.bool,
+  input: PropTypes.object.isRequired,
+  label: PropTypes.string,
+  type: PropTypes.type,
+  meta: PropTypes.object,
+  short: PropTypes.bool
 }
 
 const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/
@@ -87,8 +100,8 @@ class RestaurantForm extends Component {
           name="name"
           type="text"
           placeholder="Pepe's pizza"
+          required
         />
-
         <Field
           component={renderField}
           label="Ruoanlaji"
@@ -138,7 +151,8 @@ class RestaurantForm extends Component {
 RestaurantForm.propTypes = {
   addRestaurant: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  invalid: PropTypes.bool.isRequired
 }
 
 
