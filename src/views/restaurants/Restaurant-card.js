@@ -36,14 +36,14 @@ const RestaurantCard = ({
       {!hideButtons && !isOnBoard &&
         <Button
           onClick={() => handleSelect(userId, restaurantId)}
-          text='Lähden junalla mukaan'
+          text="Lähden junaan mukaan"
         />
       }
       {!hideButtons && isOnBoard &&
         <Button
           type="destructive"
           onClick={() => handleCancel(userId, restaurantId)}
-          text='En halua lähde mukaan'
+          text="En halua lähteä mukaan"
         />
       }
     </article>

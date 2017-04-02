@@ -6,9 +6,9 @@ const getButtonContent = (type, loading) => {
   if (loading) {
     return <Loading small={true} />
   } else if (type === 'SignIn') {
-    return 'Sign In'
+    return 'Kirjaudu sisään'
   }
-  return 'Sign out'
+  return 'Kirjaudu ulos'
 }
 
 const SignInOrOut = ({type = 'SignIn', loading, onClickHandler}) => {
