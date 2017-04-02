@@ -48,10 +48,9 @@ class App extends Component {
             <CurrentUser {...auth} />
             {auth.status === 'SIGNED_IN' &&
               <div className="App-subheader--link">
-                <ButtonLink
-                  path="/uusi"
-                  text="Lisää lounaspaikka"
-                />
+                <ButtonLink path="/uusi">
+                  {'Lisää lounaspaikka'}
+                </ButtonLink>
               </div>}
           </div>
           <Switch>
