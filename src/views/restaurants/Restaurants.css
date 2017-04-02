@@ -2,23 +2,50 @@
   background-color: #fff;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-gap: 30px;
-  padding: 30px;
-}
-
-.Restaurant {
-  border: 1px solid #eee;
-  border-radius: 10px;
+  grid-gap: 15px;
   padding: 15px;
 }
 
-.Restaurant--name {
-  margin-top: 0;
+.Restaurant {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-Restaurants--loader {
-  align-center: center;
+.Restaurant-name {
+  background-color: #bbaa99;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 1rem;
+  color: #fff;
+  margin: 0;
+  padding: 10px 15px;
 }
+
+.Restaurant-www {
+  color: #fff;
+  font-size: 1rem;
+  float: right;
+  text-decoration: none;
+}
+
+.Restaurant-content {
+  border: 1px solid #bbaa99;
+  flex: 1 1 auto;
+  padding: 15px;
+}
+
+.Restaurant-footer {
+  border: 1px solid #bbaa99;
+  border-top: 0;
+  text-align: center;
+  padding: 15px;
+}
+
+.Restaurants-loader {
+  text-align: center;
+}
+
 /* css insanity...http://codepen.io/haibnu/pen/FxGsI */
 .Restaurant--votes {
   position: relative;
