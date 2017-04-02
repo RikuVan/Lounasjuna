@@ -1,4 +1,4 @@
-import {apiGet} from './requests'
+import {apiGet, apiPush} from './requests'
 import {objectToArray, objectKeysToArray} from './helpers'
 import {resources} from '../dataApi';
 
@@ -44,4 +44,13 @@ export const fetchRestaurants = () => {
     resource: resources.RESTAURANTS,
     handler
   })
+}
+
+export const addRestaurant = payload => dispatch => {
+  const handler = () => dispatch(fetchRestaurants())
+  return dispatch(apiPush({
+    resource: resources.RESTAURANTS,
+    payload,
+    handler
+  }))
 }

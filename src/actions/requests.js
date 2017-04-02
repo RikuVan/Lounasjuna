@@ -1,4 +1,7 @@
-import {DB} from '../dataApi'
+import {
+  database,
+  DB
+} from '../dataApi'
 
 /**
   REQUEST ACTION CONSTANTS
@@ -23,11 +26,20 @@ const completeRequest = (resource, data, error) => {
   Shouldn't need to mess with this, which creates the database query
  */
 
+const handlePush = (resource, params, payload) => {
+  //first get a unique ID from firebase
+  const payloadKey = database.ref().child(resource).push().key
+  const updates = {}
+  const resourcePath = `${resource}/${payloadKey}`
+  updates[resourcePath] = payload;
+  return database.ref().update(updates);
+}
+
 const createRequest = (type, resource, params = {}, payload) => {
   switch(type) {
     case 'set': return DB[resource](params).set(payload)
     //untested
-    case 'push': return DB[resource](params).push()
+    case 'push': return handlePush(resource, params, payload)
     case 'update': return DB[resource](params).update(payload)
     case 'remove': return DB[resource](params).remove()
     // get is default
@@ -60,13 +72,12 @@ export const apiFn = type => ({resource, params, payload, handler: responseHandl
   }
   //update and set api returns a promise
   //update can also take an object with multiple atomic updates
-  if (type === 'update' || type === 'set') {
+  if (type === 'update' || type === 'set' || type === 'push') {
     return request.then(() => {
       if (responseHandler) responseHandler()
       dispatch(completeRequest(resource, null, null))
     }).catch(err => console.log(err))
   }
-  if (type === 'push') console.info('NOT YET IMPLEMENTED')
   //real time api but once listens for event then turns off
   return request.once('value', snapshot => {
     const data = responseHandler ?

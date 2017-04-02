@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux'
 import requests from './requests'
 import auth from './auth'
+import {reducer as form} from 'redux-form'
 
 /**
  * The name you give here in combine reducers will be the key you select the data by
@@ -10,7 +11,8 @@ import auth from './auth'
 
 const reducer = combineReducers({
   auth,
-  requests
+  requests,
+  form
 });
 
 export default reducer;

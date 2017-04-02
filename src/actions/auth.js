@@ -1,4 +1,4 @@
-import {saveUserToDB} from './users'
+import {addUser} from './users'
 import {auth, googleAuthProvider} from '../dataApi'
 
 /**
@@ -29,7 +29,7 @@ const getRelevantUserDataFromResponse = user => ({
 const handleUserIfNew = (user, currentUsers, dispatch) => {
   const {uid, ...rest} = user;
   if (!currentUsers[uid]) {
-    dispatch(saveUserToDB(uid, rest))
+    dispatch(addUser(uid, rest))
   }
 }
 
