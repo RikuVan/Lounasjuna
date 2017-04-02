@@ -1,4 +1,4 @@
-import {apiUpdate, apiRemove} from './requests'
+import {apiUpdate, apiUnset} from './requests'
 import {fetchRestaurants} from './restaurants'
 import {resources} from '../dataApi';
 
@@ -16,7 +16,7 @@ export const vote = (userId, restaurantId) => dispatch => {
 }
 
 export const revokeVote = (userId, restaurantId, onSuccess) => dispatch => {
-  dispatch(apiRemove({
+  dispatch(apiUnset({
     resource: resources.VOTES,
     params: {restaurantId, userId},
     handler: onSuccess
