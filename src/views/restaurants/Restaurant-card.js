@@ -34,17 +34,14 @@ const RestaurantCard = ({
       <p>{address}</p>
       {userId && <RestaurantVotes votes={mapToUsers(votes, users)} />}
       {!hideButtons && !isOnBoard &&
-        <Button
-          onClick={() => handleSelect(userId, restaurantId)}
-          text='Lähden junalla mukaan'
-        />
+        <Button onClick={() => handleSelect(userId, restaurantId)}>
+          Lähden junaan mukaan
+        </Button>
       }
       {!hideButtons && isOnBoard &&
-        <Button
-          type="destructive"
-          onClick={() => handleCancel(userId, restaurantId)}
-          text='En halua lähde mukaan'
-        />
+        <Button onClick={() => handleCancel(userId, restaurantId)}>
+          En halua lähteä mukaan
+        </Button>
       }
     </article>
   );

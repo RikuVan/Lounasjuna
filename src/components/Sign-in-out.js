@@ -1,25 +1,25 @@
 import React, { PropTypes } from 'react'
-import './Sign-in-out.css'
 import Loading from './Loading'
+import Button from './Button'
 
 const getButtonContent = (type, loading) => {
   if (loading) {
     return <Loading small={true} />
   } else if (type === 'SignIn') {
-    return 'Sign In'
+    return 'Kirjaudu sisään'
   }
-  return 'Sign out'
+  return 'Kirjaudu ulos'
 }
 
 const SignInOrOut = ({type = 'SignIn', loading, onClickHandler}) => {
   return (
     <div className="SignInOut">
-      <button
+      <Button
         className={`block ${type === 'SignOut' ? 'destructive' : ''}`}
         onClick={onClickHandler}
       >
         {getButtonContent(type, loading)}
-      </button>
+      </Button>
     </div>
   );
 };

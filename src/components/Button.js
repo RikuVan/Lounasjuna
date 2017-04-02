@@ -1,14 +1,17 @@
 import React, {PropTypes} from 'react'
+import './Button.css'
 
-const Button = ({type, onClick, text}) => (
+const Button = ({type, onClick, children}) => (
   <button
-    className={type ? type : 'default'}
-    onClick={onClick}>
-    {text}
+    className={`Button ${type && type}`}
+    onClick={onClick}
+  >
+    {children}
   </button>
 )
 
 Button.propTypes = {
+  children: PropTypes.node.isRequired,
   type: PropTypes.string,
   onClick: PropTypes.func,
   text: PropTypes.string.isRequired

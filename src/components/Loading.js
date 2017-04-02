@@ -4,7 +4,7 @@ import './Loading.css'
 const Loading = ({small}) => {
   return (
     <div className={small ? 'Loading--small' : 'Loading'}>
-      Loading…
+      Lataa…
     </div>
   )
 }

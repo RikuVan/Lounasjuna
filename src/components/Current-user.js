@@ -6,12 +6,12 @@ const CurrentUser = ({displayName, photoURL}) => {
     <div className="CurrentUser">
       {photoURL &&
         <img
-          className="CurrentUser--photo"
+          className="CurrentUser-photo"
           src={photoURL}
           alt={displayName}
         />
       }
-      {displayName && <h3 className="CurrentUser--displayName">{displayName}</h3>}
+      {displayName && <div className="CurrentUser-displayName">{displayName}</div>}
     </div>
   );
 };

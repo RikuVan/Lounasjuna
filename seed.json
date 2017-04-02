@@ -7,7 +7,7 @@
       "lng": "23.7674007415771",
       "name": "Amarillo Ilves",
       "rating": "3",
-      "type": "Nöytäpöytä"
+      "type": "Noutopöytä"
     },
     "aa599c87-31fb-487a-9e3b-b0fef0463bf3": {
       "address": "Hameenkatu 19, Kauppahalli, 33200 Tampere",
@@ -25,7 +25,7 @@
       "lng": "23.7521219",
       "name": "Katmandu",
       "rating": "4.6667",
-      "type": "Nepalalainen",
+      "type": "Nepalilainen",
       "votes": {
         "obX90qRGN7cU8sRhFHkYRjGsUUh1": true
       }
@@ -89,7 +89,7 @@
       "lng": "23.7546005249023",
       "name": "Thai & Laos Näsilinnankatu",
       "rating": "4.2",
-      "type": "Thaimalainen"
+      "type": "Thaimaalainen"
     },
     "12ec6699-ebf3-46ae-95c4-b87d67fd8a46": {
       "address": "Tullikatu 6, 33100 Tampere",
@@ -98,7 +98,7 @@
       "lng": "23.7771279999999",
       "name": "Bengol Curry",
       "rating": "3.2",
-      "type": "Indialainen"
+      "type": "Intialainen"
     }
   },
   "users": {

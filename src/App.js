@@ -11,7 +11,6 @@ import {
   cancelGoogleAuth
 } from './actions/auth'
 import {fetchUsers} from './actions/users'
-import logo from './logo.svg'
 import './App.css'
 import RestaurantList from './views/restaurants/Restaurant-list'
 import RestaurantForm from './views/forms/Restaurant-form'
@@ -36,10 +35,10 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Lounasjuna</h2>
-          </div>
+          <h1 className="Logo">
+            <div className="Logo-train">🚂</div>
+            <div className="Logo-text">Lounasjuna</div>
+          </h1>
           <div className="App-subheader">
             <SignInOrOut
               type={showSignIn ? 'SignIn' : 'SignOut'}

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import './Star-rating.css'
 
-const ratingTitles = ['huono', 'Ihan Ok', 'Melkein hyvä', 'Hyvä', 'Erinomainen!'];
+const ratingTitles = ['Välttävä', 'Tyydyttävä', 'Hyvä', 'Kiitettävä', 'Erinomainen!'];
 
 /***
  * convert a number to a an array of values to map over li for each star
