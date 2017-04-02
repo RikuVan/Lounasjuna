@@ -40,7 +40,7 @@ class RestaurantForm extends Component {
           </div>
         </div>
         <div className="Restaurant-form--input">
-          <button className="Restaurant-form--submit" type="submit">
+          <button className="Button Restaurant-form--submit" type="submit">
             Submit
           </button>
         </div>

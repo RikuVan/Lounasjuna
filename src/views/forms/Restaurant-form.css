@@ -21,7 +21,8 @@
 
 .Restaurant-form--input > label {
   padding: 8px;
-  font-weight: 700;
+  font-weight: bold;
+  color: white;
   letter-spacing: .09em;
   text-transform: uppercase;
   flex: 1 0 120px;
@@ -44,4 +45,13 @@ button.Restaurant-form--submit {
 
 .input--number > *{
   max-width: 100px;
+}
+
+input:not([type="submit"]) {
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: 0.1em;
+  padding: 1em 0.5em;
+  width: 100%;
+  border-radius: 5px;
 }
