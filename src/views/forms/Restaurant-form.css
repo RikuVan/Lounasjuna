@@ -31,7 +31,7 @@
 
 .Restaurant-form--input > label.required::after {
   content: "*";
-  color: hsl(0, 76%, 47%);
+  color: #fff;
 }
 
 .Restaurant-form--input > label + * {
@@ -41,6 +41,7 @@
 button.Restaurant-form--submit {
   margin-left: auto;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 .input--number > *{
@@ -54,4 +55,8 @@ input:not([type="submit"]) {
   padding: 1em 0.5em;
   width: 100%;
   border-radius: 5px;
+}
+
+.form-error {
+  color: red;
 }

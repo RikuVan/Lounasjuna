@@ -29,7 +29,7 @@ const RestaurantCard = ({
   return (
     <article className="Restaurant">
       <h2 className="Restaurant-name">
-        <a href={link} className="Restaurant-www"><span className="fa fa-home" /></a>
+        {link && <a href={link} className="Restaurant-www"><span className="fa fa-home" /></a>}
         {name}
       </h2>
       <div className="Restaurant-content">
@@ -61,7 +61,7 @@ RestaurantCard.propTypes = {
   handleCancel: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
   rating: PropTypes.string,
   type: PropTypes.string,
   votes: PropTypes.array,

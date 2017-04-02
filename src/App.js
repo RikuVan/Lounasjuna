@@ -46,12 +46,24 @@ class App extends Component {
               loading={awaitingLogin}
             />
             <CurrentUser {...auth} />
-            {auth.status === 'SIGNED_IN' &&
-              <div className="App-subheader--link">
-                <ButtonLink path="/uusi">
+            <Route path="/" exact render={() =>
+              /**
+               * react router provides a render method instead of just passing
+               * as component, inside of which you can add logic and/or
+               * pass props
+               */
+              auth.status === 'SIGNED_IN' ?
+                <ButtonLink className="Nav--button" path="/lounaspaikka/uusi">
                   {'Lisää lounaspaikka'}
+                </ButtonLink> : null
+                }
+            />
+            <Route path="/lounaspaikka/" render={() =>
+                <ButtonLink className="Nav--button" path="/">
+                  {'Pääsivu'}
                 </ButtonLink>
-              </div>}
+              }
+            />
           </div>
           <Switch>
             <Route
@@ -62,10 +74,16 @@ class App extends Component {
               }
             />
             <Route
-              path="/uusi"
-              render={() => {
+              path="/lounaspaikka/uusi"
+              render={({history}) => {
+                /***
+                 *  here react router gives us the history object
+                 *  which allows us to perform programmatic routing
+                 *  in the form component using 'push'
+                 */
+
                 if (auth.status === 'SIGNED_IN') {
-                  return <RestaurantForm />
+                  return <RestaurantForm history={history} />
                 } else {
                   return <RestaurantList auth={auth} />
                 }

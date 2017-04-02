@@ -13,7 +13,7 @@
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding: 15px;
 }
 
@@ -48,4 +48,12 @@ h1 {
   text-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
   top: 0;
   transform: translate(-50%, 50%);
+}
+
+.CurrentUser {
+  margin-left: 2em;
+}
+
+.Nav--button {
+  margin-left: auto;
 }
