@@ -6,9 +6,17 @@ const getButtonContent = (type, loading) => {
   if (loading) {
     return <Loading small={true} />
   } else if (type === 'SignIn') {
-    return 'Kirjaudu sisään'
+    return (
+      <span>
+        <i className="fa fa-sign-in" /> Kirjaudu sisään
+      </span>
+    )
   }
-  return 'Kirjaudu ulos'
+  return (
+    <span>
+      <i className="fa fa-sign-out" /> Kirjaudu ulos
+    </span>
+  )
 }
 
 const SignInOrOut = ({type = 'SignIn', loading, onClickHandler}) => {

@@ -29,7 +29,7 @@ const RestaurantCard = ({
   return (
     <article className="Restaurant">
       <h2 className="Restaurant-name">
-        <a href={link} className="Restaurant-www"><span className="fa fa-home" /></a>
+        <a href={link} className="Restaurant-www"><i className="fa fa-home" /></a>
         {name}
       </h2>
       <div className="Restaurant-content">

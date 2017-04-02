@@ -47,7 +47,7 @@ class App extends Component {
             {auth.status === 'SIGNED_IN' &&
               <div className="App-subheader-links">
                 <ButtonLink path="/uusi" type="white">
-                  Lisää lounaspaikka
+                  <i className="fa fa-plus-circle" /> Lisää lounaspaikka
                 </ButtonLink>
               </div>
             }
@@ -82,7 +82,7 @@ class App extends Component {
           </div>
         </div>
       </Router>
-    );
+    )
   }
 }
 
@@ -99,4 +99,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   attemptSignInWithGoogle, cancelGoogleAuth, fetchUsers
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)

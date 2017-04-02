@@ -24,11 +24,13 @@ class Restaurants extends Component {
     const {restaurants, auth, users, currentVote} = this.props
     return (
       <section className="Restaurants">
-        {restaurants.loading || users.loading ?
-          <div className="Restaurants-loader">
-            <Loading />
-          </div> :
-          (restaurants.data || []).map((rest, i) =>
+        {restaurants.loading || users.loading
+          ? (
+            <div className="Restaurants-loader">
+              <Loading />
+            </div>
+          )
+          : (restaurants.data || []).map((rest, i) => (
             <RestaurantCard
               key={i}
               userId={auth.uid}
@@ -38,7 +40,8 @@ class Restaurants extends Component {
               currentVote={currentVote}
               {...rest}
             />
-        )}
+          ))
+        }
       </section>
     )
   }

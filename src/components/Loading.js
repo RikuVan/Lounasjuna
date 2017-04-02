@@ -3,9 +3,7 @@ import './Loading.css'
 
 const Loading = ({small}) => {
   return (
-    <div className={small ? 'Loading--small' : 'Loading'}>
-      Lataa…
-    </div>
+    <i className={`fa fa-spinner fa-pulse ${!small ? 'fa-3x' : ''} fa-fw`} />
   )
 }
 
