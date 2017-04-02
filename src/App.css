@@ -22,6 +22,11 @@
   padding-left: 20px;
 }
 
+.App-subheader--link {
+  align-self: center;
+  margin-right: auto;
+}
+
 .App-subheader > * {
   padding: 10px;
 }

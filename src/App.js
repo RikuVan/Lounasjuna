@@ -1,5 +1,10 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
 import {bindActionCreators} from 'redux'
 import {
   attemptSignInWithGoogle,
@@ -9,8 +14,10 @@ import {fetchUsers} from './actions/users'
 import logo from './logo.svg'
 import './App.css'
 import RestaurantList from './views/restaurants/Restaurant-list'
+import RestaurantForm from './views/forms/Restaurant-form'
 import SignInOrOut from './components/Sign-in-out'
 import CurrentUser from './components/Current-user'
+import ButtonLink from './components/ButtonLink'
 
 class App extends Component {
 
@@ -27,21 +34,49 @@ class App extends Component {
     const showSignIn = this.props.auth.status === 'ANONYMOUS'
     const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE'
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Lounasjuna</h2>
+      <Router>
+        <div className="App">
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h2>Lounasjuna</h2>
+          </div>
+          <div className="App-subheader">
+            <SignInOrOut
+              type={showSignIn ? 'SignIn' : 'SignOut'}
+              onClickHandler={showSignIn ? this.handleSignIn : this.handleSignOut}
+              loading={awaitingLogin}
+            />
+            <CurrentUser {...auth} />
+            {auth.status === 'SIGNED_IN' &&
+              <div className="App-subheader--link">
+                <ButtonLink
+                  path="/uusi"
+                  text="Lisää lounaspaikka"
+                />
+              </div>}
+          </div>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={() =>
+                <RestaurantList auth={auth} />
+              }
+            />
+            <Route
+              path="/uusi"
+              render={() => {
+                if (auth.status === 'SIGNED_IN') {
+                  return <RestaurantForm />
+                } else {
+                  return <RestaurantList auth={auth} />
+                }
+              }}
+            />
+            <Route path="/" render={() => <h3>404</h3>} />
+          </Switch>
         </div>
-        <div className="App-subheader">
-          <SignInOrOut
-            type={showSignIn ? 'SignIn' : 'SignOut'}
-            onClickHandler={showSignIn ? this.handleSignIn : this.handleSignOut}
-            loading={awaitingLogin}
-          />
-          <CurrentUser {...auth} />
-        </div>
-        <RestaurantList auth={auth} />
-      </div>
+      </Router>
     );
   }
 }
