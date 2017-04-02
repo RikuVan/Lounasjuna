@@ -1,5 +1,4 @@
 .Restaurants {
-  background-color: #fff;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-gap: 15px;
@@ -14,8 +13,8 @@
 
 .Restaurant-name {
   background-color: #bbaa99;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   font-size: 1rem;
   color: #fff;
   margin: 0;
