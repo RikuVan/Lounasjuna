@@ -1,4 +1,3 @@
-import {addUser} from './users'
 import {auth, googleAuthProvider} from '../dataApi'
 
 /**
@@ -26,32 +25,21 @@ const getRelevantUserDataFromResponse = user => ({
   uid: user.uid,
 })
 
-const handleUserIfNew = (user, currentUsers, dispatch) => {
-  const {uid, ...rest} = user
-  if (!currentUsers[uid]) {
-    dispatch(addUser(uid, rest))
-  }
-}
-
 /**
  * main action for signing in with a popup
  */
 
 export const attemptSignInWithGoogle = () =>
-  (dispatch, getState) => {
+  dispatch => {
     dispatch(startLogin())
-    const currentUsers = getState().requests.users.data || {}
     auth
       .signInWithPopup(googleAuthProvider)
       .then(({user}) => {
         const userData = getRelevantUserDataFromResponse(user)
         //if the user has never signed in before we need to add them to
-        //to list of users in the DB. Is this the right place for this?
-        handleUserIfNew(userData, currentUsers, dispatch)
-        return userData
-      })
-      .then(data => {
-        dispatch(signIn(data))
+        //to list of users in the DB here by checking state for the user
+        //and dispatching an action, but in our case we will do this is middleware
+        return dispatch(signIn(userData))
       })
       .catch(err => console.error(err))
   }

@@ -35,7 +35,9 @@ const RestaurantCard = (
         <StarRating rating={rating ? Math.round(rating) : 0} />
         <p>{type}</p>
         <p>{address}</p>
-        {userId && <RestaurantVotes votes={mapToUsers(votes, users)} />}
+        {userId &&
+          users &&
+          <RestaurantVotes votes={mapToUsers(votes, users)} />}
       </div>
       {userId &&
         <div className="Restaurant-footer">
@@ -60,7 +62,7 @@ RestaurantCard.propTypes = {
   votes: PropTypes.array,
   userId: PropTypes.string,
   uid: PropTypes.string,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.object,
   currentVote: PropTypes.string,
 }
 

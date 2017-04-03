@@ -1,0 +1,5 @@
+export const SEND_NOTIFICATION = 'SEND_NOTIFICATION'
+export const DISMISS_NOTIFICATION = 'DISMISS_NOTIFICATION'
+export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION'
+
+const NotificationsConfig = {}
