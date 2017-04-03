@@ -1,4 +1,5 @@
 import {auth, googleAuthProvider} from '../dataApi'
+import {notify} from './notifications'
 
 /**
  * AUTH ACTIONS
@@ -6,7 +7,7 @@ import {auth, googleAuthProvider} from '../dataApi'
  */
 
 export const ATTEMPTING_LOGIN = 'ATTEMPTING_LOGIN'
-export const SIGN_IN = 'SIGIN_IN'
+export const SIGN_IN = 'SIGN_IN'
 export const SIGN_OUT = 'SIGN_OUT'
 
 /**
@@ -39,6 +40,7 @@ export const attemptSignInWithGoogle = () =>
         //if the user has never signed in before we need to add them to
         //to list of users in the DB here by checking state for the user
         //and dispatching an action, but in our case we will do this is middleware
+        dispatch(notify('LOGGED_IN'))
         return dispatch(signIn(userData))
       })
       .catch(err => console.error(err))
@@ -48,6 +50,7 @@ export const attemptSignInWithGoogle = () =>
 export const cancelGoogleAuth = () =>
   dispatch => {
     auth.signOut().then(() => {
+      dispatch(notify('LOGGED_OUT'))
       dispatch(signOut())
     })
   }

@@ -3,6 +3,7 @@ const initialState = {
     status: 'ANONYMOUS',
   },
   requests: {},
+  notifications: {},
 }
 
 export default initialState

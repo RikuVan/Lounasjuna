@@ -10,6 +10,7 @@ import RestaurantForm from './views/forms/Restaurant-form';
 import SignInOrOut from './components/Sign-in-out';
 import CurrentUser from './components/Current-user';
 import ButtonLink from './components/ButtonLink';
+import Notification from './components/Notification';
 import {Link} from 'react-router-dom';
 
 class App extends Component {
@@ -79,6 +80,7 @@ class App extends Component {
           {/******** END NAV *******/}
           {/****** START CONTENT ******/}
           <div className="App-content">
+            <Notification />
             <Switch>
               <Route
                 path="/"

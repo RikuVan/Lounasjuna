@@ -2,9 +2,9 @@ import initialState from '../initial-state.js'
 import {
   SEND_NOTIFICATION,
   DISMISS_NOTIFICATION,
-  CLEAR_NOTIFICATIONS,
 } from '../actions/notifications'
 
+//notice this returns a new object, not a mutated payload
 const removeByKey = (myObj, deleteKey) => {
   return Object.keys(myObj).filter(key => key !== deleteKey).reduce((
     result,
@@ -15,18 +15,19 @@ const removeByKey = (myObj, deleteKey) => {
   }, {})
 }
 
-export default function notifications (state = iniitialState, action) {
+export default function notifications (
+  state = initialState.notifications,
+  action,
+) {
   switch (action.type) {
     case SEND_NOTIFICATION:
       return {
         ...state,
-        [action.payload.id]: {...action.payload},
+        [action.payload.key]: {...action.payload},
       }
     case DISMISS_NOTIFICATION:
-      return removeByKey(state, action.id)
-    case CLEAR_NOTIFICATIONS:
-      return {}
+      return removeByKey(state, action.payload.key)
     default:
-      return initialState
+      return state
   }
 }

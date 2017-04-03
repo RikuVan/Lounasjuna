@@ -1,6 +1,7 @@
 import {apiGet, apiPush} from './requests'
 import {objectToArray, objectKeysToArray} from './helpers'
 import {resources} from '../dataApi'
+import {notify} from './notifications'
 
 /**
   RESTAURANTS ACTIONS
@@ -48,7 +49,10 @@ export const fetchRestaurants = () => {
 
 export const addRestaurant = payload =>
   dispatch => {
-    const handler = () => dispatch(fetchRestaurants())
+    const handler = () => {
+      dispatch(notify('CREATED'))
+      dispatch(fetchRestaurants())
+    }
     return dispatch(
       apiPush({
         resource: resources.RESTAURANTS,
