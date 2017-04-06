@@ -7,7 +7,7 @@ import RestaurantVotes from './Restaurant-votes'
 const mapToUsers = (votes = [], users = {}) =>
   votes.map(id => users[id].displayName)
 
-const RestaurantCard = (
+export const RestaurantCard = (
   {
     name,
     address,

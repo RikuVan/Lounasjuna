@@ -1,0 +1,60 @@
+exports[`test Restaurant card snapshot test 1`] = `
+<BrowserRouter>
+  <div
+    className="App">
+    <div
+      className="App-header">
+      <Link
+        replace={false}
+        to="/">
+        <h1
+          className="Logo">
+          <div
+            className="Logo-train">
+            🚂
+          </div>
+          <div
+            className="Logo-text">
+            Lounasjuna
+          </div>
+        </h1>
+      </Link>
+    </div>
+    <div
+      className="App-subheader">
+      <div
+        className="App-subheader-links">
+        <Route
+          exact={true}
+          path="/"
+          render={[Function]} />
+        <Route
+          path="/lounaspaikka/"
+          render={[Function]} />
+      </div>
+      <CurrentUser
+        status="ANONYMOUS" />
+      <SignInOrOut
+        loading={false}
+        onClickHandler={[Function]}
+        type="SignIn" />
+    </div>
+    <div
+      className="App-content">
+      <Connect(Notifier) />
+      <Switch>
+        <Route
+          exact={true}
+          path="/"
+          render={[Function]} />
+        <Route
+          path="/lounaspaikka/uusi"
+          render={[Function]} />
+        <Route
+          path="/"
+          render={[Function]} />
+      </Switch>
+    </div>
+  </div>
+</BrowserRouter>
+`;

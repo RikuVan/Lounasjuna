@@ -11,11 +11,12 @@ export const COMPLETE_REQUEST = 'COMPLETE_REQUEST'
   REQUEST ACTION CREATORS - functions that create actions
  */
 
-const attemptRequest = resource => ({
+//exported to test
+export const attemptRequest = resource => ({
   type: ATTEMPT_REQUEST,
   payload: {resource},
 })
-const completeRequest = (resource, data, error) => {
+export const completeRequest = (resource, data, error) => {
   return {
     type: COMPLETE_REQUEST,
     payload: {resource, ...data, error},

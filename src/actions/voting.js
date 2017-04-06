@@ -20,6 +20,7 @@ export const vote = (userId, restaurantId) =>
 
 export const revokeVote = (userId, restaurantId, onSuccess) =>
   dispatch => {
+  console.log("here")
     dispatch(
       apiUnset({
         resource: resources.VOTES,

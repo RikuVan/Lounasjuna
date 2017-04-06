@@ -15,9 +15,10 @@ export const SIGN_OUT = 'SIGN_OUT'
  * @param user
  */
 
-const signIn = user => ({type: SIGN_IN, payload: user})
-const signOut = () => ({type: SIGN_OUT})
-const startLogin = () => ({type: ATTEMPTING_LOGIN})
+//exported for testing purposes
+export const signIn = user => ({type: SIGN_IN, payload: user})
+export const signOut = () => ({type: SIGN_OUT})
+export const startLogin = () => ({type: ATTEMPTING_LOGIN})
 
 const getRelevantUserDataFromResponse = user => ({
   email: user.email,

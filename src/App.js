@@ -13,7 +13,7 @@ import ButtonLink from './components/ButtonLink';
 import Notification from './components/Notification';
 import {Link} from 'react-router-dom';
 
-class App extends Component {
+export class App extends Component {
   componentDidMount() {
     this.props.fetchUsers();
   }
@@ -24,7 +24,7 @@ class App extends Component {
 
   render() {
     const {auth} = this.props;
-    const showSignIn = this.props.auth.status === 'ANONYMOUS';
+    const showSignIn = auth.status === 'ANONYMOUS';
     const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE';
     return (
       <Router>
