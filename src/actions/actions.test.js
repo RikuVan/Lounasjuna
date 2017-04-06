@@ -11,7 +11,6 @@ import {
 } from './voting'
 import {testRestaurants} from './__mocks__/requests'
 
-
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
