@@ -4,16 +4,16 @@ export const testData = {
       address: 'Näsilinnankatu 23, 33210 TAMPERE',
       name: 'Thai & Laos Näsilinnankatu',
       rating: 4.2,
-      votes: [{1: true}]
+      votes: [{1: true}],
     },
     '12ec6699-ebf3-46ae-95c4-b87d67fd8a46': {
       address: 'Tullikatu 6, 33100 Tampere',
       name: 'Bengol Curry',
       rating: 3.2,
-      votes: []
-    }
+      votes: [],
+    },
   },
-  votes: null
+  votes: null,
 }
 
 const ATTEMPT_REQUEST = 'ATTEMPT_REQUEST'
@@ -31,14 +31,14 @@ const completeRequest = (resource, data, error) => {
   }
 }
 
-export const apiFn = type => ({resource, params, payload, handler: responseHandler}) => dispatch => {
-    dispatch(attemptRequest(resource))
-    const data = testData[resource]
-    const response = responseHandler
-      ? responseHandler(data)
-      : {data}
-    return dispatch(completeRequest(resource, response, null))
-}
+export const apiFn = type =>
+  ({resource, params, payload, handler: responseHandler}) =>
+    dispatch => {
+      dispatch(attemptRequest(resource))
+      const data = testData[resource]
+      const response = responseHandler ? responseHandler(data) : {data}
+      return dispatch(completeRequest(resource, response, null))
+    }
 
 export const apiGet = apiFn('get')
 export const apiSet = apiFn('set')

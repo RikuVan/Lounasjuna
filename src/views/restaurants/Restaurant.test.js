@@ -9,8 +9,8 @@ import {shallowToJson} from 'enzyme-to-json'
 
 test('Restaurant contains title and link', () => {
   const data = {
-    name: "Restaurant",
-    address: "10 some street",
+    name: 'Restaurant',
+    address: '10 some street',
     rating: 2,
     link: 'http://chineseplace.com',
     type: 'Chinese',
@@ -19,22 +19,25 @@ test('Restaurant contains title and link', () => {
     uid: 2,
     votes: [1],
     users: {
-      1: {displayName: 'some dude'}
+      1: {displayName: 'some dude'},
     },
     currentVote: 1,
-    handleSelect: () => {}
+    handleSelect: () => {},
   }
-  console.error = jest.genMockFn();
-  const title = <h2 className="Restaurant-name">
-    <a href="http://chineseplace.com" className="Restaurant-www">
-      <span className="fa fa-home">
-      </span></a>Restaurant</h2>
+  console.error = jest.genMockFn()
+  const title = (
+    <h2 className="Restaurant-name">
+      <a href="http://chineseplace.com" className="Restaurant-www">
+        <span className="fa fa-home" />
+      </a>Restaurant
+    </h2>
+  )
   const component = mount(<RestaurantCard {...data} />)
-  expect((component).contains(title)).toBe(true)
+  expect(component.contains(title)).toBe(true)
 })
 
 test('Restaurant card snapshot test', () => {
-  console.error = jest.genMockFn();
+  console.error = jest.genMockFn()
   const component = shallow(<RestaurantCard />)
   const tree = shallowToJson(component)
   expect(tree).toMatchSnapshot()
