@@ -62,6 +62,66 @@ authentication hooked up. Database → Rules
   ```
 ### App
 
-- Each page/feature has its own directory under `/Views` together with its css and tests
-- Generic, reusable components are placed in the `components` directory
+- Entry point is App.js
+- Each page/feature has its own directory under `/views` together with its css and tests
+- Generic, reusable components are placed in the `/components` directory
 - Feel free to reorganize
+
+### ES6 features it helps to be familiar with
+
+
+#### Arrow functions
+  Instead of
+  ```javascript
+  setTimeout(function(){ return console.log("USPA!").bind(this)}, 1000);
+  ```
+  we can stop worrying about `this` and do
+  ```javascript
+  setTimeout(() => console.log("USPA!"), 1000);
+  ```
+  And to get even more concise, instead of
+  ```javascript
+  const makeUspaObject = () => {
+    return {
+      name: "USPA",
+      style: "80s"
+    }
+  }
+  ```
+  we can do this
+  ```javascript
+  const makeUspaObject = () => ({
+    name: "USPA",
+    style: "80s"
+  })
+  ```
+#### Descructuring assignment
+  Instead of
+  ```javascript
+  const name = data.transaction.name;
+  const age = data.transaction.age;
+  ```
+  we can do this
+  ```javascript
+  const {name, age} = data.transaction;
+  ```
+And notice we use `const` these days instead of `var`, unless you are going to reassign the variable, in which case use `let`
+  
+### Object spread operator
+  Instead of creating a new object from one or more objects this way
+  ```javascript
+  const newUspaObject = _.merge(_.clone(uspaObject1), uspaObject2))
+  ```
+  or this way
+  ```javascript
+  const newUspaObject = Object.assign({}, uspaObject1, uspaObject2)
+  ```
+  we can do this
+  ```javascript
+  const newUspaObject = {...uspaObject, ...uspaObject2}
+  ```
+
+Additionally you may want to checkout [classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) and [modules](http://2ality.com/2014/09/es6-modules-final.html)
+  
+
+
