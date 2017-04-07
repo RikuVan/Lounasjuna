@@ -8,6 +8,9 @@ import {shallowToJson} from 'enzyme-to-json'
  */
 
 test('Restaurant contains title and link', () => {
+  //this is to avoid logging of propType errors
+  console.error = jest.genMockFn()
+  const handleSelect = jest.fn()
   const data = {
     name: 'Restaurant',
     address: '10 some street',
@@ -15,16 +18,15 @@ test('Restaurant contains title and link', () => {
     link: 'http://chineseplace.com',
     type: 'Chinese',
     rating: 1,
-    userId: 1,
-    uid: 2,
-    votes: [1],
+    userId: "1",
+    uid: "2",
+    votes: ["1"],
     users: {
       1: {displayName: 'some dude'},
     },
     currentVote: 1,
-    handleSelect: () => {},
+    handleSelect,
   }
-  console.error = jest.genMockFn()
   const title = (
     <h2 className="Restaurant-name">
       <a href="http://chineseplace.com" className="Restaurant-www">
@@ -33,7 +35,10 @@ test('Restaurant contains title and link', () => {
     </h2>
   )
   const component = mount(<RestaurantCard {...data} />)
+  component.find('button').simulate('click');
   expect(component.contains(title)).toBe(true)
+  expect(handleSelect).toHaveBeenCalledTimes(1)
+  expect(handleSelect).toHaveBeenCalledWith("1", "2");
 })
 
 test('Restaurant card snapshot test', () => {
@@ -42,3 +47,4 @@ test('Restaurant card snapshot test', () => {
   const tree = shallowToJson(component)
   expect(tree).toMatchSnapshot()
 })
+
