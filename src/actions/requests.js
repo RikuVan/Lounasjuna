@@ -58,7 +58,7 @@ const createRequest = (type, resource, params = {}, payload) => {
 //the .on/.once method for the real time api takes a second func, an error callback
 const errorCallback = (dispatch, resource) =>
   error => {
-    dispatch(completeRequest(resource, null, error))
+    return dispatch(completeRequest(resource, null, error))
   }
 
 /**
@@ -81,11 +81,8 @@ export const apiFn = type =>
         return dispatch(completeRequest(resource, null, null))
       }
 
-      //real time api but once listens for event then turns off
       if (type === 'get') {
-        return request.once(
-          'value',
-          snapshot => {
+        return request.once('value').then(snapshot => {
             const data = responseHandler
               ? responseHandler(snapshot.val())
               : {data: snapshot.val()}
@@ -104,7 +101,7 @@ export const apiFn = type =>
     }
 
 /**
- * The operations below take an object:
+ * The operations below take an config object and return a promise (except remove):
  *   [resource]: string e.g. 'restaurants'
  *   [params]: object e.g. {userId}
  *   [payload]: object e.g. {name: 'rick'}
