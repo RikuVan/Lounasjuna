@@ -10,6 +10,7 @@ firebase.initializeApp(secrets.firebaseConfig)
 export default firebase
 
 export const database = firebase.database()
+export const messaging = firebase.messaging()
 export const auth = firebase.auth()
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
 

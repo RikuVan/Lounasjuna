@@ -1,5 +1,6 @@
 import {auth, googleAuthProvider} from '../dataApi'
 import {notify} from './notifications'
+import registerMessaging from '../request-messaging-permission'
 
 /**
  * AUTH ACTIONS
@@ -42,6 +43,7 @@ export const attemptSignInWithGoogle = () =>
         //to list of users in the DB here by checking state for the user
         //and dispatching an action, but in our case we will do this is middleware
         dispatch(notify('LOGGED_IN'))
+        registerMessaging(user)
         return dispatch(signIn(userData))
       })
       .catch(err => console.error(err))
