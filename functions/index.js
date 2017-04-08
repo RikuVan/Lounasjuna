@@ -19,18 +19,20 @@ exports.newVoteAlert = functions.database.ref('/restaurants/{restaurantId}/votes
 
     const getRestaurant = admin.database().ref(`restaurants/${restaurantId}`)
       .once('value')
-      .then(snapshot => snapshot.val().name)
+      .then(snapshot => snapshot.val())
 
     Promise.all([getTokens, getAuthor, getRestaurant])
       .then(([tokens, author, restaurant]) => {
+        //we will only send a message if it was a new, not deletion of the old
+        const wasDeletion = !restaurant.votes || !restaurant.votes[userId]
         const payload = {
           notification: {
-            title: `${author.displayName} on valinnut uuden junan!"`,
-            body: restaurant.toUpperCase(),
+            title: `${author.displayName} on valinnut uuden junan!`,
+            body: restaurant.name.toUpperCase(),
             icon: author.photoURL
           }
         }
-      if (tokens.length > 0) {
+      if (!wasDeletion && tokens.length > 0) {
         admin.messaging().sendToDevice(tokens, payload).catch(console.error)
       }
     })
