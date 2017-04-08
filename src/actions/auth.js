@@ -43,7 +43,6 @@ export const attemptSignInWithGoogle = () =>
         //to list of users in the DB here by checking state for the user
         //and dispatching an action, but in our case we will do this is middleware
         dispatch(notify('LOGGED_IN'))
-        registerMessaging(user)
         return dispatch(signIn(userData))
       })
       .catch(err => console.error(err))
@@ -64,6 +63,7 @@ export const listenToAuthChanges = () =>
   dispatch => {
     auth.onAuthStateChanged(user => {
       if (user) {
+        registerMessaging(user)
         const userData = getRelevantUserDataFromResponse(user)
         dispatch(signIn(userData))
       } else {

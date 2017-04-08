@@ -3,36 +3,35 @@ const admin = require('firebase-admin')
 
 admin.initializeApp(functions.config().firebase)
 
-exports.newVoteAlert = functions.database.ref('/restaurants/{restaurant}/votes/{vote}')
+exports.newVoteAlert = functions.database.ref('/restaurants/{restaurantId}/votes/{userId}')
   .onWrite(event => {
-    const vote = event.data.val()
-
+    const userId = event.params.userId
+    const restaurantId = event.params.restaurantId
     const getTokens = admin.database().ref('users').once('value')
       .then(snapshot => {
-        const tokens = []
-        snapshot.forEach(user => {
-          const token = user.child('token').val()
-          if (token) tokens.push(token)
-          return tokens
-        })
+        const users = snapshot.val()
+        return Object.keys(users)
+          .filter(key => !!users[key].token)
+          .map(key => users[key].token)
       })
 
-    const getAuthor = admin.auth().getUser(vote)
+    const getAuthor = admin.auth().getUser(userId)
 
-    Promise.all([getTokens, getAuthor]).then([tokens, author] => {
-      const payload = {
-        title: `${author.displayName} has joined a train!"`,
-        body: JSON.stringify(vote, null, 2),
-        icon: author.photoURL
+    const getRestaurant = admin.database().ref(`restaurants/${restaurantId}`)
+      .once('value')
+      .then(snapshot => snapshot.val().name)
+
+    Promise.all([getTokens, getAuthor, getRestaurant])
+      .then(([tokens, author, restaurant]) => {
+        const payload = {
+          notification: {
+            title: `${author.displayName} on valinnut uuden junan!"`,
+            body: restaurant.toUpperCase(),
+            icon: author.photoURL
+          }
+        }
+      if (tokens.length > 0) {
+        admin.messaging().sendToDevice(tokens, payload).catch(console.error)
       }
     })
-
-    admin.messaging().sendToDevice(tokens, payload).catch(console.error)
   })
-
-// // Start writing Firebase Functions
-// // https://firebase.google.com/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// })
