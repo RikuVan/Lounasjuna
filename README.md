@@ -69,7 +69,6 @@ authentication hooked up. Database → Rules
 
 ### ES6 features it helps to be familiar with
 
-
 #### Arrow functions
   Instead of
   ```javascript
@@ -107,7 +106,7 @@ authentication hooked up. Database → Rules
   ```
 And notice we use `const` these days instead of `var`, unless you are going to reassign the variable, in which case use `let`
   
-### Object spread operator
+#### Object spread operator
   Instead of creating a new object from one or more objects this way
   ```javascript
   const newUspaObject = _.merge(_.clone(uspaObject1), uspaObject2))
@@ -123,5 +122,19 @@ And notice we use `const` these days instead of `var`, unless you are going to r
 
 Additionally you may want to checkout [classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) and [modules](http://2ality.com/2014/09/es6-modules-final.html)
   
+### Deployment
 
+Firebase will also host your app for free. It is super simple to set up.
 
+Assuming you already have already done `npm install -g firebase-tools`, do the following:
+ 
+1. Run `firebase init` in the terminal. It will ask you about what services you want. Choose them all.
+Also, make sure you answer as follows:
+  ```
+  ? What do you want to use as your public directory? build
+  ? Configure as a single-page app (rewrite all urls to /index.html)? Yes
+  ```
+2. Add/edit the `database.rules.json` with the same config you added in the firebase console
+3. `npm run deploy` will install npm modules, build the production bundle, and deploy to firebase
+
+Partial updates can be made with the --add flag: firebase --add /functions deploy
