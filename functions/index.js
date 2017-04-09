@@ -1,5 +1,25 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
+const rp = require('request-promise')
+
+/**
+ * Post a message to Slack about the new GitHub commit.
+ */
+const postToSlack = (author, restaurant) => {
+  const appUrl = 'https://lounasjuna-3c525.firebaseapp.com/'
+  console.log(functions.config().slack.webhook.url)
+  return rp({
+    method: 'POST',
+    // TODO: Configure the `slack.webhook_url` Google Cloud environment variables.
+    // firebase functions:config:set slack.webhook.url="https://hooks.slack.com/services/..."
+    // external requests require a Firebase account with a credit card :/
+    uri: functions.config().slack.webhook.url,
+    body: {
+      text: `${author.displayName} on valinnut: ${restaurant.name}\n<${appUrl}|Millä lounasjunalla sinä menet?>`
+    },
+    json: true
+  });
+}
 
 admin.initializeApp(functions.config().firebase)
 
@@ -33,7 +53,11 @@ exports.newVoteAlert = functions.database.ref('/restaurants/{restaurantId}/votes
           }
         }
       if (!wasDeletion && tokens.length > 0) {
+        postToSlack(author, restaurant).then(() => {
+          res.end()
+        }).catch(console.error)
         admin.messaging().sendToDevice(tokens, payload).catch(console.error)
       }
     })
   })
+
