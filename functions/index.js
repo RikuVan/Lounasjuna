@@ -41,7 +41,7 @@ exports.newVoteAlert = functions.database.ref('/restaurants/{restaurantId}/votes
       .once('value')
       .then(snapshot => snapshot.val())
 
-    Promise.all([getTokens, getAuthor, getRestaurant])
+    return Promise.all([getTokens, getAuthor, getRestaurant])
       .then(([tokens, author, restaurant]) => {
         //we will only send a message if it was a new, not deletion of the old
         const wasDeletion = !restaurant.votes || !restaurant.votes[userId]
@@ -56,8 +56,9 @@ exports.newVoteAlert = functions.database.ref('/restaurants/{restaurantId}/votes
         postToSlack(author, restaurant).then(res => {
           res.end()
         }).catch(console.error)
-        admin.messaging().sendToDevice(tokens, payload).catch(console.error)
+        return admin.messaging().sendToDevice(tokens, payload).catch(console.error)
       }
+      return
     })
   })
 
