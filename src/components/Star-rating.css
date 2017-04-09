@@ -7,9 +7,9 @@
 }
 
 .Star-rating--star > i.fa-star {
-  color: #ccc;
+  color: #f4e4e1;
 }
 
 .Star-rating--star > i.fa-star.active {
-  color: #ff912c;
+  color: #cf8e80;
 }

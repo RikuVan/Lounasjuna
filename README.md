@@ -137,4 +137,4 @@ Also, make sure you answer as follows:
 2. Add/edit the `database.rules.json` with the same config you added in the firebase console
 3. `npm run deploy` will install npm modules, build the production bundle, and deploy to firebase
 
-Partial updates can be made with the --add flag: firebase --add /functions deploy
+- Partial updates can be made with the --add flag: `firebase --add /functions deploy`

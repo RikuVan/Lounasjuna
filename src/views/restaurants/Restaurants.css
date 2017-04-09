@@ -45,33 +45,16 @@
   text-align: center;
 }
 
-/* css insanity...http://codepen.io/haibnu/pen/FxGsI */
 .Restaurant--votes {
-  position: relative;
-  background-color: #ededed;
-  padding: 5px;
-  border: 1px solid #aaaaaa;
-  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  background-color: #ece2d0;
+  border: 1px solid #bbaa99;
+  border-radius: 3px;
   margin-bottom: 5px;
-}
-
-Restaurant--votes:before, .Restaurant--votes:after
-{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
-  -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
-  box-shadow:0 0 20px rgba(0,0,0,0.8);
-  top:50%;
-  bottom:0;
-  left:10px;
-  right:10px;
-  -moz-border-radius:100px / 10px;
-  border-radius:100px / 10px;
+  padding: 5px;
+  position: relative;
 }
 
 .Restaurant--votes-title {
+  color: rgb(170, 136, 153);
   font-weight: 700;
-  color: #1cb2d3;
 }

@@ -23,7 +23,7 @@ class Notifier extends Component {
             key={i}
             transitionName="Notification-transition"
             transitionEnterTimeout={600}
-            transitionExitTimeout={600}
+            transitionLeaveTimeout={600}
           >
             <Notification
               key={i}
