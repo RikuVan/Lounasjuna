@@ -53,7 +53,7 @@ exports.newVoteAlert = functions.database.ref('/restaurants/{restaurantId}/votes
           }
         }
       if (!wasDeletion && tokens.length > 0) {
-        postToSlack(author, restaurant).then(() => {
+        postToSlack(author, restaurant).then(res => {
           res.end()
         }).catch(console.error)
         admin.messaging().sendToDevice(tokens, payload).catch(console.error)
