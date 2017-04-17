@@ -1,0 +1,60 @@
+.Restaurants {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: 15px;
+  padding: 15px;
+}
+
+.Restaurant {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.Restaurant-name {
+  background-color: #bbaa99;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  font-size: 1rem;
+  color: #fff;
+  margin: 0;
+  padding: 10px 15px;
+}
+
+.Restaurant-www {
+  color: #fff;
+  font-size: 1rem;
+  float: right;
+  text-decoration: none;
+}
+
+.Restaurant-content {
+  border: 1px solid #bbaa99;
+  flex: 1 1 auto;
+  padding: 15px;
+}
+
+.Restaurant-footer {
+  border: 1px solid #bbaa99;
+  border-top: 0;
+  text-align: center;
+  padding: 15px;
+}
+
+.Restaurants-loader {
+  text-align: center;
+}
+
+.Restaurant--votes {
+  background-color: #ece2d0;
+  border: 1px solid #bbaa99;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  padding: 5px;
+  position: relative;
+}
+
+.Restaurant--votes-title {
+  color: rgb(170, 136, 153);
+  font-weight: 700;
+}

@@ -1,0 +1,16 @@
+.CurrentUser {
+  align-items: center;
+  display: flex;
+  margin-right: 15px;
+}
+
+.CurrentUser-displayName {
+  color: #fff;
+}
+
+.CurrentUser-photo {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}

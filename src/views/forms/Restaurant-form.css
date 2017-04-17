@@ -1,0 +1,49 @@
+.Restaurant-form {
+  padding: 60px;
+  text-align: left;
+}
+
+.Restaurant-form__row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.Restaurant-form__label {
+  flex: 0 1 160px;
+}
+
+.Restaurant-form__label--required::after {
+  content: ' *';
+  color: hsl(0, 76%, 47%);
+}
+
+.Restaurant-form__field {
+  flex: 1 0 220px;
+}
+
+.Restaurant-form__input {
+  outline: none;
+  border: 1px solid #ddd;
+  font-size: inherit;
+  padding: 10px 15px;
+  width: 100%
+}
+
+.Restaurant-form__field--short {
+  max-width: 100px;
+}
+
+.Restaurant-form__submit {
+  margin-left: auto;
+}
+
+.Restaurant-form__error {
+  padding-top: 5px;
+  color: red;
+}
+
+.Restaurant-form__input_error {
+  border: 1px solid red;
+}

@@ -1,0 +1,14 @@
+exports[`test Restaurant card snapshot test 1`] = `
+<article
+  className="Restaurant">
+  <h2
+    className="Restaurant-name" />
+  <div
+    className="Restaurant-content">
+    <StarRating
+      rating={0} />
+    <p />
+    <p />
+  </div>
+</article>
+`;
