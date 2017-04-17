@@ -18,9 +18,9 @@ test('Restaurant contains title and link', () => {
     link: 'http://chineseplace.com',
     type: 'Chinese',
     rating: 1,
-    userId: "1",
-    uid: "2",
-    votes: ["1"],
+    userId: '1',
+    uid: '2',
+    votes: ['1'],
     users: {
       1: {displayName: 'some dude'},
     },
@@ -35,10 +35,10 @@ test('Restaurant contains title and link', () => {
     </h2>
   )
   const component = mount(<RestaurantCard {...data} />)
-  component.find('button').simulate('click');
+  component.find('button').simulate('click')
   expect(component.contains(title)).toBe(true)
   expect(handleSelect).toHaveBeenCalledTimes(1)
-  expect(handleSelect).toHaveBeenCalledWith("1", "2");
+  expect(handleSelect).toHaveBeenCalledWith('1', '2')
 })
 
 test('Restaurant card snapshot test', () => {
@@ -47,4 +47,3 @@ test('Restaurant card snapshot test', () => {
   const tree = shallowToJson(component)
   expect(tree).toMatchSnapshot()
 })
-

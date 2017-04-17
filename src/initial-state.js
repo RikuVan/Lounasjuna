@@ -1,13 +1,9 @@
 const initialState = {
-  /*auth: {
-    status: 'ANONYMOUS',
-    email: null,
-    displayName: null,
-    photoURL: null,
-    uid: null,
-  },*/
+  // SPRINT 2
+  // TODO: add the initial state for auth and restaurants
   requests: {},
-  //notifications: {},
+  // SPRINT 5
+  // TODO: add notifications initial state
 }
 
 export default initialState

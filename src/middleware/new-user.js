@@ -11,8 +11,6 @@ import {SIGN_IN} from '../actions/auth'
  * @param getState
  */
 
-const newUser = ({dispatch, getState}) =>
-  next =>
-    action => {}
+const newUser = ({dispatch, getState}) => next => action => {}
 
 export default newUser

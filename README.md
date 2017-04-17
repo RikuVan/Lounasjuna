@@ -123,14 +123,15 @@ And notice we use `const` these days instead of `var`, unless you are going to r
 Additionally you may want to checkout [classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) and [modules](http://2ality.com/2014/09/es6-modules-final.html)
   
 ### Sprint 1: DISPLAYING A RESTAURANT LIST (React)
-  A user wants to see a list of all the available restaurants they can eat at. Each listing
-  should have a name, an address, a link the restaurant's webpage, and a rating from 0-5.
+  A user wants to see a list of all the available restaurants. Each listing
+  should have a name, an address, a link to the restaurant's webpage, and a rating from 0-5.
 #### TODOS:
+  * NOTE AT THIS POINT YOU MUST HAVE SEED DATA LOADED IN FIREBASE
   1. Make sure you are getting your restaurant data from your database in the correct
   lifecyle hook.
   2. Create a state object in your component to hold your restaurants.
-  3. Make use of the Restaurant-card and Restaurant votes (inside the card) to display
-  your restaurant data. Use map to create a card for each.
+  3. Use `<RestaurantCard/>` and `<RestaurantVotes/>` (inside the card) to display
+  your restaurant data. Use `[].map` to create a card for each.
 
 #### Resources:
   - [Redux Actions](https://facebook.github.io/react/docs/react-component.html)
@@ -138,28 +139,25 @@ Additionally you may want to checkout [classes](https://developer.mozilla.org/en
   - [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)
   
 ### Sprint 2: USING REDUX AND AUTHORIZING USERS (Redux connect, thunks, & action creators)
-  The developer wants his components to be free of local state. All the apps
-  data should be stored in a tree. The user wants to be able to log in and out
+  The developer wants his components to be free of local state. All state, at this point,
+  restaurants and auth data, should be stored in an immutable tree. The user wants to be able to log in and out
   of the app using his Google account.
 #### TODOS:
   1. Add the two action type constants and two actions to actions/requests
   so that data will flow to your reducers. Look at the reducer for clues.
-  2. Use connect and mapStateToProps to get your restaurants from redux, getting
-  rid of the local state object in the component, and calling fetchRestaurants from
-  the correct lifecycle method
-  3. Add auth by adding three action types and action creators to the
-  actions/auth file. Look at the reducer for clues.
-  * AT THIS POINT MAKE SURE GOOGLE AUTH IS ENABLED IN YOUR FIREBASE CONSOLE
-  4. There are three functions that are almost ready to log the user in with
-  Google, log them out, and listen for changes. However, these functions do not
-  dispatch the actions you created. Add the dispatches to these functions where they
-  are needed.
-  5. Make sure your App component is getting the auth data so you can detect
+  2. Use `connect` and `mapStateToProps` to get your restaurants from redux, getting
+  rid of the local state object in the component, and calling `fetchRestaurants` from
+  the correct lifecycle method.
+  3. The auth actions are ready: to show a login is in progress, to login with Google and
+  to logout. But there is no reducer. Add one, passing in initial state.
+  * AT THIS POINT MAKE SURE GOOGLE AUTH IS ENABLED IN YOUR FIREBASE CONSOLE.
+  4. Make use to the signin and out functions inside the `<App/>` component by adding
+  them to props and hooking them up to the `<SignInOrOut/>` component
+  6. Make sure your `<App/>` component is getting the auth data so you can detect
   whether a user is signed in and hide some content (e.g. voting buttons) if so. You
   will also want to display different texts in the button depending on whether
   they are logged in or out.
-  6. Now make use to the sigin and out functions inside the App.js component so
-  a user can sign in and out.
+  7. Display the users photo and name using the `<CurrentUser/>` component in the nav.
   
 #### Resources:
   - [Redux Actions](http://redux.js.org/docs/basics/Actions.html)
@@ -167,32 +165,53 @@ Additionally you may want to checkout [classes](https://developer.mozilla.org/en
   - [Redux with React and connect](http://redux.js.org/docs/basics/UsageWithReact.html)
     
   - [Redux thunk](http://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559)
-
-### Sprint 3: VOTING (Redux reducers & middleware)
+  
+  - [Redux Reducers](http://redux.js.org/docs/basics/Reducers.html)
+  
+### Sprint 3: VOTING (Redux middleware and react higher order components)
   A user wants to be able to login and see which users have voted
-  for which restaurant. They also want to be able to vote for a restaurant themselves
-  and, if needed, his old vote to be revoked.
+  for which restaurant. They also want to be able to vote for a restaurant themselves. When
+  changing votes, They want the old vote to simultaneously be revoked.
+#### TODOS:
+  1. Make sure that all users are fetched and saved in the store--you can decide where to do
+  this--and pass it into the `<RestaurantCards/>` where we should see those currently in the 'train'
+  for a restaurant in the `<RestaurantVotes>` component (notice the user id should be found in the votes
+  object of a restaurant).
+  2. When a new user logins in, they are not our users object in the database.
+  Do this with middleware. Check if a login action is dispatched in the middleware and if
+  the user logging in is not in your list of users in the store, call the `addUser` function from the
+  middleware.
+  3. Now implement voting inside the `<RestaurantList/> component. You will need to use some system
+  to make sure that when a user votes, his old vote is revoked (e.g. callback). When a user votes
+  for a restaurant, that button should be disabled.
+  4. Extra credit: if you are ahead at this point and want to improve your code,
+  try out a higher order component for either the loading spinner or auth
   
-  
+#### Resources:
+
+  - [Middleware](http://redux.js.org/docs/advanced/Middleware.html)
+
+  - [Higher Order Components](https://facebook.github.io/react/docs/higher-order-components.html)
 
 ### Sprint 4: ADDING RESTAURANT (Redux Form and React Router v.4)
   Authenticated users want to be able to add new restaurants. These new
   and be automatically redirected to the front page where the addition can be seen.
   They also want validation to make sure the correct data is entered in the right format.
 #### TODOS:
-  1. Use the Route component inside a Switch component to split our app
-  into two routes in App.js, one for the restaurant list and another for a new 
-  restaurant form
-  2. The route component offers a render method in which we can check for
-  authenication and only render the new restaurant form if logged in
-  3. We can also use Route in the nav to conditionally show buttons, ie
+  1. Use `<Route>` components inside a `<Switch>` component from React Router to split our app
+  into two routes in App.js: one for the restaurant list and another for a new 
+  restaurant form.
+  2. The `<Route>` component offers a `render` method in which we can check, for example,
+  if a user is authenticated and only render the new restaurant form if logged in.
+  3. We can also use `<Route>` in the nav to conditionally show buttons, ie
   add a home button with the new restaurant path and a new restaurant button
-  for the form
-  4. Complete the redux form by adding the Field component and passing it the
+  for the form. React Router offers a `<Link>` component for links between states.
+  This has already been used in a `<ButtonLink>` component you can use in the nav.
+  4. Complete the Redux Form by adding the `<Field/>` component and passing it the
   component add correct props. Make sure the input component gets all the props
-  it needs from Field
+  it needs from `<Field/>`.
   5. If you have time, add some validation the form by adding a validation function
-  in the reduxForm component
+  in the `reduxForm` component.
   
 ### Resources:
   - [React Router v.4](https://reacttraining.com/react-router/web/guides/quick-start)
@@ -210,9 +229,9 @@ Additionally you may want to checkout [classes](https://developer.mozilla.org/en
 #### TODOS:
   1. Create a action(s) to show and dismiss flash notifications, for example
   when a restaurant is saved, when a user logs out etc.
-  2. Create the reducer with a least two cases
+  2. Create the reducer with a least two cases.
   3. Hook up the ready component and state into the main view. Make sure it gets
-  the props it needs somehow
+  the props it needs somehow.
   
 
 ### Deployment

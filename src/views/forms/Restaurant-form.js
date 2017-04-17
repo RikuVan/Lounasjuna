@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {reduxForm} from 'redux-form';
-import {addRestaurant} from '../../actions/restaurants';
-import Button from '../../components/Button';
-import './Restaurant-form.css';
-import classNames from 'classnames';
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {reduxForm} from 'redux-form'
+import {addRestaurant} from '../../actions/restaurants'
+import Button from '../../components/Button'
+import './Restaurant-form.css'
+import classNames from 'classnames'
 
 const renderField = (
   //SPRINT 4
@@ -22,10 +22,10 @@ const renderField = (
 ) => {
   const labelStyles = classNames('Restaurant-form__label', {
     'Restaurant-form__label--required': required,
-  });
+  })
   const fieldStyles = classNames('Restaurant-form__field', {
     'Restaurant-form__field--short': short,
-  });
+  })
   return (
     <div className="Restaurant-form__row">
       <label className={labelStyles} htmlFor={name}>
@@ -47,8 +47,8 @@ const renderField = (
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 renderField.propTypes = {
   placeholder: PropTypes.string,
@@ -59,7 +59,7 @@ renderField.propTypes = {
   type: PropTypes.type,
   meta: PropTypes.object,
   short: PropTypes.bool,
-};
+}
 
 //const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
 
@@ -89,7 +89,10 @@ class RestaurantForm extends Component {
      */
     //const {handleSubmit, invalid} = this.props;
     return (
-      <form className="Restaurant-form" onSubmit={/*handleSubmit(this.submit)*/}>
+      <form
+        className="Restaurant-form"
+        onSubmit={() => {} /*handleSubmit(this.submit)*/}
+      >
         {/*
           SPRINT 4
           TODO: use the Field component from redux-form to create five inputs for your restaurant data,
@@ -105,7 +108,7 @@ class RestaurantForm extends Component {
           </Button>
         </div>
       </form>
-    );
+    )
   }
 }
 
@@ -114,16 +117,16 @@ RestaurantForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   //invalid: PropTypes.bool.isRequired,
-};
+}
 
 //as a shortcut we can just give connect an object with a function instead
 //of mapDispatchToProps and it will automagically bind it for us
-const ConnectedRestaurantForm = connect(null, {addRestaurant})(RestaurantForm);
+const ConnectedRestaurantForm = connect(null, {addRestaurant})(RestaurantForm)
 
 const DecoratedRestaurantForm = reduxForm({
   form: 'restaurant', // a unique name for this form
   // SPRINT 4
   //TODO: add some validation
-})(ConnectedRestaurantForm);
+})(ConnectedRestaurantForm)
 
-export default DecoratedRestaurantForm;
+export default DecoratedRestaurantForm

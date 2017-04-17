@@ -23,4 +23,3 @@ const notificationMessages = {
  * and dispatching notifications as they arrive. This is perhaps a cleaner way
  * to handle it since we don't need to give actions in callbacks for each notification
  */
-

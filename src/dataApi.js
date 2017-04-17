@@ -2,7 +2,8 @@ import secrets from './secrets'
 import firebase from 'firebase'
 
 /**
- * you should need to touch this stuff, as long as you export your config from secrets.js
+ * FIREBASE CONFIG
+ * you shouldn't need to touch this stuff, as long as you export your config from secrets.js
  */
 
 firebase.initializeApp(secrets.firebaseConfig)
@@ -14,6 +15,7 @@ export const messaging = firebase.messaging()
 export const auth = firebase.auth()
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
 
+//creates the URLs needed to query the firebase database
 export const DB = {
   restaurants: () => database.ref('restaurants'),
   users: ({userId = ''}) => database.ref(`users${userId ? `/${userId}` : ''}`),
@@ -23,6 +25,7 @@ export const DB = {
     ),
 }
 
+//each of these represents a main branch which can be queried from the firebase tree-type database
 export const resources = {
   RESTAURANTS: 'restaurants',
   USERS: 'users',

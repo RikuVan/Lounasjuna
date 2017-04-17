@@ -6,7 +6,7 @@ import Button from '../../components/Button'
 
 //Helper to add users to RestaurantVotes
 //const mapToUsers = (votes = [], users = {}) =>
-  //votes.map(id => users[id].displayName)
+//votes.map(id => users[id].displayName)
 
 /**
  * SPRINT 3
@@ -22,7 +22,7 @@ export const RestaurantCard = (
     address,
     link,
     rating,
-    type
+    type,
   },
 ) => {
   return (
@@ -41,10 +41,7 @@ export const RestaurantCard = (
         {/*<RestaurantVotes votes={mapToUsers(votes, users)} />} */}
       </div>
       <div className="Restaurant-footer">
-        <Button
-          disabled={false}
-          onClick={() => {}}
-        >
+        <Button disabled={false} onClick={() => {}}>
           Lähden junaan mukaan
         </Button>
       </div>
@@ -57,7 +54,7 @@ RestaurantCard.propTypes = {
   address: PropTypes.string.isRequired,
   link: PropTypes.string,
   rating: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
 }
 
 export default RestaurantCard

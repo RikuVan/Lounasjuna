@@ -1,15 +1,14 @@
-import React, {Component, PropTypes} from 'react';
-import Loading from '../../components/Loading';
+import React, {Component, PropTypes} from 'react'
+import Loading from '../../components/Loading'
 import {processRestaurantData} from '../../actions/helpers'
 import {DB} from '../../dataApi'
-import './Restaurants.css';
+import './Restaurants.css'
 
 class Restaurants extends Component {
-
   componentMayDoSomething() {
     /**
      * SPRINT 1:
-     * TODO: add the restaurants returned to state
+     * TODO: save the restaurants returned from the database to component state
      * make sure this happens in the correct life cycle method
      * and display then in RestaurantCards
      */
@@ -21,7 +20,7 @@ class Restaurants extends Component {
 
   handleSelect = (userId, restaurantId) => {
     /***
-     * SPRINT 3
+     * SPRINT 4
      * TODO: add the logic here for changing a vote
      * You will need to check whether the use has a current vote and
      * revoke it and then vote again, perhaps as a callback
@@ -35,7 +34,7 @@ class Restaurants extends Component {
           <Loading />
         </div>
       </section>
-    );
+    )
   }
 }
 
@@ -52,4 +51,4 @@ class Restaurants extends Component {
  * in mapDispatchToProps whether the current user has a vote
  */
 
-export default Restaurants;
+export default Restaurants
