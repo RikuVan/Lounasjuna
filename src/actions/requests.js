@@ -82,7 +82,8 @@ export const apiFn = type =>
       }
 
       if (type === 'get') {
-        return request.once('value').then(snapshot => {
+        return request.once('value').then(
+          snapshot => {
             const data = responseHandler
               ? responseHandler(snapshot.val())
               : {data: snapshot.val()}

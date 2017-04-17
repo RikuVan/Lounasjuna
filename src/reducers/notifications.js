@@ -15,7 +15,7 @@ const removeByKey = (myObj, deleteKey) => {
   }, {})
 }
 
-export default function notifications (
+export default function notifications(
   state = initialState.notifications,
   action,
 ) {

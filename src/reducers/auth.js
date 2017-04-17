@@ -1,7 +1,7 @@
 import initialState from '../initial-state.js'
 import {ATTEMPTING_LOGIN, SIGN_OUT, SIGN_IN} from '../actions/auth'
 
-export default function authReducer (state = initialState.auth, action) {
+export default function authReducer(state = initialState.auth, action) {
   switch (action.type) {
     case ATTEMPTING_LOGIN:
       return {

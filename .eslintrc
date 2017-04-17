@@ -15,7 +15,7 @@
   ],
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
-    "semi": 0,
+    "semi": ["error", "never"],
     "no-console": 0
   }
 }

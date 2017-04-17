@@ -12,7 +12,7 @@ const Notification = ({id, message}) => (
 )
 
 class Notifier extends Component {
-  render () {
+  render() {
     const notifications = this.props.notifications
     const current = Object.keys(notifications)
     if (current.length === 0) return null

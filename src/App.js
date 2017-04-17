@@ -1,21 +1,21 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {bindActionCreators} from 'redux';
-import {attemptSignInWithGoogle, cancelGoogleAuth} from './actions/auth';
-import {fetchUsers} from './actions/users';
-import './App.css';
-import RestaurantList from './views/restaurants/Restaurant-list';
-import RestaurantForm from './views/forms/Restaurant-form';
-import SignInOrOut from './components/Sign-in-out';
-import CurrentUser from './components/Current-user';
-import ButtonLink from './components/ButtonLink';
-import Notification from './components/Notification';
-import {Link} from 'react-router-dom';
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {bindActionCreators} from 'redux'
+import {attemptSignInWithGoogle, cancelGoogleAuth} from './actions/auth'
+import {fetchUsers} from './actions/users'
+import './App.css'
+import RestaurantList from './views/restaurants/Restaurant-list'
+import RestaurantForm from './views/forms/Restaurant-form'
+import SignInOrOut from './components/Sign-in-out'
+import CurrentUser from './components/Current-user'
+import ButtonLink from './components/ButtonLink'
+import Notification from './components/Notification'
+import {Link} from 'react-router-dom'
 
 export class App extends Component {
   componentDidMount() {
-    this.props.fetchUsers();
+    this.props.fetchUsers()
   }
 
   handleSignIn = () => this.props.attemptSignInWithGoogle();
@@ -23,9 +23,9 @@ export class App extends Component {
   handleSignOut = () => this.props.cancelGoogleAuth();
 
   render() {
-    const {auth} = this.props;
-    const showSignIn = auth.status === 'ANONYMOUS';
-    const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE';
+    const {auth} = this.props
+    const showSignIn = auth.status === 'ANONYMOUS'
+    const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE'
     return (
       <Router>
         <div className="App">
@@ -97,9 +97,9 @@ export class App extends Component {
                    */
 
                   if (auth.status === 'SIGNED_IN') {
-                    return <RestaurantForm history={history} />;
+                    return <RestaurantForm history={history} />
                   } else {
-                    return <RestaurantList auth={auth} />;
+                    return <RestaurantList auth={auth} />
                   }
                 }}
               />
@@ -109,7 +109,7 @@ export class App extends Component {
           {/******* END CONTENT *******/}
         </div>
       </Router>
-    );
+    )
   }
 }
 
@@ -118,9 +118,9 @@ App.propTypes = {
   attemptSignInWithGoogle: PropTypes.func.isRequired,
   cancelGoogleAuth: PropTypes.func.isRequired,
   fetchUsers: PropTypes.func.isRequired,
-};
+}
 
-const mapStateToProps = state => ({auth: state.auth});
+const mapStateToProps = state => ({auth: state.auth})
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -130,6 +130,6 @@ const mapDispatchToProps = dispatch =>
       fetchUsers,
     },
     dispatch,
-  );
+  )
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)
