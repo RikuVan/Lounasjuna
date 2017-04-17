@@ -1,13 +1,13 @@
 const initialState = {
-  auth: {
+  /*auth: {
     status: 'ANONYMOUS',
     email: null,
     displayName: null,
     photoURL: null,
     uid: null,
-  },
+  },*/
   requests: {},
-  notifications: {},
+  //notifications: {},
 }
 
 export default initialState

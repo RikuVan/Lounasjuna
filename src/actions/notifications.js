@@ -1,14 +1,19 @@
-export const SEND_NOTIFICATION = 'SEND_NOTIFICATION'
-export const DISMISS_NOTIFICATION = 'DISMISS_NOTIFICATION'
+/***
+ * SPRINT 5
+ * TODO: create action type constants and at least one action creator
+ * if you like you can both dipatch the showing of the notification and dispatch
+ * its dismissal in the same action creator using a setTimout
+ * below are some example messages, feel free to change them
+ */
 
+/*
 const notificationMessages = {
   CREATED: 'Uusi lounaspaikka tallennettu!',
   LOGGED_IN: 'Tervetuloa takaisin lounasjunaan!',
   LOGGED_OUT: 'Hei hei, nähdään huomenna junalla',
   OOPS: 'Voi paska, jotain huono on tapahtunut',
 }
-
-const NOTIFICATION_TIME = 2000
+*/
 
 /**
  * NOTIFICATION ACTION CREATOR
@@ -19,14 +24,3 @@ const NOTIFICATION_TIME = 2000
  * to handle it since we don't need to give actions in callbacks for each notification
  */
 
-export const notify = key =>
-  dispatch => {
-    dispatch({
-      type: SEND_NOTIFICATION,
-      payload: {key, message: notificationMessages[key]},
-    })
-    setTimeout(
-      () => dispatch({type: DISMISS_NOTIFICATION, payload: {key}}),
-      NOTIFICATION_TIME,
-    )
-  }

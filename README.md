@@ -122,6 +122,99 @@ And notice we use `const` these days instead of `var`, unless you are going to r
 
 Additionally you may want to checkout [classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) and [modules](http://2ality.com/2014/09/es6-modules-final.html)
   
+### Sprint 1: DISPLAYING A RESTAURANT LIST (React)
+  A user wants to see a list of all the available restaurants they can eat at. Each listing
+  should have a name, an address, a link the restaurant's webpage, and a rating from 0-5.
+#### TODOS:
+  1. Make sure you are getting your restaurant data from your database in the correct
+  lifecyle hook.
+  2. Create a state object in your component to hold your restaurants.
+  3. Make use of the Restaurant-card and Restaurant votes (inside the card) to display
+  your restaurant data. Use map to create a card for each.
+
+#### Resources:
+  - [Redux Actions](https://facebook.github.io/react/docs/react-component.html)
+  
+  - [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)
+  
+### Sprint 2: USING REDUX AND AUTHORIZING USERS (Redux connect, thunks, & action creators)
+  The developer wants his components to be free of local state. All the apps
+  data should be stored in a tree. The user wants to be able to log in and out
+  of the app using his Google account.
+#### TODOS:
+  1. Add the two action type constants and two actions to actions/requests
+  so that data will flow to your reducers. Look at the reducer for clues.
+  2. Use connect and mapStateToProps to get your restaurants from redux, getting
+  rid of the local state object in the component, and calling fetchRestaurants from
+  the correct lifecycle method
+  3. Add auth by adding three action types and action creators to the
+  actions/auth file. Look at the reducer for clues.
+  * AT THIS POINT MAKE SURE GOOGLE AUTH IS ENABLED IN YOUR FIREBASE CONSOLE
+  4. There are three functions that are almost ready to log the user in with
+  Google, log them out, and listen for changes. However, these functions do not
+  dispatch the actions you created. Add the dispatches to these functions where they
+  are needed.
+  5. Make sure your App component is getting the auth data so you can detect
+  whether a user is signed in and hide some content (e.g. voting buttons) if so. You
+  will also want to display different texts in the button depending on whether
+  they are logged in or out.
+  6. Now make use to the sigin and out functions inside the App.js component so
+  a user can sign in and out.
+  
+#### Resources:
+  - [Redux Actions](http://redux.js.org/docs/basics/Actions.html)
+    
+  - [Redux with React and connect](http://redux.js.org/docs/basics/UsageWithReact.html)
+    
+  - [Redux thunk](http://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559)
+
+### Sprint 3: VOTING (Redux reducers & middleware)
+  A user wants to be able to login and see which users have voted
+  for which restaurant. They also want to be able to vote for a restaurant themselves
+  and, if needed, his old vote to be revoked.
+  
+  
+
+### Sprint 4: ADDING RESTAURANT (Redux Form and React Router v.4)
+  Authenticated users want to be able to add new restaurants. These new
+  and be automatically redirected to the front page where the addition can be seen.
+  They also want validation to make sure the correct data is entered in the right format.
+#### TODOS:
+  1. Use the Route component inside a Switch component to split our app
+  into two routes in App.js, one for the restaurant list and another for a new 
+  restaurant form
+  2. The route component offers a render method in which we can check for
+  authenication and only render the new restaurant form if logged in
+  3. We can also use Route in the nav to conditionally show buttons, ie
+  add a home button with the new restaurant path and a new restaurant button
+  for the form
+  4. Complete the redux form by adding the Field component and passing it the
+  component add correct props. Make sure the input component gets all the props
+  it needs from Field
+  5. If you have time, add some validation the form by adding a validation function
+  in the reduxForm component
+  
+### Resources:
+  - [React Router v.4](https://reacttraining.com/react-router/web/guides/quick-start)
+  
+  - [Redux Form reduxForm](http://redux-form.com/6.6.3/docs/api/Props.md/)
+  
+  - [Redux Form Field Component](http://redux-form.com/6.6.3/docs/api/Field.md/)
+  
+  - [Redux Form sync validation](http://redux-form.com/6.6.3/examples/syncValidation/)
+
+### Sprint 5: NOTIFYING USERS OF SUCCESS/FAILURE (Bonus - more Redux, yeah!)
+  Users want verification that an action has succeeded or failed via a flash message
+  displayed at the top of the viewport. They want to know, for example, that a restaurant
+  has been successfully added or that logout has succeeded.
+#### TODOS:
+  1. Create a action(s) to show and dismiss flash notifications, for example
+  when a restaurant is saved, when a user logs out etc.
+  2. Create the reducer with a least two cases
+  3. Hook up the ready component and state into the main view. Make sure it gets
+  the props it needs somehow
+  
+
 ### Deployment
 
 Firebase will also host your app for free. It is super simple to set up.

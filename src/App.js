@@ -1,135 +1,71 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {bindActionCreators} from 'redux';
-import {attemptSignInWithGoogle, cancelGoogleAuth} from './actions/auth';
-import {fetchUsers} from './actions/users';
-import './App.css';
-import RestaurantList from './views/restaurants/Restaurant-list';
-import RestaurantForm from './views/forms/Restaurant-form';
-import SignInOrOut from './components/Sign-in-out';
-import CurrentUser from './components/Current-user';
-import ButtonLink from './components/ButtonLink';
-import Notification from './components/Notification';
-import {Link} from 'react-router-dom';
+import React, {Component, PropTypes} from 'react'
+import './App.css'
+import RestaurantList from './views/restaurants/Restaurant-list'
+import SignInOrOut from './components/Sign-in-out'
+import Button from './components/Button'
+import CurrentUser from './components/Current-user'
 
 export class App extends Component {
-  componentDidMount() {
-    this.props.fetchUsers();
-  }
 
-  handleSignIn = () => this.props.attemptSignInWithGoogle();
+  /***
+   * SPRINT
+   * TODO: Use the correct lifecycle method to fetch users
+   */
 
-  handleSignOut = () => this.props.cancelGoogleAuth();
+  //handleSignIn = () => this.props.attemptSignInWithGoogle();
+
+  //handleSignOut = () => this.props.cancelGoogleAuth();
+
+  /***
+   * TODO: Use the CurrentUser component to add use info to your nav
+   */
 
   render() {
-    const {auth} = this.props;
-    const showSignIn = auth.status === 'ANONYMOUS';
-    const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE';
+    //const {auth} = this.props;
+    //const showSignIn = auth.status === 'ANONYMOUS';
+    //const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE';
     return (
-      <Router>
         <div className="App">
           <div className="App-header">
-            <Link to={'/'}>
               <h1 className="Logo">
                 <div className="Logo-train">🚂</div>
                 <div className="Logo-text">Lounasjuna</div>
               </h1>
-            </Link>
           </div>
-          {/******** START NAV *******/}
           <div className="App-subheader">
             <div className="App-subheader-links">
-              <Route
-                path="/"
-                exact
-                render={() =>
-                  /**
-                 * react router provides a render method instead of just passing
-                 * as component, inside of which you can add logic and/or
-                 * pass props
-                 */
-                  auth.status === 'SIGNED_IN'
-                    ? <ButtonLink
-                        type="white"
-                        className="Nav--button"
-                        path="/lounaspaikka/uusi"
-                      >
-                        <i className="fa fa-plus-circle" /> Lisää lounaspaikka
-                      </ButtonLink>
-                    : null}
-              />
-              <Route
-                path="/lounaspaikka/"
-                render={() => (
-                  <ButtonLink type="white" className="Nav--button" path="/">
-                    <i className="fa fa-home" /> Pääsivu
-                  </ButtonLink>
-                )}
-              />
+              {/* TODO: change to a working ButtonLink */}
+              <Button
+                type="white"
+                className="Nav--button"
+              >
+                <i className="fa fa-plus-circle" />
+                Lisää lounaspaikka
+              </Button>
             </div>
-            <CurrentUser {...auth} />
+            {/* TODO: CurrentUser needs data */}
+            <CurrentUser />
+            {/* TODO: Make sign in or out work */}
             <SignInOrOut
-              type={showSignIn ? 'SignIn' : 'SignOut'}
-              onClickHandler={
-                showSignIn ? this.handleSignIn : this.handleSignOut
-              }
-              loading={awaitingLogin}
+              type="SignIn"
+              onClickHandler={() => {}}
             />
           </div>
-          {/******** END NAV *******/}
-          {/****** START CONTENT ******/}
           <div className="App-content">
-            <Notification />
-            <Switch>
-              <Route
-                path="/"
-                exact
-                render={() => <RestaurantList auth={auth} />}
-              />
-              <Route
-                path="/lounaspaikka/uusi"
-                render={({history}) => {
-                  /***
-                   *  here react router gives us the history object
-                   *  which allows us to perform programmatic routing
-                   *  in the form component using 'push'
-                   */
-
-                  if (auth.status === 'SIGNED_IN') {
-                    return <RestaurantForm history={history} />;
-                  } else {
-                    return <RestaurantList auth={auth} />;
-                  }
-                }}
-              />
-              <Route path="/" render={() => <h3>404</h3>} />
-            </Switch>
+             <RestaurantList />
           </div>
-          {/******* END CONTENT *******/}
         </div>
-      </Router>
     );
   }
 }
 
-App.propTypes = {
-  auth: PropTypes.object.isRequired,
-  attemptSignInWithGoogle: PropTypes.func.isRequired,
-  cancelGoogleAuth: PropTypes.func.isRequired,
-  fetchUsers: PropTypes.func.isRequired,
-};
+/**
+ * SPRINT 2
+ * TODO: connect to the redux store and hook up login/out with attemptSignInWithGoogle & cancelGoogleAuth.
+ * You will need a mapStateToProps function, as well as some bound action creators.
+ * The container page with also pass auth information to its children views to use.
+ *
+ * TODO: fetchUsers, get them in mapStateToProps and pass them to the restaurant view
+ */
 
-const mapStateToProps = state => ({auth: state.auth});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      attemptSignInWithGoogle,
-      cancelGoogleAuth,
-      fetchUsers,
-    },
-    dispatch,
-  );
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App

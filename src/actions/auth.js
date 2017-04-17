@@ -1,25 +1,23 @@
 import {auth, googleAuthProvider} from '../dataApi'
-import {notify} from './notifications'
+//Later you may want to dispatch when logging in/out
+//import {notify} from './notifications'
 import registerMessaging from '../request-messaging-permission'
 
 /**
+ * TODO: add three auth action type constants
  * AUTH ACTIONS
  * @type {string}
  */
 
-export const ATTEMPTING_LOGIN = 'ATTEMPTING_LOGIN'
-export const SIGN_IN = 'SIGN_IN'
-export const SIGN_OUT = 'SIGN_OUT'
 
 /**
+ * TODO: add three auth action creators
  * AUTH ACTION CREATORS
  * @param user
  */
 
-//exported for testing purposes
-export const signIn = user => ({type: SIGN_IN, payload: user})
-export const signOut = () => ({type: SIGN_OUT})
-export const startLogin = () => ({type: ATTEMPTING_LOGIN})
+//export the action creators for testing purposes
+
 
 const getRelevantUserDataFromResponse = user => ({
   email: user.email,
@@ -32,9 +30,13 @@ const getRelevantUserDataFromResponse = user => ({
  * main action for signing in with a popup
  */
 
+/***
+ * SPRINT 2
+ * TODO: You will need to dispatch the login/logout actions in the correct places below
+ */
+
 export const attemptSignInWithGoogle = () =>
   dispatch => {
-    dispatch(startLogin())
     auth
       .signInWithPopup(googleAuthProvider)
       .then(({user}) => {
@@ -42,8 +44,7 @@ export const attemptSignInWithGoogle = () =>
         //if the user has never signed in before we need to add them to
         //to list of users in the DB here by checking state for the user
         //and dispatching an action, but in our case we will do this is middleware
-        dispatch(notify('LOGGED_IN'))
-        return dispatch(signIn(userData))
+
       })
       .catch(err => console.error(err))
   }
@@ -52,8 +53,7 @@ export const attemptSignInWithGoogle = () =>
 export const cancelGoogleAuth = () =>
   dispatch => {
     auth.signOut().then(() => {
-      dispatch(notify('LOGGED_OUT'))
-      dispatch(signOut())
+
     })
   }
 
@@ -65,9 +65,9 @@ export const listenToAuthChanges = () =>
       if (user) {
         registerMessaging(user)
         const userData = getRelevantUserDataFromResponse(user)
-        dispatch(signIn(userData))
+
       } else {
-        dispatch(signOut())
+
       }
     })
   }

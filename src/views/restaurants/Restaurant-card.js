@@ -2,10 +2,19 @@ import React, {PropTypes} from 'react'
 import './Restaurants.css'
 import StarRating from '../../components/Star-rating'
 import Button from '../../components/Button'
-import RestaurantVotes from './Restaurant-votes'
+//import RestaurantVotes from './Restaurant-votes'
 
-const mapToUsers = (votes = [], users = {}) =>
-  votes.map(id => users[id].displayName)
+//Helper to add users to RestaurantVotes
+//const mapToUsers = (votes = [], users = {}) =>
+  //votes.map(id => users[id].displayName)
+
+/**
+ * SPRINT 3
+ * TODO: This panel will take user data which will show as a list of users in RestaurantsVote component
+ * Change where the button is active depending on whether the user has voted for the restaurant
+ * A vote function should be passed as prop to this dumb component to be used as a callback
+ *
+ */
 
 export const RestaurantCard = (
   {
@@ -13,13 +22,7 @@ export const RestaurantCard = (
     address,
     link,
     rating,
-    type,
-    userId,
-    uid: restaurantId,
-    votes = [],
-    users,
-    handleSelect,
-    currentVote,
+    type
   },
 ) => {
   return (
@@ -35,35 +38,26 @@ export const RestaurantCard = (
         <StarRating rating={rating ? Math.round(rating) : 0} />
         <p>{type}</p>
         <p>{address}</p>
-        {userId &&
-          users &&
-          <RestaurantVotes votes={mapToUsers(votes, users)} />}
+        {/*<RestaurantVotes votes={mapToUsers(votes, users)} />} */}
       </div>
-      {userId &&
-        <div className="Restaurant-footer">
-          <Button
-            disabled={currentVote === restaurantId}
-            onClick={() => handleSelect(userId, restaurantId)}
-          >
-            Lähden junaan mukaan
-          </Button>
-        </div>}
+      <div className="Restaurant-footer">
+        <Button
+          disabled={false}
+          onClick={() => {}}
+        >
+          Lähden junaan mukaan
+        </Button>
+      </div>
     </article>
   )
 }
 
 RestaurantCard.propTypes = {
-  handleSelect: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   link: PropTypes.string,
   rating: PropTypes.string,
-  type: PropTypes.string,
-  votes: PropTypes.array,
-  userId: PropTypes.string,
-  uid: PropTypes.string,
-  users: PropTypes.object,
-  currentVote: PropTypes.string,
+  type: PropTypes.string
 }
 
 export default RestaurantCard

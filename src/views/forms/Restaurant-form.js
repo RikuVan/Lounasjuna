@@ -1,19 +1,20 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Field, reduxForm} from 'redux-form';
+import {reduxForm} from 'redux-form';
 import {addRestaurant} from '../../actions/restaurants';
 import Button from '../../components/Button';
 import './Restaurant-form.css';
 import classNames from 'classnames';
 
 const renderField = (
+  //SPRINT 4
+  //TODO: some key props here inject from the redux-form Field component are not missing
+  //make sure what you need from the input and meta object gets passed down!
   {
     placeholder,
     required,
-    input,
     label,
     type,
-    meta: {touched, error},
     short,
     name,
     ...rest
@@ -33,19 +34,17 @@ const renderField = (
       <div className={fieldStyles}>
         <input
           className={classNames('Restaurant-form__input', {
-            'Restaurant-form__input_error': touched && error,
+            'Restaurant-form__input_error': 'TODO: something from meta object here',
           })}
-          {...input}
           name={name}
           placeholder={placeholder}
           type={type}
           {...rest}
         />
-        {touched &&
-          error &&
-          <div className="Restaurant-form__error">
-            {error}
-          </div>}
+        {/* TODO: make sure this error show conditionally, based on where the user has made an error*/}
+        <div className="Restaurant-form__error">
+          todo
+        </div>
       </div>
     </div>
   );
@@ -62,74 +61,40 @@ renderField.propTypes = {
   short: PropTypes.bool,
 };
 
-const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
+//const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
 
-const validate = values => {
-  const errors = {};
-  if (!values.name) {
-    errors.name = 'Pakollinen';
-  }
-  if (!values.address) {
-    errors.address = 'Pakollinen';
-  }
-  if (values.link && !urlRegex.test(values.link)) {
-    errors.link = 'Virhellinen url';
-  }
-  return errors;
-};
+/**
+ * SPRINT 4
+ * TODO: add a validation function here to validate,
+ * required fields and the url using the regex above
+ */
+
+//const validate = () => {}
 
 class RestaurantForm extends Component {
   submit = values => {
-    this.props.addRestaurant(values);
-    this.redirectHome();
+    /**
+     *  SPRINT 4
+     *  TODO: give you form values to the addRestaurant action creator and then use the redirectHome
+     */
   };
 
   redirectHome = () => this.props.history.push('/');
 
   render() {
-    const {handleSubmit, invalid} = this.props;
+    /***
+     * SPRINT 4
+     * TODO: redux-form provides you with some form level props, use invalid to disable the button
+     * if the form is invalid
+     */
+    //const {handleSubmit, invalid} = this.props;
     return (
-      <form className="Restaurant-form" onSubmit={handleSubmit(this.submit)}>
-        <Field
-          component={renderField}
-          label="Paikan nimi"
-          name="name"
-          type="text"
-          placeholder="Pepe's pizza"
-          required
-        />
-        <Field
-          component={renderField}
-          label="Ruoanlaji"
-          name="type"
-          type="text"
-          placeholder="Pizza"
-        />
-        <Field
-          component={renderField}
-          label="Katuosoite"
-          name="address"
-          type="text"
-          placeholder="1 Hannulankatu, 33580 Tre"
-          required
-        />
-        <Field
-          component={renderField}
-          label="Web-sivu"
-          name="link"
-          type="text"
-          placeholder="https://pepes.com"
-        />
-        <Field
-          component={renderField}
-          label="Arvosana"
-          name="rating"
-          type="number"
-          min="1"
-          max="5"
-          short
-          placeholder="0"
-        />
+      <form className="Restaurant-form" onSubmit={/*handleSubmit(this.submit)*/}>
+        {/*
+          SPRINT 4
+          TODO: use the Field component from redux-form to create five inputs for your restaurant data,
+           the field names should match those in your database
+        */}
         <div className="Restaurant-form__row">
           <Button
             disabled={invalid}
@@ -148,7 +113,7 @@ RestaurantForm.propTypes = {
   addRestaurant: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  invalid: PropTypes.bool.isRequired,
+  //invalid: PropTypes.bool.isRequired,
 };
 
 //as a shortcut we can just give connect an object with a function instead
@@ -157,7 +122,8 @@ const ConnectedRestaurantForm = connect(null, {addRestaurant})(RestaurantForm);
 
 const DecoratedRestaurantForm = reduxForm({
   form: 'restaurant', // a unique name for this form
-  validate,
+  // SPRINT 4
+  //TODO: add some validation
 })(ConnectedRestaurantForm);
 
 export default DecoratedRestaurantForm;

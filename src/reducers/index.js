@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux'
 import requests from './requests'
-import auth from './auth'
-import notifications from './notifications'
-import {reducer as form} from 'redux-form'
+//import auth from './auth'
+//import notifications from './notifications'
+//import {reducer as form} from 'redux-form'
 
 /**
  * The name you give here in combine reducers will be the key you select the data by
@@ -11,10 +11,10 @@ import {reducer as form} from 'redux-form'
  */
 
 const reducer = combineReducers({
-  auth,
+  //auth,
   requests,
-  form,
-  notifications,
+  //form,
+  //notifications,
 })
 
 export default reducer

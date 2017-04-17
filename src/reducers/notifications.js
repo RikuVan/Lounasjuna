@@ -1,33 +1,20 @@
-import initialState from '../initial-state.js'
-import {
-  SEND_NOTIFICATION,
-  DISMISS_NOTIFICATION,
-} from '../actions/notifications'
+/***
+ * SPRINT 5
+ * TODO: notifications reducer here
+ */
 
-//notice this returns a new object, not a mutated payload
-const removeByKey = (myObj, deleteKey) => {
-  return Object.keys(myObj).filter(key => key !== deleteKey).reduce((
-    result,
-    current,
-  ) => {
-    result[current] = myObj[current]
-    return result
-  }, {})
-}
-
-export default function notifications (
-  state = initialState.notifications,
-  action,
-) {
-  switch (action.type) {
-    case SEND_NOTIFICATION:
-      return {
-        ...state,
-        [action.payload.key]: {...action.payload},
-      }
-    case DISMISS_NOTIFICATION:
-      return removeByKey(state, action.payload.key)
-    default:
-      return state
+// this helper is provided in case you want to you want to use it,
+// there are other ways to update an object without mutating it
+// a nice alternative: https://facebook.github.io/react/docs/update.html
+/*
+  const removeByKey = (myObj, deleteKey) => {
+    return Object.keys(myObj).filter(key => key !== deleteKey).reduce((
+      result,
+      current,
+    ) => {
+      result[current] = myObj[current]
+      return result
+    }, {})
   }
-}
+*/
+

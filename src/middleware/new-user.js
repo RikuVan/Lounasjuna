@@ -1,7 +1,10 @@
 import {SIGN_IN} from '../actions/auth'
-import {addUser} from '../actions/users'
+//import {addUser} from '../actions/users'
 
 /**
+ * SPRINT 3
+ * TODO: check if the a signin action was dispatched and, if so,
+ * dispatch the addUser action to save the user to the DB if not already in the store
  * Save user to DB if new
  * Every action with run through the middleware
  * @param dispatch
@@ -10,15 +13,6 @@ import {addUser} from '../actions/users'
 
 const newUser = ({dispatch, getState}) =>
   next =>
-    action => {
-      if (action.type === SIGN_IN) {
-        let currentUsers = getState().requests.users.data || {}
-        const {uid, ...rest} = action.payload
-        if (!currentUsers[uid]) {
-          dispatch(addUser(uid, rest))
-        }
-      }
-      return next(action)
-    }
+    action => {}
 
 export default newUser

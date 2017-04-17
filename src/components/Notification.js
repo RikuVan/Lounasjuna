@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react'
-import {connect} from 'react-redux'
 import TransitionGroup from 'react-addons-css-transition-group'
 import './Notification.css'
 
@@ -13,12 +12,12 @@ const Notification = ({id, message}) => (
 
 class Notifier extends Component {
   render () {
-    const notifications = this.props.notifications
+    const notifications = {} //this.props.notifications
     const current = Object.keys(notifications)
-    if (current.length === 0) return null
+    if (!current || current.length === 0) return null
     return (
       <div className="Notification__container">
-        {current.map((key, i) => (
+        {current && current.map((key, i) => (
           <TransitionGroup
             key={i}
             transitionName="Notification-transition"
@@ -28,7 +27,7 @@ class Notifier extends Component {
             <Notification
               key={i}
               id={key}
-              message={notifications[key].message}
+              message={'TODO'/*notifications[key].message*/}
             />
           </TransitionGroup>
         ))}
@@ -42,6 +41,9 @@ Notifier.propTypes = {
   message: PropTypes.string,
 }
 
-const mapStateToProps = state => ({notifications: state.notifications})
+/***
+ * SPRINT 5
+ * TODO: this component is now unconnected -- give it some state
+ */
 
-export default connect(mapStateToProps)(Notifier)
+export default Notifier
