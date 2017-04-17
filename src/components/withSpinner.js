@@ -7,7 +7,6 @@ import Loading from './Loading'
 
 //helper function to check if there if data is loading or the data object is empty or null
 const emptyOrLoading = (propNames, props) => {
-  console.log(propNames, props)
   return propNames.reduce((isLoading, name) => {
     if (isLoading) return isLoading
     const prop = props[name]
@@ -22,14 +21,16 @@ const emptyOrLoading = (propNames, props) => {
   }, false)
 }
 
-const loaderHOC = propNames =>
+const padding = {paddingTop: '2em', paddingBottom: '2em'}
+
+const loaderHOC = (propNames, small = false) =>
   WrappedComponent => {
     return class Wrapper extends Component {
       render() {
         if (emptyOrLoading(propNames, this.props)) {
           return (
-            <div className="Restaurants-loader">
-              <Loading />
+            <div className="Restaurants-loader" style={small ? {} : padding}>
+              <Loading small={small} />
             </div>
           )
         }

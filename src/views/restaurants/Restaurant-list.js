@@ -13,9 +13,9 @@ const RestaurantList = props => (
         key={i}
         userId={props.auth.uid}
         users={props.users.data}
-        handleSelect={this.handleSelect}
+        handleSelect={props.handleSelect}
         currentVote={props.currentVote}
-        {...props}
+        {...rest}
       />
     ))}
   </section>
@@ -28,7 +28,7 @@ RestaurantList.propTypes = {
   currentVote: PropTypes.string,
 }
 
-const RestaurantListWithSpinner = withSpinner(['restaurants, users'])(RestaurantList)
+const RestaurantListWithSpinner = withSpinner(['restaurants', 'users'])(RestaurantList)
 
 class Restaurants extends Component {
   // data usually fetched here, called once
@@ -52,7 +52,12 @@ class Restaurants extends Component {
   };
 
   render() {
-    return <RestaurantListWithSpinner {...this.props} />
+    return (
+      <RestaurantListWithSpinner
+        handleSelect={this.handleSelect}
+        {...this.props}
+      />
+    )
   }
 }
 
