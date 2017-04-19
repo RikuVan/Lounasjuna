@@ -5,7 +5,7 @@ import {DB} from '../../dataApi'
 import './Restaurants.css'
 
 class Restaurants extends Component {
-  componentMayDoSomething() {
+  componentDidMount() {
     /**
      * SPRINT 1:
      * TODO: save the restaurants returned from the database to component state

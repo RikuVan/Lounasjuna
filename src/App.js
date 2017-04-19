@@ -29,16 +29,8 @@ export class App extends Component {
 
   handleSignOut = () => this.props.cancelGoogleAuth()
 
-  /***
-   * SPRINT 2
-   * TODO: Use the CurrentUser component to add user info to your nav
-   */
-
   render() {
     const {loggedIn, user} = this.props
-    //const {auth} = this.props;
-    //const showSignIn = auth.status === 'ANONYMOUS';
-    //const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE';
     return (
       <div className="App">
         <div className="App-header">
