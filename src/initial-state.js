@@ -3,6 +3,7 @@ const initialState = {
   // SPRINT 2
   // TODO: add the initial state for auth and restaurants
   requests: {},
+  notifications: {},
   // SPRINT 5
   // TODO: add notifications initial state
 }

@@ -5,13 +5,15 @@ import RestaurantList from './views/restaurants/Restaurant-list'
 import SignInOrOut from './components/Sign-in-out'
 import Button from './components/Button'
 import CurrentUser from './components/Current-user'
-import {attemptSignInWithGoogle, cancelGoogleAuth, isLoggedIn} from './ducks/auth'
+import Notifier from './components/Notification'
+import {attemptSignInWithGoogle, cancelGoogleAuth, isLoggedIn, getUser} from './ducks/auth'
 
 export class App extends Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
     attemptSignInWithGoogle: PropTypes.func,
     cancelGoogleAuth: PropTypes.func,
+    user: PropTypes.object,
   }
   /***
    * SPRINT 3
@@ -33,7 +35,7 @@ export class App extends Component {
    */
 
   render() {
-    const {loggedIn} = this.props
+    const {loggedIn, user} = this.props
     //const {auth} = this.props;
     //const showSignIn = auth.status === 'ANONYMOUS';
     //const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE';
@@ -53,9 +55,7 @@ export class App extends Component {
               Lisää lounaspaikka
             </Button>
           </div>
-          {/* TODO: CurrentUser needs data */}
-          <CurrentUser />
-          {/* TODO: Make sign in or out work */}
+          <CurrentUser user={user} />
           <SignInOrOut
             type={loggedIn ? 'SignOut' : 'SignIn'}
             onClickHandler={this.handleSignIn}
@@ -64,6 +64,7 @@ export class App extends Component {
         <div className="App-content">
           <RestaurantList />
         </div>
+        <Notifier />
       </div>
     )
   }
@@ -80,6 +81,7 @@ export class App extends Component {
 
 const mapStateToProps = state => ({
   loggedIn: isLoggedIn(state),
+  user: getUser(state),
 })
 
 export default connect(mapStateToProps, {attemptSignInWithGoogle, cancelGoogleAuth})(App)

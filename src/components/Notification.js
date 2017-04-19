@@ -1,6 +1,15 @@
 import React, {PropTypes, Component} from 'react'
+import {connect} from 'react-redux'
+import {getNotifications} from '../ducks/notifications'
 import TransitionGroup from 'react-addons-css-transition-group'
 import './Notification.css'
+
+const TRANSLATIONS = {
+  LOGGED_IN: 'Kirjautuminen onnistui',
+  LOGGED_OUT: 'Kirjauduttiin ulos',
+}
+
+const translate = value => TRANSLATIONS[value] || value
 
 const Notification = ({id, message}) => (
   <div className={`Notification Notification--${id}`}>
@@ -10,25 +19,30 @@ const Notification = ({id, message}) => (
   </div>
 )
 
+Notification.propTypes = {
+  id: PropTypes.string,
+  message: PropTypes.string,
+}
+
 class Notifier extends Component {
   render() {
-    const notifications = {} //this.props.notifications
+    const {notifications} = this.props
     const current = Object.keys(notifications)
     if (!current || current.length === 0) return null
     return (
       <div className="Notification__container">
         {current &&
-          current.map((key, i) => (
+          current.map(key => (
             <TransitionGroup
-              key={i}
+              key={key}
               transitionName="Notification-transition"
               transitionEnterTimeout={600}
               transitionLeaveTimeout={600}
             >
               <Notification
-                key={i}
+                key={key}
                 id={key}
-                message={'TODO' /*notifications[key].message*/}
+                message={translate(notifications[key])}
               />
             </TransitionGroup>
           ))}
@@ -40,11 +54,11 @@ class Notifier extends Component {
 Notifier.propTypes = {
   key: PropTypes.string,
   message: PropTypes.string,
+  notifications: PropTypes.object,
 }
 
-/***
- * SPRINT 5
- * TODO: this component is now unconnected -- give it some state
- */
+const mapStateToProps = state => ({
+  notifications: getNotifications(state)
+})
 
-export default Notifier
+export default connect(mapStateToProps)(Notifier)

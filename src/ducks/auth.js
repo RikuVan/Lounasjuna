@@ -31,7 +31,8 @@ export const attemptSignInWithGoogle = startLogin
 
 // Selectors
 
-export const isLoggedIn = state => !!state.auth.user.uid
+export const getUser = state => state.auth.user
+export const isLoggedIn = state => !!getUser(state).uid
 
 // Sagas
 
@@ -39,13 +40,13 @@ function* login() {
   try {
     // If the yielded function call returns a promise we can just assign its return value.
     // No need for .then(), yay!
-    const user = yield call([auth, auth.signInWithPopup], googleAuthProvider)
+    const response = yield call([auth, auth.signInWithPopup], googleAuthProvider)
     // TODO: if the user has never signed in before we need to add them to
     // to list of users in the DB here by checking state for the user
     // and dispatching an action
+    const user = response.user
     if (user && !isEmpty(user)) {
       yield put(signIn(user))
-      yield put(notify('LOGGED_IN'))
     }
   } catch (error) {
     console.log('login error:', error)
@@ -92,26 +93,26 @@ function* watchCancel() {
   yield takeEvery(CANCEL_AUTH, doCancelAuth)
 }
 
+// Instead of manually calling notify after each SIGN_IN let's just trigger it automatically.
+// With redux-thunk you'd use a custom middleware to dispatch an action following a certain action.
+function* doShowNotification() {
+  yield put(notify('LOGGED_IN'))
+}
+
+function* showLoginNotification() {
+  yield takeEvery(SIGN_IN, doShowNotification)
+}
+
 export const sagas = [
   watchLogin(),
   watchAuthentication(),
   watchCancel(),
+  showLoginNotification(),
 ]
 
+// Reducer
 
-
-/***
- * SPRINT 2
- * TODO: create the reducer for each of the auth action types,
- * making sure you don't mutate state inside the reducer
- * @param state
- * @param action
- */
-
-//While switch statements have become the most common way to handle actions,
-//it is not the only option. If you, like Petri, dislike them, you might try
-//something else http://redux.js.org/docs/faq/Reducers.html#reducers-use-switch
-export default function authReducer(state = initialState.auth, action) {
+export default function reducer(state = initialState.auth, action) {
   switch(action.type) {
     case ATTEMPTING_LOGIN:
       return {

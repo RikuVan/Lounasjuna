@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
 import requests from './requests'
 import auth from '../ducks/auth'
-//import notifications from './notifications'
+import notifications from '../ducks/notifications'
 //import {reducer as form} from 'redux-form'
 
 /**
@@ -14,7 +14,7 @@ const reducer = combineReducers({
   auth,
   requests,
   //form,
-  //notifications,
+  notifications,
 })
 
 export default reducer
