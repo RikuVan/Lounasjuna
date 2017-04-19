@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 import Loading from '../../components/Loading'
 import {processRestaurantData} from '../../actions/helpers'
 import {DB} from '../../dataApi'
@@ -18,7 +18,7 @@ class Restaurants extends Component {
       .then(data => console.log(data))
   }
 
-  handleSelect = (userId, restaurantId) => {
+  handleSelect = (/* userId, restaurantId */) => {
     /***
      * SPRINT 4
      * TODO: add the logic here for changing a vote

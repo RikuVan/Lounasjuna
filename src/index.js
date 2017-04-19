@@ -1,17 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
-import './index.css'
 import {applyMiddleware, compose, createStore} from 'redux'
 import {Provider} from 'react-redux'
-import thunk from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga'
 import reducer from './reducers'
 import initialState from './initial-state'
-import newUser from './middleware/new-user'
-import {listenToAuthChanges} from './actions/auth'
+// import {listenToAuthChanges} from './actions/auth'
+import rootSaga from './sagas'
+import App from './App'
+import './index.css'
 
-//allows asynchronous actions
-const middleware = [thunk, newUser]
+// Instead of thunk middleware install saga middleware
+const sagaMiddleware = createSagaMiddleware()
+const middleware = [sagaMiddleware]
 const enhancers = []
 //install chrome extension for the redux devtools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -21,8 +22,11 @@ const store = createStore(
   initialState,
   composeEnhancers(applyMiddleware(...middleware), ...enhancers),
 )
-//this is a web socket emitting changes that are then dispatched to a reducer
-store.dispatch(listenToAuthChanges())
+// this is a web socket emitting changes that are then dispatched to a reducer
+// store.dispatch(listenToAuthChanges())
+
+// Remember to combine all sagas into a root saga and run it.
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>

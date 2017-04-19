@@ -1,19 +1,31 @@
 import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import './App.css'
 import RestaurantList from './views/restaurants/Restaurant-list'
 import SignInOrOut from './components/Sign-in-out'
 import Button from './components/Button'
 import CurrentUser from './components/Current-user'
+import {attemptSignInWithGoogle, cancelGoogleAuth, isLoggedIn} from './ducks/auth'
 
 export class App extends Component {
+  static propTypes = {
+    loggedIn: PropTypes.bool,
+    attemptSignInWithGoogle: PropTypes.func,
+    cancelGoogleAuth: PropTypes.func,
+  }
   /***
    * SPRINT 3
    * TODO: Use the correct lifecycle method to fetch users
    */
 
-  //handleSignIn = () => this.props.attemptSignInWithGoogle();
+  handleSignIn = () => {
+    if (this.props.loggedIn) {
+      return this.handleSignOut()
+    }
+    this.props.attemptSignInWithGoogle()
+  }
 
-  //handleSignOut = () => this.props.cancelGoogleAuth();
+  handleSignOut = () => this.props.cancelGoogleAuth()
 
   /***
    * SPRINT 2
@@ -21,6 +33,7 @@ export class App extends Component {
    */
 
   render() {
+    const {loggedIn} = this.props
     //const {auth} = this.props;
     //const showSignIn = auth.status === 'ANONYMOUS';
     //const awaitingLogin = auth.status === 'AWAITING_AUTH_RESPONSE';
@@ -43,7 +56,10 @@ export class App extends Component {
           {/* TODO: CurrentUser needs data */}
           <CurrentUser />
           {/* TODO: Make sign in or out work */}
-          <SignInOrOut type="SignIn" onClickHandler={() => {}} />
+          <SignInOrOut
+            type={loggedIn ? 'SignOut' : 'SignIn'}
+            onClickHandler={this.handleSignIn}
+          />
         </div>
         <div className="App-content">
           <RestaurantList />
@@ -62,4 +78,8 @@ export class App extends Component {
  * TODO: fetchUsers, get them in mapStateToProps and pass them to the restaurant view
  */
 
-export default App
+const mapStateToProps = state => ({
+  loggedIn: isLoggedIn(state),
+})
+
+export default connect(mapStateToProps, {attemptSignInWithGoogle, cancelGoogleAuth})(App)

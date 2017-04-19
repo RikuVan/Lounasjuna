@@ -16,6 +16,7 @@
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "semi": ["warn", "never"],
-    "no-console": 0
+    "no-console": 0,
+    "no-constant-condition": 0,
   }
 }

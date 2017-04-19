@@ -1,4 +1,5 @@
 const initialState = {
+  auth: {user: {}},
   // SPRINT 2
   // TODO: add the initial state for auth and restaurants
   requests: {},
