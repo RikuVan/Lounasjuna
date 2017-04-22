@@ -17,7 +17,6 @@ test('Restaurant contains title and link', () => {
     rating: 2,
     link: 'http://chineseplace.com',
     type: 'Chinese',
-    rating: 1,
     userId: '1',
     uid: '2',
     votes: ['1'],

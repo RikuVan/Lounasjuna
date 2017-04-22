@@ -8,7 +8,7 @@ import classNames from 'classnames'
 
 const renderField = (
   //SPRINT 4
-  //TODO: some key props here inject from the redux-form Field component are not missing
+  //TODO: some key props injected from the redux-form Field component are not destructured below (so missing)
   //make sure what you need from the input and meta object gets passed down!
   {
     placeholder,

@@ -10,7 +10,7 @@ import Button from '../../components/Button'
 
 /**
  * SPRINT 3
- * TODO: This panel will take user data which will show as a list of users in RestaurantsVote component
+ * TODO: This panel takes a list of users in RestaurantsVote component
  * Change where the button is active depending on whether the user has voted for the restaurant
  * A vote function should be passed as prop to this dumb component to be used as a callback
  *

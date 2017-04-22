@@ -31,8 +31,8 @@ const completeRequest = (resource, data, error) => {
   }
 }
 
-export const apiFn = type =>
-  ({resource, params, payload, handler: responseHandler}) =>
+export const apiFn = _type =>
+  ({resource, _params, _payload, handler: responseHandler}) =>
     dispatch => {
       dispatch(attemptRequest(resource))
       const data = testData[resource]

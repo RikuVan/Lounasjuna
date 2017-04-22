@@ -11,7 +11,7 @@ export const FETCH_USERS = 'FETCH_RESTAURANTS'
  * USER ACTION CREATORS
  */
 
-//firebase will return the users as an object
+//firebase will return the users as an object with their uids as the key for each one
 export const fetchUsers = () => {
   return apiGet({resource: 'users'})
 }

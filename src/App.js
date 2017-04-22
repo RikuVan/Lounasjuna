@@ -8,7 +8,7 @@ import CurrentUser from './components/Current-user'
 export class App extends Component {
   /***
    * SPRINT 3
-   * TODO: Use the correct lifecycle method to fetch users
+   * TODO: Use the correct lifecycle method to fetch a all users
    */
 
   //handleSignIn = () => this.props.attemptSignInWithGoogle();
@@ -17,7 +17,7 @@ export class App extends Component {
 
   /***
    * SPRINT 2
-   * TODO: Use the CurrentUser component to add user info to your nav
+   * TODO: Use the CurrentUser component to add user info to your nav (name and picture)
    */
 
   render() {

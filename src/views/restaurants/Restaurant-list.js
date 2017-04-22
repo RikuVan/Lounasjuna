@@ -22,8 +22,9 @@ class Restaurants extends Component {
     /***
      * SPRINT 4
      * TODO: add the logic here for changing a vote
-     * You will need to check whether the use has a current vote and
-     * revoke it and then vote again, perhaps as a callback
+     * You will need to check whether the user has a current vote and
+     * revoke it and then vote again, perhaps as a callback.
+     * If you are using redux sagas, you can take care of the revoking in a saga.
      */
   };
 
@@ -48,7 +49,7 @@ class Restaurants extends Component {
  * SPRINT 3
  * TODO: Add vote and revokeVote to for users to add voting
  * You will also need to add users from the database and calculate
- * in mapDispatchToProps whether the current user has a vote
+ * (in mapDispatchToProps?) whether the current user has a vote.
  */
 
 export default Restaurants

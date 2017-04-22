@@ -145,19 +145,24 @@ Additionally you may want to checkout [classes](https://developer.mozilla.org/en
 #### TODOS:
   1. Add the two action type constants and two actions to actions/requests
   so that data will flow to your reducers. Look at the reducer for clues.
+  
+  * Saga users: at this point the `master` branch is set up to implement thunks. If you would like to use sagas
+  instead, you will need to do some refactoring, moving code presently in actions to sagas. Use the `using-redux-saga` branch as a guide as
+  much as you need.
+  
   2. Use `connect` and `mapStateToProps` to get your restaurants from redux, getting
   rid of the local state object in the component, and calling `fetchRestaurants` from
   the correct lifecycle method.
-  3. The auth actions are ready: to show a login is in progress, to login with Google and
-  to logout. But there is no reducer. Add one, passing in initial state.
+  3. The auth actions are ready to: show a login is in progress, login with Google and
+  logout. But there is no reducer. Add the reducer, passing in initial state.
   * AT THIS POINT MAKE SURE GOOGLE AUTH IS ENABLED IN YOUR FIREBASE CONSOLE.
   4. Make use to the signin and out functions inside the `<App/>` component by adding
   them to props and hooking them up to the `<SignInOrOut/>` component
-  6. Make sure your `<App/>` component is getting the auth data so you can detect
+  5. Make sure your `<App/>` component is getting the auth data so you can detect
   whether a user is signed in and hide some content (e.g. voting buttons) if so. You
   will also want to display different texts in the button depending on whether
   they are logged in or out.
-  7. Display the users photo and name using the `<CurrentUser/>` component in the nav.
+  6. Display the users photo and name using the `<CurrentUser/>` component in the nav.
   
 #### Resources:
   - [Redux Actions](http://redux.js.org/docs/basics/Actions.html)

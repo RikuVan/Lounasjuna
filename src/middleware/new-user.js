@@ -7,6 +7,7 @@ import {SIGN_IN} from '../actions/auth'
  * dispatch the addUser action to save the user to the DB if not already in the store
  * Save user to DB if new
  * Every action with run through the middleware
+ * If you are using sagas, then you may choose to do this in a saga instead
  * @param dispatch
  * @param getState
  */
