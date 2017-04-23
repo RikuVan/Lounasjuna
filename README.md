@@ -1,5 +1,7 @@
 # React/Redux Workshop App: Lounasjuna
 
+<h3><a href="https://rikuvan.github.io/Lounasjuna/#1" target="_blank">Workshop slides</a></h3>
+
 This project was bootstrapped with Create React App.
 
 You can find the most recent version of this guide with how to perform common tasks here: [Create React App Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
