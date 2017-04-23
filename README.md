@@ -168,6 +168,8 @@ Additionally you may want to checkout [classes](https://developer.mozilla.org/en
   - [Redux Actions](http://redux.js.org/docs/basics/Actions.html)
     
   - [Redux with React and connect](http://redux.js.org/docs/basics/UsageWithReact.html)
+  
+  - [React redux](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)
     
   - [Redux thunk](http://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559)
   
