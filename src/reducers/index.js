@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import requests from './requests'
+import requests from '../ducks/api'
 import auth from '../ducks/auth'
 import notifications from '../ducks/notifications'
 //import {reducer as form} from 'redux-form'

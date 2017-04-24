@@ -1,7 +1,12 @@
-import {apiGet, apiPush} from './api'
+import {apiGet, apiPush, getApiData, isLoading as genericLoading} from './api'
 import {processRestaurantData} from '../actions/helpers'
 import {resources} from '../dataApi'
 import {notify} from './notifications'
+
+// Selectors
+
+export const getRestaurants = getApiData(resources.RESTAURANTS)
+export const isLoading = genericLoading(resources.RESTAURANTS)
 
 // Actions
 

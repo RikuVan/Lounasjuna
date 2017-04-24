@@ -1,10 +1,19 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import Loading from '../../components/Loading'
-import {processRestaurantData} from '../../actions/helpers'
-import {DB} from '../../dataApi'
+import {fetchRestaurants, getRestaurants, isLoading} from '../../ducks/restaurants'
+// import {processRestaurantData} from '../../actions/helpers'
+// import {DB} from '../../dataApi'
+import RestaurantCard from './Restaurant-card'
 import './Restaurants.css'
 
 class Restaurants extends Component {
+  static propTypes = {
+    fetchRestaurants: PropTypes.func,
+    loading: PropTypes.bool,
+    restaurants: PropTypes.array,
+  }
+
   componentDidMount() {
     /**
      * SPRINT 1:
@@ -12,10 +21,11 @@ class Restaurants extends Component {
      * make sure this happens in the correct life cycle method
      * and display then in RestaurantCards
      */
-    DB.restaurants()
+    /* DB.restaurants()
       .once('value')
       .then(snapshot => processRestaurantData(snapshot.val()))
-      .then(data => console.log(data))
+      .then(data => console.log(data)) */
+    this.props.fetchRestaurants()
   }
 
   handleSelect = (/* userId, restaurantId */) => {
@@ -28,10 +38,12 @@ class Restaurants extends Component {
   };
 
   render() {
+    const {loading, restaurants} = this.props
     return (
       <section className="Restaurants">
         <div className="Restaurants-loader">
-          <Loading />
+          {loading ? <Loading /> :
+            (restaurants || []).map(item => <RestaurantCard key={item.name} {...item} />)}
         </div>
       </section>
     )
@@ -51,4 +63,9 @@ class Restaurants extends Component {
  * in mapDispatchToProps whether the current user has a vote
  */
 
-export default Restaurants
+const mapStateToProps = state => ({
+  restaurants: getRestaurants(state),
+  loading: isLoading(state),
+})
+
+export default connect(mapStateToProps, {fetchRestaurants})(Restaurants)

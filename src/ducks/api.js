@@ -1,4 +1,7 @@
+import {takeEvery, call, put} from 'redux-saga/effects'
 import {database, DB} from '../dataApi'
+import initialState from '../initial-state.js'
+import {notify} from './notifications'
 
 // Helpers
 
@@ -11,7 +14,8 @@ const handlePush = (resource, params, payload) => {
   return database.ref().update(updates)
 }
 
-const createRequest = (type, resource, params = {}, payload) => {
+const createRequest = (type, resource, params = {}, payload, onceValue = false) => {
+  console.log('createRequest', type, resource, params, payload, onceValue)
   switch (type) {
     case 'set':
       return DB[resource](params).set(payload)
@@ -25,73 +29,28 @@ const createRequest = (type, resource, params = {}, payload) => {
       return DB[resource](params).remove()
     // get
     default:
-      return DB[resource](params)
+      return onceValue ? DB[resource](params).once('value') : DB[resource](params)
   }
 }
+
+// Selectors
+
+export const getApiData = key => state =>
+  state.requests[key] && state.requests[key].data ? state.requests[key].data.data : null
+export const isLoading = key => state => state.requests[key] ? state.requests[key].loading : false
 
 // Actions
 
 export const ATTEMPT_REQUEST = 'api/ATTEMPT'
 export const COMPLETE_REQUEST = 'api/COMPLETE'
 
-export const attemptRequest = resource => ({
-  type: ATTEMPT_REQUEST,
-  payload: {resource},
-})
+export const attemptRequest = params => ({...params, type: ATTEMPT_REQUEST})
 export const completeRequest = (resource, data, error) => {
   return {
     type: COMPLETE_REQUEST,
-    payload: {resource, ...data, error},
+    payload: {resource, data, error},
   }
 }
-
-// TODO => convert these to saga paradigm
-
-//the .on/.once method for the real time api takes a second func, an error callback
-const errorCallback = (dispatch, resource) =>
-  error => {
-    return dispatch(completeRequest(resource, null, error))
-  }
-
-/**
- * main handler for requests
- * see params description below where the curried functions are exported
- */
-
-export const apiFn = type =>
-  ({resource, params, payload, handler: responseHandler}) =>
-    dispatch => {
-      //UI wants to know that we are loading data
-      dispatch(attemptRequest(resource))
-
-      const request = createRequest(type, resource, params, payload)
-
-      //remove operation does not receive response
-      //could use set(null) for a response/safer delete
-      if (type === 'remove') {
-        if (responseHandler) responseHandler()
-        return dispatch(completeRequest(resource, null, null))
-      }
-
-      if (type === 'get') {
-        return request.once('value').then(
-          snapshot => {
-            const data = responseHandler
-              ? responseHandler(snapshot.val())
-              : {data: snapshot.val()}
-            return dispatch(completeRequest(resource, data, null))
-          },
-          errorCallback(dispatch, resource),
-        )
-      }
-
-      return request
-        .then(() => {
-          if (responseHandler) responseHandler()
-          dispatch(completeRequest(resource, null, null))
-        })
-        .catch(err => console.log(err))
-    }
 
 /**
  * The operations below take an config object and return a promise (except remove):
@@ -100,6 +59,8 @@ export const apiFn = type =>
  *   [payload]: object e.g. {name: 'rick'}
  *   [handler]: func - use this to process the data or perform another action
  */
+
+const apiFn = method => params => attemptRequest({method, ...params})
 
 export const apiGet = apiFn('get')
 export const apiSet = apiFn('set')
@@ -112,5 +73,70 @@ export const apiUpdate = apiFn('update')
 //beware this does not return a confirmation
 export const apiRemove = apiFn('remove')
 
+// Sagas
+
+function* doApiAction(action) {
+  const {resource, params, payload, handler: responseHandler, method} = action
+  console.log('1', action)
+  try {
+    if (method === 'get') {
+      const snapshot = yield call(createRequest, method, resource, params, payload, true)
+      console.log('2', snapshot)
+      const data = responseHandler ? responseHandler(snapshot.val()) : {data: snapshot.val()}
+      console.log('3', data)
+      yield put(completeRequest(resource, data, null))
+    } else {
+      yield call(createRequest, method, resource, params, payload)
+      if (responseHandler) responseHandler()
+      yield put(completeRequest(resource, null, null))
+    }
+  } catch (error) {
+    console.log('error', error)
+    yield put(completeRequest(resource, null, error))
+    yield put(notify('ERROR', JSON.stringify(error)))
+  }
+}
+
+function* watchApiActions() {
+  yield takeEvery(ATTEMPT_REQUEST, doApiAction)
+}
+
+export const sagas = [
+  watchApiActions(),
+]
+
 //firebase also has a REST api which will work in this app for reading data without auth
 //import an ajax helper lib like axios and use the data base url with .json to fetch data
+
+// Reducer
+
+export default (state = initialState.requests, action) => {
+  switch (action.type) {
+    case ATTEMPT_REQUEST:
+      return {
+        ...state,
+        //using the resource id/name as a key using an interpolated string
+        //allows us to have one reducer dle a lot of state rather than a
+        //separate reducer for each kind of data
+        [action.resource]: {
+          loading: true,
+          data: null,
+          status: null,
+          error: null,
+        },
+      }
+    case COMPLETE_REQUEST:
+      // reducers should not mutate data. The spread operator {...state} copies all the properties
+      // of an object or array into a new object, equivalent to Object.assign/R.merge
+      return {
+        ...state,
+        [action.payload.resource]: {
+          loading: false,
+          data: action.payload.data,
+          error: action.payload.error,
+        },
+      }
+    default:
+      return state
+  }
+}
