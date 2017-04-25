@@ -26,7 +26,7 @@ export const RestaurantCard = (
     <article className="Restaurant">
       <h2 className="Restaurant-name">
         {link &&
-          <a href={link} className="Restaurant-www">
+          <a href={link} className="Restaurant-www" target="_blank">
             <span className="fa fa-home" />
           </a>}
         {name}

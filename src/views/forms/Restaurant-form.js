@@ -45,7 +45,8 @@ const renderField = (
           error &&
           <div className="Restaurant-form__error">
             {error}
-          </div>}
+          </div>
+        }
       </div>
     </div>
   )
@@ -95,12 +96,12 @@ class RestaurantForm extends Component {
           label="Paikan nimi"
           name="name"
           type="text"
-          placeholder="Pepe's pizza"
+          placeholder="Pepen Pizza"
           required
         />
         <Field
           component={renderField}
-          label="Ruoanlaji"
+          label="Ruokalaji"
           name="type"
           type="text"
           placeholder="Pizza"
@@ -110,7 +111,7 @@ class RestaurantForm extends Component {
           label="Katuosoite"
           name="address"
           type="text"
-          placeholder="1 Hannulankatu, 33580 Tre"
+          placeholder="Hannulankatu 1, 33580 Tampere"
           required
         />
         <Field

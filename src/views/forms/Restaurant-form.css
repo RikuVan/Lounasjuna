@@ -21,6 +21,7 @@
 
 .Restaurant-form__field {
   flex: 1 0 220px;
+  position: relative;
 }
 
 .Restaurant-form__input {
@@ -29,6 +30,10 @@
   font-size: inherit;
   padding: 10px 15px;
   width: 100%
+}
+
+.Restaurant-form__input::placeholder {
+  opacity: 0.3;
 }
 
 .Restaurant-form__field--short {
@@ -40,8 +45,10 @@
 }
 
 .Restaurant-form__error {
-  padding-top: 5px;
   color: red;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 .Restaurant-form__input_error {
