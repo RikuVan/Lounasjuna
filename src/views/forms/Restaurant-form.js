@@ -94,10 +94,10 @@ class RestaurantForm extends Component {
         onSubmit={() => {} /*handleSubmit(this.submit)*/}
       >
         {/*
-          SPRINT 4
-          TODO: use the Field component from redux-form to create five inputs for your restaurant data,
-           the field names should match those in your database
-        */}
+         SPRINT 4
+         TODO: use the Field component from redux-form to create five inputs for your restaurant data,
+         the field names should match those in your database
+         */}
         <div className="Restaurant-form__row">
           <Button
             disabled={invalid}
