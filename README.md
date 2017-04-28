@@ -132,8 +132,7 @@ Additionally you may want to checkout [classes](https://developer.mozilla.org/en
   1. Make sure you are getting your restaurant data from your database in the correct
   lifecyle hook.
   2. Create a state object in your component to hold your restaurants.
-  3. Use `<RestaurantCard/>` and `<RestaurantVotes/>` (inside the card) to display
-  your restaurant data. Use `[].map` to create a card for each.
+  3. Use `<RestaurantCard/>` to display your restaurant data. Use `[].map` to create a card for each.
 
 #### Resources:
   - [Redux Actions](https://facebook.github.io/react/docs/react-component.html)
@@ -190,7 +189,7 @@ Additionally you may want to checkout [classes](https://developer.mozilla.org/en
   Do this with middleware. Check if a login action is dispatched in the middleware and if
   the user logging in is not in your list of users in the store, call the `addUser` function from the
   middleware.
-  3. Now implement voting inside the `<RestaurantList/> component. You will need to use some system
+  3. Now implement voting inside the `<RestaurantList/>` component. You will need to use some system
   to make sure that when a user votes, his old vote is revoked (e.g. callback). When a user votes
   for a restaurant, that button should be disabled.
   4. Extra credit: if you are ahead at this point and want to improve your code,
