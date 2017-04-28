@@ -7,11 +7,11 @@ import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import reducer from './reducers'
 import initialState from './initial-state'
-import newUser from './middleware/new-user'
+//import newUser from './middleware/new-user'
 import {listenToAuthChanges} from './actions/auth'
 
 //allows asynchronous actions
-const middleware = [thunk, newUser]
+const middleware = [thunk]
 const enhancers = []
 //install chrome extension for the redux devtools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
